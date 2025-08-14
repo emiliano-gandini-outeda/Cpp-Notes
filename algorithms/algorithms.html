@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Notes</title>
+    <link rel="icon" type="image/png"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        :root {
+            --color-dark-grey: #2D2D2D;
+            --color-background: #111217;
+            --color-surface: #3A3A3A;
+            --color-dark-red: #B71C1C;
+            --color-dark-red-light: #D32F2F;
+            --color-text-primary: #E0E0E0;
+            --color-text-secondary: #B0B0B0;
+            --color-borders: #4A4A4A;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--color-borders);
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--color-dark-grey);
+        }
+
+        tr:nth-child(even) {
+            background-color: #2a2a2a;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center py-8 px-4">
+
+    <!-- Top Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+    <!-- Blog Section -->
+    <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6">
+        <h1 id="-algorithms" class="text-3xl font-bold mb-4">🧠 Algorithms</h1>
+        <p class="text-lg">
+            Algorithms are step-by-step procedures for solving problems efficiently. Key concepts include
+            <strong>recursion, complexity analysis, and sorting algorithms</strong>.
+        </p>
+        <hr class="border-gray-600">
+
+        <!-- Recursion -->
+        <h2 id="-recursion" class="text-2xl font-semibold mt-4">🔁 Recursion</h2>
+        <ul class="list-disc list-inside space-y-2">
+            <li><strong>Recursion</strong> is a technique where a function calls <strong>itself</strong> to solve a
+                problem by breaking it into smaller subproblems.</li>
+            <li>
+                <p><strong>Key components:</strong></p>
+                <ul class="list-disc list-inside ml-5 space-y-1">
+                    <li><strong>Base case:</strong> Stops recursion, returning a direct result.</li>
+                    <li><strong>Recursive case:</strong> Calls the function with a simpler or smaller input, moving
+                        toward the base case.</li>
+                </ul>
+            </li>
+            <li><strong>Uses:</strong> factorials, binary search, merge sort, generating permutations, tree traversal.
+            </li>
+            <li>⚠️ Careful design is crucial; missing or incorrect base cases can cause <strong>infinite loops</strong>
+                or <strong>stack overflow</strong>.</li>
+        </ul>
+        <hr class="border-gray-600">
+
+        <!-- Complexity & Big O -->
+        <h2 id="-complexity-analysis-big-o" class="text-2xl font-semibold mt-4">⏱️ Complexity Analysis & Big O</h2>
+        <ul class="list-disc list-inside space-y-2">
+            <li><strong>Algorithm complexity</strong> evaluates performance in terms of <strong>time</strong>
+                (execution) and <strong>space</strong> (memory).</li>
+            <li><strong>Big O notation</strong> describes <strong>asymptotic behavior</strong> as input size grows,
+                ignoring constants and lower-order terms.</li>
+        </ul>
+        <h3 id="common-complexities-" class="text-xl font-semibold mt-2">Common complexities:</h3>
+        <table class="mt-2">
+            <thead>
+                <tr>
+                    <th>Complexity</th>
+                    <th>Growth</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>O(1)</strong></td>
+                    <td>Constant</td>
+                    <td>Direct access to an element</td>
+                </tr>
+                <tr>
+                    <td><strong>O(log n)</strong></td>
+                    <td>Logarithmic</td>
+                    <td>Binary search</td>
+                </tr>
+                <tr>
+                    <td><strong>O(n)</strong></td>
+                    <td>Linear</td>
+                    <td>Linear search</td>
+                </tr>
+                <tr>
+                    <td><strong>O(n log n)</strong></td>
+                    <td>Sub-quadratic</td>
+                    <td>Efficient sorts like merge/quick sort</td>
+                </tr>
+                <tr>
+                    <td><strong>O(n²)</strong></td>
+                    <td>Quadratic</td>
+                    <td>Bubble, insertion, selection sorts</td>
+                </tr>
+                <tr>
+                    <td><strong>O(2ⁿ)</strong></td>
+                    <td>Exponential</td>
+                    <td>Brute-force combinatorial problems</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul class="list-disc list-inside mt-2">
+            <li><strong>Practical note:</strong> Complexity guides algorithm choice but <strong>data type, hardware, and
+                    frequency of execution</strong> also matter.</li>
+        </ul>
+        <hr class="border-gray-600">
+
+        <!-- Sorting Algorithms -->
+        <h2 id="-sorting-algorithms" class="text-2xl font-semibold mt-4">🗂️ Sorting Algorithms</h2>
+        <p>Sorting algorithms reorder data based on a criterion (usually ascending/descending). They are evaluated by
+            <strong>time and space complexity</strong>.</p>
+        <h3 id="basic-sorting-algorithms" class="text-xl font-semibold mt-2">Basic Sorting Algorithms</h3>
+        <p>Useful for learning or small datasets; not optimal for large datasets.</p>
+
+        <div class="space-y-4">
+            <div>
+                <p><strong>💧 Bubble Sort:</strong> Compares adjacent elements and swaps them if out of order; repeats
+                    until sorted.</p>
+                <ul class="list-disc list-inside ml-5 space-y-1">
+                    <li>Complexity: <strong>O(n²)</strong></li>
+                    <li>Best for small or nearly sorted lists.</li>
+                </ul>
+            </div>
+            <div>
+                <p><strong>📝 Insertion Sort:</strong> Builds a sorted section gradually by inserting each element in
+                    the correct position relative to the already sorted elements.</p>
+                <ul class="list-disc list-inside ml-5 space-y-1">
+                    <li>Complexity: <strong>Average/Worst O(n²), Best O(n)</strong></li>
+                    <li>Efficient for small or partially sorted datasets.</li>
+                </ul>
+            </div>
+            <div>
+                <p><strong>🔎 Selection Sort:</strong> Finds the smallest element and places it at the beginning,
+                    repeating for the rest of the list.</p>
+                <ul class="list-disc list-inside ml-5 space-y-1">
+                    <li>Complexity: <strong>O(n²) in all cases</strong></li>
+                    <li>Simple, but not efficient for large datasets.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Search Algorithms -->
+        <hr class="border-gray-600">
+        <h2 id="-search-algorithms" class="text-2xl font-semibold mt-4">🔍 Search Algorithms</h2>
+        <p>Search algorithms are used to find elements within a dataset. Efficiency depends on the data structure and
+            algorithm choice.</p>
+
+        <div class="space-y-4">
+            <div>
+                <p><strong>🔹 Linear Search:</strong> Checks each element sequentially until the target is found.</p>
+                <ul class="list-disc list-inside ml-5 space-y-1">
+                    <li>Complexity: <strong>O(n)</strong></li>
+                    <li>Simple but inefficient for large datasets.</li>
+                </ul>
+            </div>
+            <div>
+                <p><strong>🔹 Binary Search:</strong> Repeatedly divides a sorted dataset in half to locate the target
+                    element.</p>
+                <ul class="list-disc list-inside ml-5 space-y-1">
+                    <li>Complexity: <strong>O(log n)</strong></li>
+                    <li>Efficient but requires the data to be sorted.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+</body>
+
+</html>
