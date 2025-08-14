@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Notes</title>
+    <link rel="icon" type="image/png"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        :root {
+            --color-dark-grey: #2D2D2D;
+            --color-background: #111217;
+            --color-surface: #3A3A3A;
+            --color-dark-red: #B71C1C;
+            --color-dark-red-light: #D32F2F;
+            --color-text-primary: #E0E0E0;
+            --color-text-secondary: #B0B0B0;
+            --color-borders: #4A4A4A;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center py-8 px-4">
+
+    <!-- Top Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+
+
+    <!-- Blog Section -->
+    <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6">
+
+        <h1 id="-arrays" class="text-3xl font-bold">📦 Arrays</h1>
+
+        <h2 id="-what-is-an-array-" class="text-2xl font-semibold mt-4">✅ What is an Array?</h2>
+        <p>
+            An <strong>array</strong> is a <strong>fixed-size collection of elements of the same type</strong>, stored
+            <strong>contiguously in memory</strong>.
+            Arrays allow <strong>direct access to any element</strong> in <strong>constant time O(1)</strong> using an
+            integer index.
+            However, their <strong>size is fixed</strong> at declaration, so it cannot grow or shrink during runtime.
+        </p>
+        <hr>
+
+        <h2 id="-syntax" class="text-2xl font-semibold mt-4">🧠 Syntax</h2>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto">
+<code class="lang-cpp">type arrayName[size];</code></pre>
+        <p><strong>Examples:</strong></p>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto">
+<code class="lang-cpp">int numbers[5];               <span class="hljs-comment">// Declares an array of 5 integers</span>
+int values[5] = {1, 2, 3, 4, 5}; <span class="hljs-comment">// Full initialization</span>
+int partial[5] = {10, 20};       <span class="hljs-comment">// Remaining elements set to 0</span>
+int inferred[] = {1, 2, 3};      <span class="hljs-comment">// Size inferred as 3</span></code>
+    </pre>
+        <hr>
+
+        <h2 id="-accessing-and-modifying-elements" class="text-2xl font-semibold mt-4">🔄 Accessing and Modifying
+            Elements</h2>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto">
+<code class="lang-cpp">int x = values[0];   <span class="hljs-comment">// Access first element</span>
+values[1] = 100;     <span class="hljs-comment">// Modify second element</span></code></pre>
+        <p><strong>Important rules:</strong></p>
+        <ol class="list-decimal pl-6 text-text-secondary">
+            <li>Index starts at <code>0</code>.</li>
+            <li>Accessing outside bounds → <strong>undefined behavior</strong>.</li>
+            <li>All elements must be of the same type.</li>
+            <li>Size must be constant (at compile time in traditional C++).</li>
+        </ol>
+        <hr>
+
+        <h2 id="-looping-through-arrays" class="text-2xl font-semibold mt-4">🌀 Looping through Arrays</h2>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto">
+<code class="lang-cpp">for(int i = 0; i &lt; 5; i++) {
+    cout &lt;&lt; "Element " &lt;&lt; i &lt;&lt; ": " &lt;&lt; values[i] &lt;&lt; endl;
+}</code></pre>
+        <hr>
+
+        <h2 id="-use-cases" class="text-2xl font-semibold mt-4">⚡ Use Cases</h2>
+        <ul class="list-disc pl-6 text-text-secondary">
+            <li><strong>Static collections</strong> where size is known in advance.</li>
+            <li><strong>Storing sequences of numbers</strong> (scores, measurements, etc.).</li>
+            <li><strong>Fast random access</strong> when elements are frequently read.</li>
+            <li><strong>Temporary buffers</strong> or memory blocks for algorithms.</li>
+        </ul>
+        <hr>
+
+        <h2 id="-summary-table" class="text-2xl font-semibold mt-4">🧾 Summary Table</h2>
+        <table class="w-full text-left border border-borders rounded overflow-hidden">
+            <thead class="bg-surface">
+                <tr class="border-b border-borders">
+                    <th class="px-4 py-2">Concept</th>
+                    <th class="px-4 py-2">Example</th>
+                    <th class="px-4 py-2">Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-b border-borders">
+                    <td class="px-4 py-2">Declaration</td>
+                    <td class="px-4 py-2"><code>int a[10];</code></td>
+                    <td class="px-4 py-2">Fixed size, type uniform</td>
+                </tr>
+                <tr class="border-b border-borders">
+                    <td class="px-4 py-2">Initialization</td>
+                    <td class="px-4 py-2"><code>int a[3] = {1,2,3};</code></td>
+                    <td class="px-4 py-2">Can initialize fully, partially, or infer size</td>
+                </tr>
+                <tr class="border-b border-borders">
+                    <td class="px-4 py-2">Access Elements</td>
+                    <td class="px-4 py-2"><code>a[0]</code>, <code>a[1]</code></td>
+                    <td class="px-4 py-2">O(1) time complexity</td>
+                </tr>
+                <tr class="border-b border-borders">
+                    <td class="px-4 py-2">Modify Elements</td>
+                    <td class="px-4 py-2"><code>a[2] = 100;</code></td>
+                    <td class="px-4 py-2">Direct modification</td>
+                </tr>
+                <tr class="border-b border-borders">
+                    <td class="px-4 py-2">Looping</td>
+                    <td class="px-4 py-2"><code>for(int i=0;i&lt;n;i++)</code></td>
+                    <td class="px-4 py-2">Iterate all elements</td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2">Fundamental Ops</td>
+                    <td class="px-4 py-2">Insert, Delete, Search (manual)</td>
+                    <td class="px-4 py-2">No dynamic resizing; middle insertion/deletion costly</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+
+        <p>
+            Arrays are <strong>efficient for memory-contiguous storage and constant-time access</strong>,
+            but their <strong>fixed size</strong> makes them less flexible than dynamic structures.
+            They are ideal when <strong>data size is known and frequent direct access is required</strong>.
+        </p>
+
+    </section>
+
+    <!-- Bottom Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+</body>
+
+</html>

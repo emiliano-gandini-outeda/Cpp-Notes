@@ -54,32 +54,84 @@
     </div>
 
 
-
     <!-- Blog Section -->
-    <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4">
-        <h1 class="text-3xl font-bold mb-4">Introduction to C++</h1>
+    <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6">
+
+        <h1 class="text-3xl font-bold">✅ <code>scanf</code> — Input with Format Specifiers</h1>
+        <h3 id="-what-is-scanf-" class="text-2xl font-semibold mt-4">📌 What is <code>scanf</code>?</h3>
         <p>
-            C++ is a general-purpose programming language created as an extension of the C programming language.
-            It supports procedural, object-oriented, and generic programming features.
+            <code>scanf</code> is a <strong>C standard library function</strong> defined in <code>&lt;stdio.h&gt;</code>
+            used to <strong>read input from the user</strong> via the keyboard.
+            It stores the input into the memory addresses of variables.
         </p>
-        <h2 class="text-2xl font-semibold mt-4">Basic Syntax</h2>
-        <p>
-            A simple C++ program looks like this:
-        </p>
+        <hr>
+
+        <h3 id="-syntax-" class="text-2xl font-semibold mt-4">🧠 Syntax:</h3>
         <pre class="bg-gray-800 p-4 rounded overflow-x-auto">
-#include &lt;iostream&gt;
-using namespace std;
+<code class="lang-c">scanf("format string", &amp;var1, &amp;var2, ...); <span class="hljs-comment">// Read input into variables</span>
+</code>
+    </pre>
+        <ul class="list-disc pl-6 text-text-secondary">
+            <li>The <strong>format string</strong> tells <code>scanf</code> what kind of data to expect
+                (<code>%d</code>, <code>%f</code>, <code>%c</code>, etc.).</li>
+            <li>The <strong><code>&amp;</code> operator</strong> (address-of) is used to pass the memory address where
+                the input will be stored.</li>
+        </ul>
+        <hr>
+
+        <h3 id="-example-" class="text-2xl font-semibold mt-4">✅ Example:</h3>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto">
+<code class="lang-c"><span class="hljs-meta">#include &lt;stdio.h&gt;</span>
 
 int main() {
-    cout &lt;&lt; "Hello, World!" &lt;&lt; endl;
+    int age;
+    printf("Enter your age: ");
+    scanf("%d", &amp;age); <span class="hljs-comment">// Reads an integer and stores it in age</span>
+    printf("You entered: %d\n", age);
     return 0;
 }
-        </pre>
-        <p>
-            The program prints "Hello, World!" to the console. C++ programs use functions as entry points, with
-            <code>main()</code> being the most common.
-        </p>
+</code>
+    </pre>
+        <hr>
+
+        <h3 id="-common-mistakes-" class="text-2xl font-semibold mt-4">⚠️ Common Mistakes:</h3>
+        <ul class="list-disc pl-6 text-text-secondary">
+            <li>Forgetting the <code>&amp;</code> before variable names.</li>
+            <li>Using the wrong format specifier for the variable type.</li>
+            <li>Not handling leftover input (e.g., newline characters when reading characters or strings).</li>
+        </ul>
+        <hr>
+
+        <h3 id="-multiple-inputs" class="text-2xl font-semibold mt-4">✅ Multiple Inputs</h3>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto">
+<code class="lang-c">int c1, c2, c3, c4, c5;
+scanf("%d %d %d %d %d", &amp;c1, &amp;c2, &amp;c3, &amp;c4, &amp;c5);
+</code>
+    </pre>
+        <ul class="list-disc pl-6 text-text-secondary">
+            <li>User inputs five integers separated by spaces.</li>
+            <li>Each <code>%d</code> matches an integer input and stores it in the corresponding variable.</li>
+        </ul>
+        <hr>
+
+        <h3 id="-loop-example-" class="text-2xl font-semibold mt-4">🔁 Loop Example:</h3>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto">
+<code class="lang-c">for (int i = 0; i &lt; 5; i++) {
+    printf("%d\n", numbers[i]);
+}
+</code>
+    </pre>
+        <hr>
+
+        <h3 id="-notes-" class="text-2xl font-semibold mt-4">⚠️ Notes:</h3>
+        <ul class="list-disc pl-6 text-text-secondary">
+            <li>Indexing starts at <code>0</code>.</li>
+            <li>Accessing out-of-bound indices causes <strong>undefined behavior</strong>.</li>
+            <li>All elements are of the <strong>same data type</strong>.</li>
+        </ul>
+
     </section>
+
 
     <!-- Bottom Back Button -->
     <div class="w-full max-w-3xl mb-4 flex">
@@ -102,7 +154,7 @@ int main() {
             <span class="pl-8">Back to Main</span>
         </button>
     </div>
- 
+
 </body>
 
 </html>

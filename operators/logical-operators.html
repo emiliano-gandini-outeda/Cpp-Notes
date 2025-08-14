@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Notes</title>
+    <link rel="icon" type="image/png"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        :root {
+            --color-dark-grey: #2D2D2D;
+            --color-background: #111217;
+            --color-surface: #3A3A3A;
+            --color-dark-red: #B71C1C;
+            --color-dark-red-light: #D32F2F;
+            --color-text-primary: #E0E0E0;
+            --color-text-secondary: #B0B0B0;
+            --color-borders: #4A4A4A;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center py-8 px-4">
+
+    <!-- Top Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+
+
+    <!-- Blog Section -->
+    <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6">
+
+        <!-- Logical Operators -->
+        <h1 class="text-3xl font-bold mb-4">✅ Logical Operators</h1>
+        <p class="text-text-secondary">
+            Logical operators are used to <strong>combine or modify conditions</strong>. The result is always either
+            <code>true (1)</code> or <code>false (0)</code>.
+        </p>
+        <hr class="border-b border-borders">
+
+        <h2 class="text-2xl font-semibold mt-6">🔹 List of Logical Operators</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full border border-borders text-text-secondary text-sm">
+                <thead class="bg-surface">
+                    <tr>
+                        <th class="border border-borders px-3 py-2 text-left">Operator</th>
+                        <th class="border border-borders px-3 py-2 text-left">Name</th>
+                        <th class="border border-borders px-3 py-2 text-left">Description</th>
+                        <th class="border border-borders px-3 py-2 text-left">Example</th>
+                        <th class="border border-borders px-3 py-2 text-left">Result</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-background">
+                    <tr>
+                        <td class="border border-borders px-3 py-2"><code>&amp;&amp;</code></td>
+                        <td class="border border-borders px-3 py-2">Logical AND</td>
+                        <td class="border border-borders px-3 py-2">True <strong>only if both</strong> sides are true
+                        </td>
+                        <td class="border border-borders px-3 py-2"><code>(x &gt; 0 &amp;&amp; x &lt; 10)</code></td>
+                        <td class="border border-borders px-3 py-2"><code>1</code> if <code>x</code> in (0,10)</td>
+                    </tr>
+                    <tr class="bg-surface">
+                        <td class="border border-borders px-3 py-2"><code>||</code></td>
+                        <td class="border border-borders px-3 py-2">Logical OR</td>
+                        <td class="border border-borders px-3 py-2">True <strong>if at least one</strong> side is true
+                        </td>
+                        <td class="border border-borders px-3 py-2"><code>(x &lt; 0 || x &gt; 100)</code></td>
+                        <td class="border border-borders px-3 py-2"><code>1</code> if <code>x</code> is outside 0-100
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-borders px-3 py-2"><code>!</code></td>
+                        <td class="border border-borders px-3 py-2">Logical NOT</td>
+                        <td class="border border-borders px-3 py-2"><strong>Inverts</strong> the condition
+                            (<code>true</code> → <code>false</code>, <code>false</code> → <code>true</code>)</td>
+                        <td class="border border-borders px-3 py-2"><code>!(x == 5)</code></td>
+                        <td class="border border-borders px-3 py-2"><code>1</code> if <code>x</code> is not 5</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr class="border-b border-borders">
+
+        <h2 class="text-2xl font-semibold mt-6">✅ Example Code</h2>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto text-sm">
+#include &lt;stdio.h&gt;
+
+int main() {
+    int age = 20;
+
+    if (age &gt;= 18 &amp;&amp; age &lt;= 25) {
+        printf("You are a young adult.\n");
+    }
+
+    if (age &lt; 0 || age &gt; 120) {
+        printf("Invalid age.\n");
+    }
+
+    if (!(age == 30)) {
+        printf("You are not 30 years old.\n");
+    }
+
+    return 0;
+}</pre>
+        <hr class="border-b border-borders">
+
+        <!-- If-Else Statements -->
+        <h1 class="text-3xl font-bold mb-4">✅ <code>if</code>, <code>else if</code>, <code>else</code> Statements in C
+        </h1>
+        <p class="text-text-secondary">
+            Conditional statements allow you to run <strong>different code depending on conditions</strong>.
+        </p>
+        <hr class="border-b border-borders">
+
+        <h2 class="text-2xl font-semibold mt-6">🔹 Syntax</h2>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto text-sm">
+if (condition) {
+    // code if condition is true
+} else if (another_condition) {
+    // code if another condition is true
+} else {
+    // code if no conditions were true
+}</pre>
+        <hr class="border-b border-borders">
+
+        <h2 class="text-2xl font-semibold mt-6">✅ Example</h2>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto text-sm">
+#include &lt;stdio.h&gt;
+
+int main() {
+    int number;
+    printf("Enter a number: ");
+    scanf("%d", &number);
+
+    if (number &gt; 0) {
+        printf("Positive number\n");
+    } else if (number == 0) {
+        printf("Zero\n");
+    } else {
+        printf("Negative number\n");
+    }
+
+    return 0;
+}</pre>
+        <hr class="border-b border-borders">
+
+        <h2 class="text-2xl font-semibold mt-6">🧠 Notes</h2>
+        <ul class="list-disc list-inside text-text-secondary space-y-2">
+            <li>Only the <strong>first true condition</strong> is executed.</li>
+            <li>You can nest conditions (use <code>if</code> inside another <code>if</code>).</li>
+            <li>Use <code>{}</code> even for one-line blocks to avoid errors.</li>
+        </ul>
+
+    </section>
+
+
+    <!-- Bottom Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+</body>
+
+</html>

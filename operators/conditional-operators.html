@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Notes</title>
+    <link rel="icon" type="image/png"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        :root {
+            --color-dark-grey: #2D2D2D;
+            --color-background: #111217;
+            --color-surface: #3A3A3A;
+            --color-dark-red: #B71C1C;
+            --color-dark-red-light: #D32F2F;
+            --color-text-primary: #E0E0E0;
+            --color-text-secondary: #B0B0B0;
+            --color-borders: #4A4A4A;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center py-8 px-4">
+
+    <!-- Top Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+
+
+    <!-- Blog Section -->
+    <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6">
+
+        <h1 class="text-3xl font-bold mb-4">✅ Conditional Operators</h1>
+        <p class="text-text-secondary">
+            Conditional operators compare <strong>two values or expressions</strong> and return either
+            <code>true (1)</code> or <code>false (0)</code>. They’re commonly used in <code>if</code> statements and
+            loops.
+        </p>
+        <hr class="border-b border-borders">
+
+        <!-- List of Conditional Operators -->
+        <h2 class="text-2xl font-semibold mt-6">🔹 List of Conditional Operators</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full border border-borders text-text-secondary text-sm">
+                <thead class="bg-surface">
+                    <tr>
+                        <th class="border border-borders px-3 py-2 text-left">Operator</th>
+                        <th class="border border-borders px-3 py-2 text-left">Meaning</th>
+                        <th class="border border-borders px-3 py-2 text-left">Example</th>
+                        <th class="border border-borders px-3 py-2 text-left">Result</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-background">
+                    <tr>
+                        <td class="border border-borders px-3 py-2">==</td>
+                        <td class="border border-borders px-3 py-2">Equal to</td>
+                        <td class="border border-borders px-3 py-2"><code>x == y</code></td>
+                        <td class="border border-borders px-3 py-2"><code>1</code> if <code>x</code> equals
+                            <code>y</code>
+                        </td>
+                    </tr>
+                    <tr class="bg-surface">
+                        <td class="border border-borders px-3 py-2">!=</td>
+                        <td class="border border-borders px-3 py-2">Not equal to</td>
+                        <td class="border border-borders px-3 py-2"><code>x != y</code></td>
+                        <td class="border border-borders px-3 py-2"><code>1</code> if <code>x</code> not equal to
+                            <code>y</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-borders px-3 py-2">&gt;</td>
+                        <td class="border border-borders px-3 py-2">Greater than</td>
+                        <td class="border border-borders px-3 py-2"><code>x &gt; y</code></td>
+                        <td class="border border-borders px-3 py-2"><code>1</code> if <code>x</code> greater than
+                            <code>y</code>
+                        </td>
+                    </tr>
+                    <tr class="bg-surface">
+                        <td class="border border-borders px-3 py-2">&lt;</td>
+                        <td class="border border-borders px-3 py-2">Less than</td>
+                        <td class="border border-borders px-3 py-2"><code>x &lt; y</code></td>
+                        <td class="border border-borders px-3 py-2"><code>1</code> if <code>x</code> less than
+                            <code>y</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-borders px-3 py-2">&gt;=</td>
+                        <td class="border border-borders px-3 py-2">Greater than or equal to</td>
+                        <td class="border border-borders px-3 py-2"><code>x &gt;= y</code></td>
+                        <td class="border border-borders px-3 py-2"><code>1</code> if <code>x</code> is &gt; or ==
+                            <code>y</code>
+                        </td>
+                    </tr>
+                    <tr class="bg-surface">
+                        <td class="border border-borders px-3 py-2">&lt;=</td>
+                        <td class="border border-borders px-3 py-2">Less than or equal to</td>
+                        <td class="border border-borders px-3 py-2"><code>x &lt;= y</code></td>
+                        <td class="border border-borders px-3 py-2"><code>1</code> if <code>x</code> is &lt; or ==
+                            <code>y</code>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr class="border-b border-borders">
+
+        <!-- Example Code -->
+        <h2 class="text-2xl font-semibold mt-6">✅ Example Code</h2>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto text-sm">
+#include &lt;stdio.h&gt;
+
+int main() {
+    int a = 5, b = 10;
+
+    printf("a == b: %d\n", a == b);  // 0 (false)
+    printf("a != b: %d\n", a != b);  // 1 (true)
+    printf("a &gt; b: %d\n", a &gt; b);    // 0
+    printf("a &lt; b: %d\n", a &lt; b);    // 1
+    printf("a &gt;= b: %d\n", a &gt;= b);  // 0
+    printf("a &lt;= b: %d\n", a &lt;= b);  // 1
+
+    return 0;
+}</pre>
+        <hr class="border-b border-borders">
+
+        <!-- Use in if -->
+        <h2 class="text-2xl font-semibold mt-6">🧠 Use in <code>if</code> Statements</h2>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto text-sm">
+if (a == b) {
+    printf("Equal\n");
+} else {
+    printf("Not equal\n");
+}</pre>
+        <hr class="border-b border-borders">
+
+        <!-- Summary -->
+        <h2 class="text-2xl font-semibold mt-6">📝 Summary</h2>
+        <ul class="list-disc list-inside text-text-secondary space-y-2">
+            <li>Conditional operators <strong>evaluate relationships</strong> between values.</li>
+            <li>Always return <code>1</code> (true) or <code>0</code> (false).</li>
+            <li>Most often used in:
+                <ul class="list-disc list-inside ml-5 mt-1">
+                    <li><code>if</code>, <code>else if</code>, <code>while</code>, <code>for</code>, and
+                        <code>do...while</code> conditions.
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+    </section>
+
+
+    <!-- Bottom Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+</body>
+
+</html>

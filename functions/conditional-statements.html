@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Notes</title>
+    <link rel="icon" type="image/png"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        :root {
+            --color-dark-grey: #2D2D2D;
+            --color-background: #111217;
+            --color-surface: #3A3A3A;
+            --color-dark-red: #B71C1C;
+            --color-dark-red-light: #D32F2F;
+            --color-text-primary: #E0E0E0;
+            --color-text-secondary: #B0B0B0;
+            --color-borders: #4A4A4A;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center py-8 px-4">
+
+    <!-- Top Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+    <!-- Blog Section -->
+    <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6">
+        <h1 class="text-3xl font-bold">✅ Conditional Statements</h1>
+        <p class="text-text-secondary">
+            Conditional statements let you <strong>execute different blocks of code depending on certain conditions</strong>. The main types are <code>if…else if…else</code> and <code>switch</code>.
+        </p>
+        <hr class="border-b border-borders">
+
+        <!-- if else if else -->
+        <h2 class="text-2xl font-semibold mt-4">1️⃣ <code>if</code>, <code>else if</code>, <code>else</code></h2>
+
+        <h3 class="text-xl font-medium mt-2">🔹 Syntax</h3>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto text-sm"><code class="lang-cpp">if (condition) {
+    // code if condition is true
+} else if (another_condition) {
+    // code if another condition is true
+} else {
+    // code if no conditions were true
+}</code></pre>
+
+        <h3 class="text-xl font-medium mt-2">✅ Example</h3>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto text-sm"><code class="lang-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int number;
+    cout &lt;&lt; "Enter a number: ";
+    cin &gt;&gt; number;
+
+    if (number &gt; 0) {
+        cout &lt;&lt; "Positive number" &lt;&lt; endl;
+    } else if (number == 0) {
+        cout &lt;&lt; "Zero" &lt;&lt; endl;
+    } else {
+        cout &lt;&lt; "Negative number" &lt;&lt; endl;
+    }
+
+    return 0;
+}</code></pre>
+
+        <h3 class="text-xl font-medium mt-2">🔸 Use Cases</h3>
+        <ul class="list-disc list-inside text-text-secondary">
+            <li>When conditions are <strong>different and complex</strong>, not just checking the same variable.</li>
+            <li>Nested conditions are possible.</li>
+            <li>Can combine multiple logical operators (<code>&amp;&amp;</code>, <code>||</code>, <code>!</code>).</li>
+        </ul>
+
+        <h3 class="text-xl font-medium mt-2">🧠 Notes</h3>
+        <ul class="list-disc list-inside text-text-secondary">
+            <li>Only the <strong>first true condition</strong> is executed.</li>
+            <li><code>{}</code> are recommended even for single statements.</li>
+            <li>Conditions can be <strong>any boolean expression</strong>.</li>
+        </ul>
+        <hr class="border-b border-borders">
+
+        <!-- switch -->
+        <h2 class="text-2xl font-semibold mt-4">2️⃣ <code>switch</code></h2>
+        <p class="text-text-secondary">
+            The <code>switch</code> statement is used to <strong>choose one block of code from many, based on a single variable</strong>.
+        </p>
+
+        <h3 class="text-xl font-medium mt-2">🔹 Syntax</h3>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto text-sm"><code class="lang-cpp">switch (expression) {
+    case value1:
+        // code block
+        break;
+    case value2:
+        // code block
+        break;
+    ...
+    default:
+        // code if no cases match
+}</code></pre>
+
+        <h3 class="text-xl font-medium mt-2">✅ Example</h3>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto text-sm"><code class="lang-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int day;
+    cout &lt;&lt; "Enter a number (1–7): ";
+    cin &gt;&gt; day;
+
+    switch (day) {
+        case 1: cout &lt;&lt; "Monday" &lt;&lt; endl; break;
+        case 2: cout &lt;&lt; "Tuesday" &lt;&lt; endl; break;
+        case 3: cout &lt;&lt; "Wednesday" &lt;&lt; endl; break;
+        case 4: cout &lt;&lt; "Thursday" &lt;&lt; endl; break;
+        case 5: cout &lt;&lt; "Friday" &lt;&lt; endl; break;
+        case 6: cout &lt;&lt; "Saturday" &lt;&lt; endl; break;
+        case 7: cout &lt;&lt; "Sunday" &lt;&lt; endl; break;
+        default: cout &lt;&lt; "Invalid day number." &lt;&lt; endl;
+    }
+
+    return 0;
+}</code></pre>
+
+        <h3 class="text-xl font-medium mt-2">🔸 Use Cases</h3>
+        <ul class="list-disc list-inside text-text-secondary">
+            <li>When comparing <strong>one variable</strong> against multiple constant values.</li>
+            <li>Easier to read than multiple <code>if…else if</code>.</li>
+            <li>Can <strong>group multiple cases</strong> using fallthrough.</li>
+        </ul>
+
+        <h3 class="text-xl font-medium mt-2">🔔 Fallthrough Example</h3>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto text-sm"><code class="lang-cpp">int n = 2;
+
+switch (n) {
+    case 1:
+    case 2:
+    case 3:
+        cout &lt;&lt; "Number is between 1 and 3" &lt;&lt; endl;
+        break;
+}</code></pre>
+        <hr class="border-b border-borders">
+
+        <h2 class="text-2xl font-semibold mt-4">3️⃣ Comparison Table</h2>
+        <div class="overflow-x-auto">
+            <table class="table-auto w-full text-left border-collapse border border-borders">
+                <thead>
+                    <tr class="bg-gray-700">
+                        <th class="border border-borders px-3 py-2">Feature</th>
+                        <th class="border border-borders px-3 py-2"><code>if…else if…else</code></th>
+                        <th class="border border-borders px-3 py-2"><code>switch</code></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-borders px-3 py-2">Type of condition</td>
+                        <td class="border border-borders px-3 py-2">Any boolean expression</td>
+                        <td class="border border-borders px-3 py-2">Variable equals constant value</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-borders px-3 py-2">Multiple variables</td>
+                        <td class="border border-borders px-3 py-2">✅ Yes</td>
+                        <td class="border border-borders px-3 py-2">❌ No</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-borders px-3 py-2">Data types</td>
+                        <td class="border border-borders px-3 py-2">int, float, char, bool, etc.</td>
+                        <td class="border border-borders px-3 py-2">int, char, enum (not float or string)</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-borders px-3 py-2">Complex conditions</td>
+                        <td class="border border-borders px-3 py-2">✅ Yes</td>
+                        <td class="border border-borders px-3 py-2">❌ No</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-borders px-3 py-2">Readability</td>
+                        <td class="border border-borders px-3 py-2">Can get long with many conditions</td>
+                        <td class="border border-borders px-3 py-2">Cleaner for multiple values of one variable</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-borders px-3 py-2">Fallthrough</td>
+                        <td class="border border-borders px-3 py-2">❌ No</td>
+                        <td class="border border-borders px-3 py-2">✅ Yes (if <code>break</code> omitted)</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-borders px-3 py-2">Default case</td>
+                        <td class="border border-borders px-3 py-2"><code>else</code></td>
+                        <td class="border border-borders px-3 py-2"><code>default:</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Bottom Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+</body>
+
+</html>

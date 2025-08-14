@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Notes</title>
+    <link rel="icon" type="image/png"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        :root {
+            --color-dark-grey: #2D2D2D;
+            --color-background: #111217;
+            --color-surface: #3A3A3A;
+            --color-dark-red: #B71C1C;
+            --color-dark-red-light: #D32F2F;
+            --color-text-primary: #E0E0E0;
+            --color-text-secondary: #B0B0B0;
+            --color-borders: #4A4A4A;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        pre {
+            background-color: var(--color-dark-grey);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--color-surface);
+        }
+
+        th,
+        td {
+            border: 1px solid var(--color-borders);
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--color-dark-grey);
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center py-8 px-4">
+
+    <!-- Top Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+    <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6">
+
+        <h1 id="-lists" class="text-3xl font-bold">📋 Lists</h1>
+        <p class="text-text-secondary">A <strong>list</strong> is a collection of elements organized sequentially.
+            Unlike arrays, lists can be <strong>dynamic</strong>, meaning their size can grow or shrink during runtime.
+            They are extremely useful when you need <strong>flexible insertion or deletion</strong> of elements.</p>
+        <hr class="border-b border-borders">
+
+        <h2 id="-basic-lists-arrays-vs-vectors" class="text-2xl font-semibold mt-4">🟢 Basic Lists: Arrays vs Vectors
+        </h2>
+        <p class="text-text-secondary">In C++, <strong>arrays</strong> are the simplest kind of sequential storage:</p>
+        <pre><code class="lang-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int arr[5] = {10, 20, 30, 40, 50};
+    cout &lt;&lt; arr[2] &lt;&lt; endl;  // Access third element
+    return 0;
+}
+</code></pre>
+
+        <ul class="list-disc pl-6 text-text-secondary">
+            <li><strong>Fixed size</strong> → cannot grow or shrink.</li>
+            <li><strong>Access</strong> → O(1) time using index.</li>
+            <li><strong>Use case</strong> → fast, static storage for known-size collections.</li>
+        </ul>
+
+        <p class="text-text-secondary">To overcome fixed-size limitations, C++ provides <strong>vectors</strong>
+            (dynamic arrays):</p>
+        <pre><code class="lang-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v = {1, 2, 3};
+    v.push_back(4);          // Add at the end
+    v.insert(v.begin() + 1, 5); // Insert at index 1
+    v.erase(v.begin() + 2);  // Remove element at index 2
+
+    for (int x : v) cout &lt;&lt; x &lt;&lt; " ";
+    return 0;
+}
+</code></pre>
+
+        <ul class="list-disc pl-6 text-text-secondary">
+            <li><strong>Dynamic size</strong> → grows or shrinks automatically.</li>
+            <li><strong>Access</strong> → O(1) for direct indexing, O(n) for insertion/deletion in the middle.</li>
+            <li><strong>Use case</strong> → collections with frequent additions/removals.</li>
+        </ul>
+
+        <hr class="border-b border-borders">
+
+        <h2 id="-linked-lists-flexibility-in-memory" class="text-2xl font-semibold mt-4">🔗 Linked Lists: Flexibility in
+            Memory</h2>
+        <p class="text-text-secondary">Unlike arrays or vectors, <strong>linked lists</strong> store elements as
+            <strong>nodes</strong>, each containing <strong>data</strong> and a <strong>pointer</strong> to the next
+            node. Nodes are <strong>not contiguous in memory</strong>, which allows efficient insertion and deletion
+            anywhere in the list.
+        </p>
+
+        <!-- Singly Linked List (SLL) -->
+        <h3 id="singly-linked-list-sll-" class="text-xl font-bold mt-3">Singly Linked List (SLL)</h3>
+        <ul class="list-disc pl-6 text-text-secondary">
+            <li>Each node points <strong>forward</strong> only.</li>
+            <li>Traversal is possible in <strong>one direction</strong>.</li>
+        </ul>
+        <pre><code class="lang-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void insertAtHead(Node*& head, int value) {
+    Node* newNode = new Node{value, head};
+    head = newNode;
+}
+
+void printList(Node* head) {
+    while(head) {
+        cout &lt;&lt; head-&gt;data &lt;&lt; " -&gt; ";
+        head = head-&gt;next;
+    }
+    cout &lt;&lt; "NULL\n";
+}
+
+int main() {
+    Node* list = nullptr;
+    insertAtHead(list, 10);
+    insertAtHead(list, 20);
+    insertAtHead(list, 30);
+
+    printList(list);
+    return 0;
+}
+</code></pre>
+
+
+
+        <!-- Doubly Linked List (DLL) -->
+        <h3 id="doubly-linked-list-dll-" class="text-xl font-bold mt-3">Doubly Linked List (DLL)</h3>
+        <ul class="list-disc pl-6 text-text-secondary">
+            <li>Each node points <strong>forward and backward</strong>.</li>
+            <li>Traversal possible <strong>both directions</strong>.</li>
+        </ul>
+        <pre><code class="lang-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    Node* prev;
+};
+
+void insertAtHead(Node*& head, int value) {
+    Node* newNode = new Node{value, head, nullptr};
+    if(head) head-&gt;prev = newNode;
+    head = newNode;
+}
+
+void printForward(Node* head) {
+    while(head) {
+        cout &lt;&lt; head-&gt;data &lt;&lt; " &lt;-&gt; ";
+        head = head-&gt;next;
+    }
+    cout &lt;&lt; "NULL\n";
+}
+
+void printBackward(Node* tail) {
+    while(tail) {
+        cout &lt;&lt; tail-&gt;data &lt;&lt; " &lt;-&gt; ";
+        tail = tail-&gt;prev;
+    }
+    cout &lt;&lt; "NULL\n";
+}
+
+int main() {
+    Node* list = nullptr;
+    insertAtHead(list, 10);
+    insertAtHead(list, 20);
+    insertAtHead(list, 30);
+
+    printForward(list);
+    return 0;
+}
+</code></pre>
+
+
+        <!-- Circular Linked List (CLL) -->
+        <h3 id="circular-linked-list-cll-" class="text-xl font-bold mt-3">Circular Linked List (CLL)</h3>
+        <ul class="list-disc pl-6 text-text-secondary">
+            <li>Last node points <strong>back to the first node</strong>, forming a <strong>loop</strong>.</li>
+            <li>Can be <strong>singly</strong> or <strong>doubly</strong> linked.</li>
+        </ul>
+        <pre><code class="lang-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void insert(Node*& head, int value) {
+    Node* newNode = new Node{value, nullptr};
+    if(!head) {
+        head = newNode;
+        newNode-&gt;next = head;
+    } else {
+        Node* temp = head;
+        while(temp-&gt;next != head) temp = temp-&gt;next;
+        temp-&gt;next = newNode;
+        newNode-&gt;next = head;
+    }
+}
+
+void printList(Node* head) {
+    if(!head) return;
+    Node* temp = head;
+    do {
+        cout &lt;&lt; temp-&gt;data &lt;&lt; " -&gt; ";
+        temp = temp-&gt;next;
+    } while(temp != head);
+    cout &lt;&lt; "(head)\n";
+}
+
+int main() {
+    Node* list = nullptr;
+    insert(list, 10);
+    insert(list, 20);
+    insert(list, 30);
+
+    printList(list);
+    return 0;
+}
+</code></pre>
+
+        <hr class="border-b border-borders">
+
+        <h2 id="-advantages-and-trade-offs" class="text-2xl font-semibold mt-4">⚡ Advantages and Trade-offs</h2>
+        <table class="text-text-secondary">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Access</th>
+                    <th>Insertion/Deletion</th>
+                    <th>Memory Use</th>
+                    <th>Use Cases</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Array</td>
+                    <td>O(1)</td>
+                    <td>O(n)</td>
+                    <td>Contiguous</td>
+                    <td>Static collections, fast indexing</td>
+                </tr>
+                <tr>
+                    <td>Vector</td>
+                    <td>O(1)</td>
+                    <td>O(n) (middle)</td>
+                    <td>Contiguous, dynamic</td>
+                    <td>Dynamic arrays, flexible storage</td>
+                </tr>
+                <tr>
+                    <td>Singly Linked List</td>
+                    <td>O(n)</td>
+                    <td>O(1) at head</td>
+                    <td>Non-contiguous</td>
+                    <td>Stacks, adjacency lists</td>
+                </tr>
+                <tr>
+                    <td>Doubly Linked List</td>
+                    <td>O(n)</td>
+                    <td>O(1) if node known</td>
+                    <td>Extra pointer</td>
+                    <td>Undo-redo, deque, navigation</td>
+                </tr>
+                <tr>
+                    <td>Circular Linked List</td>
+                    <td>O(n)</td>
+                    <td>O(1) at head/tail</td>
+                    <td>Non-contiguous</td>
+                    <td>Round-robin, cyclic buffers</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 id="-key-takeaways" class="text-xl font-medium mt-3">✅ Key Takeaways</h3>
+        <ul class="list-disc pl-6 text-text-secondary">
+            <li><strong>Use arrays</strong> for fixed-size data and fast random access.</li>
+            <li><strong>Use vectors</strong> for dynamic-size collections with occasional middle insertions.</li>
+            <li><strong>Use linked lists</strong> when frequent insertion/deletion is needed or memory is fragmented.
+            </li>
+            <li><strong>Choose circular or doubly linked lists</strong> for specialized scenarios like looping or
+                bidirectional navigation.</li>
+        </ul>
+
+    </section>
+
+    <!-- Bottom Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+</body>
+
+</html>

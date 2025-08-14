@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Notes</title>
+    <link rel="icon" type="image/png"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        :root {
+            --color-dark-grey: #2D2D2D;
+            --color-background: #111217;
+            --color-surface: #3A3A3A;
+            --color-dark-red: #B71C1C;
+            --color-dark-red-light: #D32F2F;
+            --color-text-primary: #E0E0E0;
+            --color-text-secondary: #B0B0B0;
+            --color-borders: #4A4A4A;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center py-8 px-4">
+
+    <!-- Top Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+
+
+    <!-- Blog Section -->
+    <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4">
+        <!-- ✅ Character Arrays (Strings) -->
+        <h1 class="text-2xl font-bold mt-8">✅ Character Arrays (Strings)</h1>
+        <p>
+            In C++, strings can be represented using <strong>character arrays</strong>, which are sequences of
+            characters
+            stored in <strong>contiguous memory</strong> and terminated by a special <strong>null character</strong>
+            <code>'\0'</code>. This null terminator tells the program where the string ends.
+        </p>
+
+        <hr class="border-gray-700 my-4">
+
+        <h3 class="text-xl font-semibold">🧠 Declaration:</h3>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto">
+char name[6] = {'A', 'l', 'i', 'c', 'e', '\0'}; // Manual null termination
+char word[] = "Hello";                          // Auto null-terminated</pre>
+        <p>
+            When using double quotes, the compiler automatically adds the <code>'\0'</code> at the end.
+            Always ensure there is enough space for it when specifying array size.
+        </p>
+
+        <hr class="border-gray-700 my-4">
+
+        <h3 class="text-xl font-semibold">📥 Input and Output:</h3>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto">
+char name[50];
+scanf("%s", name);          // Reads a single word (stops at spaces)
+printf("Name: %s\n", name); // Prints the string</pre>
+        <blockquote class="border-l-4 border-yellow-500 pl-4 text-yellow-300">
+            ⚠️ <code>scanf("%s")</code> stops reading at whitespace.
+            Use <code>fgets()</code> to read a full line, including spaces:
+            <pre class="bg-gray-800 p-4 rounded overflow-x-auto">
+fgets(name, sizeof(name), stdin);</pre>
+        </blockquote>
+
+        <hr class="border-gray-700 my-4">
+
+        <h3 class="text-xl font-semibold">🔁 Accessing & Modifying Characters:</h3>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto">
+char first = name[0];  // Access first character
+name[1] = 'X';         // Modify second character</pre>
+
+        <hr class="border-gray-700 my-4">
+
+        <h3 class="text-xl font-semibold">📌 Common String Functions (<code>&lt;string.h&gt;</code>):</h3>
+        <ul class="list-disc list-inside">
+            <li><code>strlen(str)</code> – Get length of string (excludes <code>'\0'</code>)</li>
+            <li><code>strcpy(dest, src)</code> – Copy string</li>
+            <li><code>strcmp(s1, s2)</code> – Compare two strings (returns 0 if equal)</li>
+            <li><code>strcat(dest, src)</code> – Append one string to another</li>
+        </ul>
+
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto">
+#include &lt;string.h&gt;
+
+char str1[20] = "Hello";
+char str2[] = "World";
+
+strcat(str1, str2); // str1 becomes "HelloWorld"</pre>
+
+        <hr class="border-gray-700 my-4">
+
+        <h3 class="text-xl font-semibold">📌 Practical Use Cases:</h3>
+        <ul class="list-disc list-inside">
+            <li>Storing and manipulating names or short text</li>
+            <li>Processing user input in console programs</li>
+            <li>Creating simple text-based games or menus</li>
+            <li>Parsing and handling small configuration data</li>
+        </ul>
+
+        <hr class="border-gray-700 my-4">
+
+        <h3 class="text-xl font-semibold">📊 Summary Table:</h3>
+        <table class="table-auto border-collapse border border-gray-700 w-full">
+            <thead class="bg-gray-700">
+                <tr>
+                    <th class="border border-gray-600 px-4 py-2">Operation</th>
+                    <th class="border border-gray-600 px-4 py-2">Example</th>
+                    <th class="border border-gray-600 px-4 py-2">Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="border border-gray-600 px-4 py-2">Declaration</td>
+                    <td class="border border-gray-600 px-4 py-2"><code>char name[10];</code></td>
+                    <td class="border border-gray-600 px-4 py-2">Must reserve space for <code>'\0'</code></td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-4 py-2">Initialization</td>
+                    <td class="border border-gray-600 px-4 py-2"><code>char w[] = "Hi";</code></td>
+                    <td class="border border-gray-600 px-4 py-2">Auto null-terminated</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-4 py-2">Access</td>
+                    <td class="border border-gray-600 px-4 py-2"><code>name[0]</code></td>
+                    <td class="border border-gray-600 px-4 py-2">Index starts at 0</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-4 py-2">Length</td>
+                    <td class="border border-gray-600 px-4 py-2"><code>strlen(name)</code></td>
+                    <td class="border border-gray-600 px-4 py-2">Does not count <code>'\0'</code></td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-4 py-2">Copy</td>
+                    <td class="border border-gray-600 px-4 py-2"><code>strcpy(dest, src);</code></td>
+                    <td class="border border-gray-600 px-4 py-2">Destination must be large enough</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+
+    <!-- Bottom Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+</body>
+
+</html>
