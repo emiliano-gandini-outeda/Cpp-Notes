@@ -96,7 +96,7 @@
         
         <!-- Cards -->
         <div class="mt-8">
-            <h2 class="section-header mb-6">Notes</h2>
+            <h2 class="font-extrabold uppercase text-xl tracking-wide mb-6">Topics</h2>
 
             <!-- Masonry container -->
             <div id="masonry-container" class="relative">
@@ -139,19 +139,23 @@ function cardApp() {
         selectedTags: [],
 
         // All available filters/tags
-        allTags: ['Filter 1', 'Filter 2', 'Filter 3', 'Filter 4'],
+        allTags: ['Algorithms', 'Searching', 'Sorting', 'Syntax', "Data Structures", "Functions", "Data Type", "Operators", "Junior", "Intermadiate", "Senior", "Conditionals", "Operators"],
 
         // Card data
         cards: [
-            { title: 'Binary Search', text: 'Efficient aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalgorithm for sorted arrays.', tags: ['Filter 1'], url: 'binary-search.html' },
-            { title: 'Classes in C++', text: 'Learn how to define and use classes.', tags: ['Filter 2'], url: 'classes.html' },
-            { title: 'Pointers', text: 'Understanding pointers and memory.', tags: ['Filter 3'], url: 'pointers.html' },
-            { title: 'Linked Lists', text: 'Data structaaaaaaaaaaaaaaaaaaaaaure for dynamic data.', tags: ['Filter 4'], url: 'linked-lists.html' },
-            { title: 'Quick Sort', text: 'Fast sorting algorithm.', tags: ['Filter 1'], url: 'quick-sort.html' },
-            { title: 'Stacks', text: 'LIFO data structure exam loremple.', tags: ['Filter 3'], url: 'stacks.html' },
-            { title: 'Queues', text: 'FIFO data structuaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaare example.', tags: ['Filter 3'], url: 'queues.html' },
-            { title: 'Recursion', text: 'Techniques to solve problems recursively.', tags: ['Filter 2'], url: 'recursion.html' },
-            { title: 'Merge Sort', text: 'Divide-and-conquer sorting algorithm.', tags: ['Filter 1'], url: 'merge-sort.html' },
+            { title: 'Basic Syntax Rules of C++', text: 'An overview of the essential rules and structure for writing C++ code.', tags: ['Syntax', "Junior"], url: 'syntax/basic-syntax.html' },
+            { title: 'Arrays in C++', text: 'An array is a fixed-size collection of elements of the same type, stored in contiguous memory.', tags: ["Data Structures", "Junior", "Data Type"], url: 'data/arrays.html' },
+            { title: 'scanf', text: 'scanf is a C++ standard library function defined in <stdio.h> used to read input from the user via the keyboard. ', tags: ['Functions',"Junior"], url: 'functions/scanf.html' },
+            { title: 'Character Arrays', text: 'In C++, strings are stored as character arrays ending with a null character "\\0".', tags: ['Data Type', "Junior",], url: 'data/character-array.html' },
+            { title: 'Loops', text: 'Loops let you repeat a block of code multiple times, either a fixed number of times or until a condition is met.', tags: ['Functions', "Junior", "Conditionals"], url: 'functions/loops.html' },
+            { title: 'Conditional Operators', text: 'Conditional operators compare two values or expressions and return either true (1) or false (0). They’re commonly used in if statements and loops.', tags: ['Operators', "Conditionals", "Junior"], url: 'operators/conditional-operators.html' },
+            { title: 'Logical Operators', text: 'Logical operators are used to combine or modify conditions. The result is always either true (1) or false (0).', tags: ['Operators', "Conditionals", "Junior"], url: 'operators/logical-operators.html' },
+            { title: 'Conditional Statements', text: 'Conditional statements, such as if, else if, else and switch, allow a program to execute different blocks of code based on whether specific conditions are true or false. ', tags: ["Conditionals", "Junior", "Functions"], url: 'functions/conditional-statements.html' },
+            { title: 'printf', text: 'printf is a standard library function used to print formatted output to the console.', tags: ['Functions', "Junior"], url: 'functions/printf.html' },
+            { title: 'struct', text: 'A struct is a user-defined data type in C++ that groups related variables, which can be of different types, under one name.', tags: ['Data Type', "Data Structure", "Junior"], url: 'functions/printf.html' },
+            { title: 'Classes in C++', text: 'A struct is a user-defined data type in C++ that groups related variables, which can be of different types, under one name.', tags: ['Data Type', "Data Structure", "Junior"], url: 'functions/printf.html' },
+
+
         ],
 
         // Toggle a tag on/off when clicked
@@ -165,7 +169,7 @@ function cardApp() {
 
         // Filter cards based on search + selected tags
         get filteredCards() {
-            const filtered = this.cards.filter(card => {
+            const filtered = this.cards.filter(card => {merge-sort
                 const matchesSearch = card.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
                                       card.text.toLowerCase().includes(this.searchQuery.toLowerCase());
                 const matchesTags = this.selectedTags.length === 0 || card.tags.some(tag => this.selectedTags.includes(tag));
