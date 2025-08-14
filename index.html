@@ -10,7 +10,7 @@
     <style>
         :root {
             --color-dark-grey: #2D2D2D;
-            --color-background: #1A1A1A;
+            --color-background: #111217;
             --color-surface: #3A3A3A;
             --color-dark-red: #B71C1C;
             --color-dark-red-light: #D32F2F;
@@ -139,12 +139,16 @@ function cardApp() {
         selectedTags: [],
 
         // All available filters/tags
-        allTags: ['Algorithms', 'Searching', 'Sorting', 'Syntax', "Data Structures", "Functions", "Data Type", "Operators", "Junior", "Intermadiate", "Senior", "Conditionals",],
+        allTags: ['Algorithms', 'Searching', 'Sorting', 'Syntax', "Data Structures", "Functions", "Data Type", "Operators", "Junior", "Intermediate", "Senior", "Conditionals",],
 
         // Card data
         cards: [
             { title: 'Basic Syntax Rules of C++', text: 'An overview of the essential rules and structure for writing C++ code.', tags: ['Syntax', "Junior"], url: 'syntax/basic-syntax.html' },
-            { title: 'Arrays in C++', text: 'An array is a fixed-size collection of elements of the same type, stored in contiguous memory.', tags: ["Data Structures", "Junior", "Data Type"], url: 'data/arrays.html' },
+            { title: 'Functions', text: 'A function is a reusable block of code that performs a specific task. It can return a value (non-void) or not return anything (void). Functions help structure programs, reduce code duplication, and improve readability.', tags: ['Functions', "Junior"], url: 'functions/functions.html' },
+            { title: 'Basic Data Structures', text: 'Basic data structures are fundamental ways of organizing and storing data, such as arrays, linked lists, stacks, and queues.', tags: ["Data Structures", "Junior", "Data Type"], url: 'data/data-structures.html' },
+            { title: 'Algorithms', text: 'An algorithm is a step-by-step procedure for solving a problem or performing a task.', tags: ["Algorithms", "Junior"], url: 'algorithms/algorithms.html' },
+            { title: 'Lists', text: 'A list is a dynamic structure that can grow or shrink at runtime.', tags: ["Data Structures", "Junior", "Data Type"], url: 'data/lists.html' },
+            { title: 'Arrays', text: 'An array is a fixed-size collection of elements of the same type, stored in contiguous memory.', tags: ["Data Structures", "Junior", "Data Type"], url: 'data/arrays.html' },
             { title: 'scanf', text: 'scanf is a C standard library function defined in <stdio.h> used to read input from the user via the keyboard. ', tags: ['Functions',"Junior"], url: 'functions/scanf.html' },
             { title: 'Character Arrays', text: 'In C++, strings are stored as character arrays ending with a null character "\\0".', tags: ['Data Type', "Junior",], url: 'data/character-array.html' },
             { title: 'Loops', text: 'Loops let you repeat a block of code multiple times, either a fixed number of times or until a condition is met.', tags: ['Functions', "Junior", "Conditionals"], url: 'functions/loops.html' },
@@ -152,7 +156,27 @@ function cardApp() {
             { title: 'Logical Operators', text: 'Logical operators are used to combine or modify conditions. The result is always either true (1) or false (0).', tags: ['Operators', "Conditionals", "Junior"], url: 'operators/logical-operators.html' },
             { title: 'Conditional Statements', text: 'Conditio  nal statements, such as if, else if, else and switch, allow a program to execute different blocks of code based on whether specific conditions are true or false. ', tags: ["Conditionals", "Junior", "Functions"], url: 'functions/conditional-statements.html' },
             { title: 'printf', text: 'printf is a standard library function used to print formatted output to the console.', tags: ['Functions', "Junior"], url: 'functions/printf.html' },
-            { title: 'struct', text: 'A struct is a user-defined data type in C++ that groups related variables, which can be of different types, under one name.', tags: ['Functions', "Junior"], url: 'data/struct.html' },
+            { title: 'struct', text: 'A struct is a user-defined data type in C++ that groups related variables, which can be of different types, under one name.', tags: ['Data Type', "Data Structures", "Junior"], url: 'data/struct.html' },
+            { title: 'Classes', text: 'A class is a blueprint for creating objects that combines data (attributes) and functions (methods).', tags: ['Data Type', "Data Structures", "Intermediate"], url: 'data/class.html' },
+            { title: 'strcpy', text: 'strcpy is a string function from <string.h> that copies one string into another.', tags: ['Function', "Junior"], url: 'functions/strcpy.html' },
+            { title: 'Pointers', text: 'A pointer is a variable that stores the memory address of another variable.', tags: ['Data Type', "Data Structures", "Junior"], url: 'data/pointers.html' },
+            { title: 'Pointer Arithmetic', text: 'Pointer arithmetic allows moving through memory addresses based on the size of the data type the pointer refers to.', tags: [ "Data Structures", "Intermediate"], url: 'data/pointer-arithmetic.html' },
+            { title: 'Arithmetic Operators', text: 'Symbols that tell the compiler to perform specific mathematical operations.', tags: ['Operators', "Junior"], url: 'operators/arithmetic-operators.html' },
+            { title: 'Data Types', text: 'A data type defines the kind of data a variable can hold, such as integers, floating-point numbers, characters, or more complex structures.', tags: ['Data Type', "Junior"], url: 'data/data-type.html' },
+            { title: 'Format Specifiers', text: 'Format specifiers are placeholders used in functions like printf() and scanf() to tell the program what type of data is being printed or read. They begin with % and are followed by one or more characters that define type, size, and format.', tags: ['Data Type', "Junior"], url: 'data/format-specifiers.html' },
+            { title: 'Signed and Unsigned Types', text: 'Integer types like int can store positive and negative numbers by default (signed). You can also declare them as unsigned, which means they can only store non-negative numbers.', tags: ['Data Type', "Intermediate"], url: 'data/signed-unsigned.html' },
+            { title: 'Stacks', text: 'A stack is a data structure that stores elements in a last-in, first-out (LIFO) order, where insertion and removal occur only at the top.', tags: ["Data Structures", "Intermediate", "Data Type"], url: 'data/stacks.html' },
+            { title: 'Queues', text: 'A queue is a data structure that stores elements in a first-in, first-out (FIFO) order, where insertion occurs at the rear and removal occurs at the front.', tags: ["Data Structures", "Intermediate", "Data Type"], url: 'data/queues.html' },
+            { title: 'Linked Lists', text: 'Linked lists are linear data structures made up of nodes, where each node contains a value and one or more pointers (or references) to other nodes.', tags: ["Data Structures", "Junior","Intermediate",], url: 'data/linked-list.html' },
+            { title: 'Hash Map', text: 'A hash map is a data structure designed to store key-value pairs and allow very fast access to data using the key.', tags: ["Data Structures", "Intermediate", "Data Type"], url: 'data/hash-map.html' },
+            { title: 'Object Oriented Programming', text: 'Object-Oriented Programming (OOP) is a programming paradigm that models entities from the problem domain as objects. Each object combines data (attributes or properties) and behaviors (methods or operations).', tags: ["Data Structures", "Senior",], url: 'data/oop.html' },
+            { title: 'Binary Trees', text: 'A binary tree is one in which each node has at most two children, called the left child and the right child.', tags: ["Data Structures", "Intermediate", "Data Type"], url: 'data/binary-tree.html' },
+            { title: 'Binary Search Trees', text: 'A binary search tree is a binary tree where each node’s left subtree contains smaller values and the right subtree contains larger values.', tags: ["Data Structures", "Intermediate", "Data Type", "Searching"], url: 'data/binary-search-tree.html' },
+            { title: 'AVL Tree', text: 'An AVL tree is a balanced binary search tree that ensures the height difference between the left and right subtrees of any node (balance factor) is at most 1.', tags: ["Data Structures", "Senior", "Data Type", "Searching"], url: 'data/avl-tree.html' },
+            { title: 'Red-Black Tree', text: 'A Red-Black Tree is a balanced binary search tree that ensures a maximum height of 2*log₂(n+1), keeping all operations O(log n) in the worst case.', tags: ["Data Structures", "Senior", "Data Type", "Searching"], url: 'data/red-black-tree.html' },
+            { title: 'Graphs', text: 'A graph is a data structure consisting of a set of nodes (vertices) and a set of edges that connect pairs of nodes.', tags: ["Data Structures", "Intermediate", "Data Type",], url: 'data/graphs.html' },
+            { title: 'Priority Queue', text: 'A priority queue is a data structure that stores elements with an associated priority.', tags: ["Data Structures", "Intermediate", "Data Type",], url: 'data/priority-queue.html' },
+            { title: 'Heaps', text: 'A heap is a complete binary tree where each node follows the heap property: in a max-heap, nodes are greater than or equal to their children; in a min-heap, nodes are less than or equal to their children.', tags: ["Data Structures", "Senior", "Data Type",], url: 'data/heaps.html' },
         ],
 
         // Toggle a tag on/off when clicked
