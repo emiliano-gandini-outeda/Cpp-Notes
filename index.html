@@ -139,7 +139,7 @@ function cardApp() {
         selectedTags: [],
 
         // All available filters/tags
-        allTags: ['Algorithms', 'Searching', 'Sorting', 'Syntax', "Data Structures", "Functions", "Data Type", "Operators", "Junior", "Intermediate", "Senior", "Conditionals",],
+        allTags: ['Algorithms', 'Search', 'Sorting', 'Syntax', "Data Structures", "Functions", "Data Type", "Operators", "Junior", "Intermediate", "Senior", "Conditionals",],
 
         // Card data
         cards: [
@@ -171,12 +171,27 @@ function cardApp() {
             { title: 'Hash Map', text: 'A hash map is a data structure designed to store key-value pairs and allow very fast access to data using the key.', tags: ["Data Structures", "Intermediate", "Data Type"], url: 'data/hash-map.html' },
             { title: 'Object Oriented Programming', text: 'Object-Oriented Programming (OOP) is a programming paradigm that models entities from the problem domain as objects. Each object combines data (attributes or properties) and behaviors (methods or operations).', tags: ["Data Structures", "Senior",], url: 'data/oop.html' },
             { title: 'Binary Trees', text: 'A binary tree is one in which each node has at most two children, called the left child and the right child.', tags: ["Data Structures", "Intermediate", "Data Type"], url: 'data/binary-tree.html' },
-            { title: 'Binary Search Trees', text: 'A binary search tree is a binary tree where each node’s left subtree contains smaller values and the right subtree contains larger values.', tags: ["Data Structures", "Intermediate", "Data Type", "Searching"], url: 'data/binary-search-tree.html' },
-            { title: 'AVL Tree', text: 'An AVL tree is a balanced binary search tree that ensures the height difference between the left and right subtrees of any node (balance factor) is at most 1.', tags: ["Data Structures", "Senior", "Data Type", "Searching"], url: 'data/avl-tree.html' },
-            { title: 'Red-Black Tree', text: 'A Red-Black Tree is a balanced binary search tree that ensures a maximum height of 2*log₂(n+1), keeping all operations O(log n) in the worst case.', tags: ["Data Structures", "Senior", "Data Type", "Searching"], url: 'data/red-black-tree.html' },
+            { title: 'Binary Search Trees', text: 'A binary search tree is a binary tree where each node’s left subtree contains smaller values and the right subtree contains larger values.', tags: ["Data Structures", "Intermediate", "Data Type", "Search"], url: 'data/binary-search-tree.html' },
+            { title: 'AVL Tree', text: 'An AVL tree is a balanced binary search tree that ensures the height difference between the left and right subtrees of any node (balance factor) is at most 1.', tags: ["Data Structures", "Senior", "Data Type", "Search"], url: 'data/avl-tree.html' },
+            { title: 'Red-Black Tree', text: 'A Red-Black Tree is a balanced binary search tree that ensures a maximum height of 2*log₂(n+1), keeping all operations O(log n) in the worst case.', tags: ["Data Structures", "Senior", "Data Type", "Search"], url: 'data/red-black-tree.html' },
             { title: 'Graphs', text: 'A graph is a data structure consisting of a set of nodes (vertices) and a set of edges that connect pairs of nodes.', tags: ["Data Structures", "Intermediate", "Data Type",], url: 'data/graphs.html' },
             { title: 'Priority Queue', text: 'A priority queue is a data structure that stores elements with an associated priority.', tags: ["Data Structures", "Intermediate", "Data Type",], url: 'data/priority-queue.html' },
+            { title: 'Recursion', text: 'A function that calls itself directly or indirectly to solve a problem by breaking it into smaller subproblems.', tags: ["Algorithms", "Intermediate", "Functions",], url: 'functions/recursion.html' },
             { title: 'Heaps', text: 'A heap is a complete binary tree where each node follows the heap property: in a max-heap, nodes are greater than or equal to their children; in a min-heap, nodes are less than or equal to their children.', tags: ["Data Structures", "Senior", "Data Type",], url: 'data/heaps.html' },
+            { title: 'Big O Notation', text: 'A mathematical way to describe the upper bound of an algorithm’s running time or space requirement in terms of input size, showing its worst-case growth rate.', tags: ["Algorithms", "Intermediate",], url: 'algorithms/big-o.html' },
+            { title: 'Bubble Sort', text: 'A simple sorting algorithm that repeatedly compares and swaps adjacent elements in a list until the entire list is sorted.', tags: ["Algorithms", "Junior", "Sorting"], url: 'algorithms/bubble-sort.html' },
+            { title: 'Insertion Sort', text: 'A sorting algorithm that builds the final sorted array one element at a time by repeatedly taking the next element and inserting it into its correct position in the already sorted part.', tags: ["Algorithms", "Junior","Sorting"], url: 'algorithms/insertion-sort.html' },
+            { title: 'Selection Sort', text: 'A sorting algorithm that repeatedly selects the smallest (or largest) element from the unsorted portion of a list and swaps it with the first unsorted element.', tags: ["Algorithms", "Junior","Sorting"], url: 'algorithms/selection-sort.html' },
+            { title: 'Merge Sort', text: 'A divide-and-conquer sorting algorithm that recursively splits an array into halves, sorts each half, and then merges the sorted halves back together.', tags: ["Algorithms", "Junior","Sorting"], url: 'algorithms/merge-sort.html' },
+            { title: 'Quick Sort', text: 'A divide-and-conquer sorting algorithm that selects a pivot element, partitions the array so that elements less than the pivot come before it and greater elements come after, and then recursively sorts the partitions.', tags: ["Algorithms", "Junior","Sorting"], url: 'algorithms/quick-sort.html' },
+            { title: 'Lineal Search', text: 'A simple search algorithm that checks each element of a list sequentially until the desired value is found or the list ends.', tags: ["Algorithms", "Junior","Search"], url: 'algorithms/lineal-search.html' },
+            { title: 'Binary Search', text: 'A search algorithm that efficiently finds a target value in a sorted array by repeatedly dividing the search interval in half.', tags: ["Algorithms", "Junior","Search"], url: 'algorithms/binary-search.html' },
+            { title: 'Depth-First Search', text: 'A graph traversal algorithm that explores as far as possible along each branch before backtracking.', tags: ["Algorithms", "Intermediate","Search"], url: 'algorithms/depth-first-search.html' },
+            { title: 'Breadth-First Search', text: 'A graph traversal algorithm that explores all neighbors of a node level by level before moving to the next level.', tags: ["Algorithms", "Intermediate","Search"], url: 'algorithms/breadth-first-search.html' },
+            { title: 'Greedy Algorithms', text: 'Problem-solving methods that make the locally optimal choice at each step, hoping to find a global optimum.', tags: ["Algorithms", "Intermediate",], url: 'algorithms/greedy-search1.html' },
+
+
+
         ],
 
         // Toggle a tag on/off when clicked
