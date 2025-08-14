@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Notes</title>
+    <link rel="icon" type="image/png"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        :root {
+            --color-dark-grey: #2D2D2D;
+            --color-background: #111217;
+            --color-surface: #3A3A3A;
+            --color-dark-red: #B71C1C;
+            --color-dark-red-light: #D32F2F;
+            --color-text-primary: #E0E0E0;
+            --color-text-secondary: #B0B0B0;
+            --color-borders: #4A4A4A;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            border: 1px solid var(--color-borders);
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--color-surface);
+        }
+
+        hr {
+            border-color: var(--color-borders);
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center py-8 px-4">
+
+    <!-- Top Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+    <!-- Blog Section -->
+    <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6">
+        <h1 id="-functions" class="text-3xl font-bold">📦 Functions</h1>
+
+        <h2 id="-what-is-a-function-" class="text-2xl font-semibold">✅ What is a Function?</h2>
+        <p>
+            A function is a <strong>named block of code that performs a specific task</strong> and can be 
+            <strong>called multiple times</strong> throughout a program. Functions help 
+            <strong>organize code, avoid repetition, and improve readability</strong>.
+        </p>
+        <hr>
+
+        <h2 id="-syntax" class="text-2xl font-semibold">🧠 Syntax</h2>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto"><code class="lang-cpp">returnType functionName(parameterList) {
+    // code to execute
+    return value; // if returnType is not void
+}
+</code></pre>
+        <p>Example:</p>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto"><code class="lang-cpp">int add(int a, int b) {
+    return a + b;
+}
+</code></pre>
+        <hr>
+
+        <h2 id="-calling-a-function" class="text-2xl font-semibold">📌 Calling a Function</h2>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto"><code class="lang-cpp">int result = add(5, 3); // Calls add() with 5 and 3
+</code></pre>
+
+        <h3 class="text-xl font-semibold">Functions with No Return Value:</h3>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto"><code class="lang-cpp">void printMessage() {
+    std::cout &lt;&lt; "Hello, World!" &lt;&lt; std::endl;
+}
+</code></pre>
+        <p>Call:</p>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto"><code class="lang-cpp">printMessage();
+</code></pre>
+        <hr>
+
+        <h2 id="-important-rules" class="text-2xl font-semibold">⚠️ Important Rules</h2>
+        <ol class="list-decimal pl-6 space-y-1">
+            <li>Function <strong>must be declared before it is called</strong> (or use a prototype).</li>
+            <li>Parameters are <strong>optional</strong>; a function can have no parameters.</li>
+            <li>Return type can be <code>void</code> if the function does not return a value.</li>
+            <li>Functions can be <strong>overloaded</strong> (same name, different parameters).</li>
+        </ol>
+        <hr>
+
+        <h2 id="-example-program" class="text-2xl font-semibold">🧾 Example Program</h2>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto"><code class="lang-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+// Function prototype
+int multiply(int x, int y);
+
+int main() {
+    int a = 4, b = 5;
+    cout &lt;&lt; "Product: " &lt;&lt; multiply(a, b) &lt;&lt; endl;
+    return 0;
+}
+
+// Function definition
+int multiply(int x, int y) {
+    return x * y;
+}
+</code></pre>
+        <hr>
+
+        <h2 id="-functions-with-parameters-and-loops" class="text-2xl font-semibold">🔄 Functions with Parameters and Loops</h2>
+        <pre class="bg-gray-800 p-4 rounded overflow-x-auto"><code class="lang-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+void printNumbers(int n) {
+    for (int i = 1; i &lt;= n; i++) {
+        cout &lt;&lt; i &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+}
+
+int main() {
+    printNumbers(5);  // Output: 1 2 3 4 5
+    return 0;
+}
+</code></pre>
+        <hr>
+
+        <h2 id="-summary-table" class="text-2xl font-semibold">✅ Summary Table</h2>
+        <table class="bg-gray-800 text-text-primary">
+            <thead>
+                <tr>
+                    <th>Concept</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Declaration</td>
+                    <td><code>int add(int a, int b);</code></td>
+                </tr>
+                <tr>
+                    <td>Definition</td>
+                    <td><code>int add(int a, int b) { return a+b; }</code></td>
+                </tr>
+                <tr>
+                    <td>Call</td>
+                    <td><code>int sum = add(2,3);</code></td>
+                </tr>
+                <tr>
+                    <td>No Return</td>
+                    <td><code>void printMessage() { ... }</code></td>
+                </tr>
+                <tr>
+                    <td>With Parameters</td>
+                    <td><code>void printNumbers(int n) { ... }</code></td>
+                </tr>
+                <tr>
+                    <td>Overloading</td>
+                    <td><code>int add(int a,int b); double add(double a,double b);</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Bottom Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+</body>
+
+</html>
