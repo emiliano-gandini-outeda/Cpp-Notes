@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+        <section
+            class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4"
+        >
+            <h1 id="-pointers" class="text-3xl font-bold">📦 Pointers</h1>
+
+            <h2 id="-what-is-a-pointer-" class="text-2xl font-semibold mt-6">
+                ✅ What is a Pointer?
+            </h2>
+            <p>
+                A pointer is a
+                <strong>variable that stores the memory address</strong> of
+                another variable. Instead of holding a value directly, it
+                <strong>points</strong> to where the value is stored in memory.
+            </p>
+            <hr class="border-borders" />
+
+            <h2 id="-syntax" class="text-2xl font-semibold mt-6">🧠 Syntax</h2>
+            <pre><code class="lang-c">type *pointerName;</code></pre>
+            <ul class="list-disc list-inside space-y-1">
+                <li>
+                    <code>type</code>: The data type of the variable the pointer
+                    will point to.
+                </li>
+                <li><code>*</code>: Declares a pointer.</li>
+            </ul>
+            <hr class="border-borders" />
+
+            <h2 id="-basic-operations" class="text-2xl font-semibold mt-6">
+                📌 Basic Operations
+            </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Operation</th>
+                        <th>Symbol</th>
+                        <th>Meaning</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Address-of</td>
+                        <td><code>&amp;</code></td>
+                        <td>Gets the address of a variable</td>
+                    </tr>
+                    <tr>
+                        <td>Dereference</td>
+                        <td><code>*</code></td>
+                        <td>Accesses the value at a memory address</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr class="border-borders" />
+
+            <h2 id="-example-program" class="text-2xl font-semibold mt-6">
+                🧾 Example Program
+            </h2>
+            <pre><code class="lang-c">#include &lt;stdio.h&gt;
+
+int main() {
+    int x = 10;
+    int *ptr = &amp;x;  // Pointer to x
+
+    printf("Value of x: %d\n", x);
+    printf("Address of x: %p\n", &amp;x);
+    printf("Pointer value (address): %p\n", ptr);
+    printf("Value pointed to by ptr: %d\n", *ptr);
+
+    return 0;
+}</code></pre>
+            <hr class="border-borders" />
+
+            <h2
+                id="-changing-values-via-pointers"
+                class="text-2xl font-semibold mt-6"
+            >
+                🔄 Changing Values via Pointers
+            </h2>
+            <pre><code class="lang-c">#include &lt;stdio.h&gt;
+
+int main() {
+    int x = 5;
+    int *p = &amp;x;
+
+    *p = 20; // Changes x through pointer
+
+    printf("x = %d\n", x);
+
+    return 0;
+}</code></pre>
+            <hr class="border-borders" />
+
+            <h2 id="-important-rules" class="text-2xl font-semibold mt-6">
+                ⚠️ Important Rules
+            </h2>
+            <ol class="list-decimal list-inside space-y-1">
+                <li>
+                    Always <strong>initialize pointers</strong> before using
+                    them.
+                </li>
+                <li>
+                    <strong>NULL pointers</strong> (<code>NULL</code>) represent
+                    “points to nothing.”
+                </li>
+                <li>
+                    Dereferencing an
+                    <strong>invalid or uninitialized pointer</strong> causes
+                    undefined behavior.
+                </li>
+                <li>
+                    Pointers can be used with
+                    <strong
+                        >arrays, strings, and dynamic memory allocation</strong
+                    >.
+                </li>
+            </ol>
+            <hr class="border-borders" />
+
+            <h2 id="-summary-table" class="text-2xl font-semibold mt-6">
+                ✅ Summary Table
+            </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Concept</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Declare pointer</td>
+                        <td><code>int *p;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Assign address</td>
+                        <td><code>p = &amp;x;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Dereference</td>
+                        <td><code>*p</code></td>
+                    </tr>
+                    <tr>
+                        <td>Null pointer</td>
+                        <td><code>p = NULL;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Pointer to pointer</td>
+                        <td><code>int **pp;</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>
