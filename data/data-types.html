@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Notes</title>
+    <link rel="icon" type="image/png"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        :root {
+            --color-dark-grey: #2D2D2D;
+            --color-background: #111217;
+            --color-surface: #3A3A3A;
+            --color-dark-red: #B71C1C;
+            --color-dark-red-light: #D32F2F;
+            --color-text-primary: #E0E0E0;
+            --color-text-secondary: #B0B0B0;
+            --color-borders: #4A4A4A;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        pre {
+            background-color: var(--color-dark-grey);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--color-borders);
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--color-surface);
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center py-8 px-4">
+
+    <!-- Top Back Button -->
+    <div class="w-full max-w-5xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+    <!-- Blog Section -->
+    <section class="max-w-5xl w-full bg-surface p-6 rounded shadow-md space-y-6">
+
+        <h1 id="-data-types" class="text-3xl font-bold">📦 Data Types</h1>
+
+        <h2 id="-what-are-data-types-" class="text-2xl font-semibold">✅ What are Data Types?</h2>
+        <p>
+            Data types define <strong>the kind of data a variable can hold</strong> and <strong>how much memory it
+                uses</strong>.
+            C++ supports <strong>fundamental</strong>, <strong>derived</strong>, and <strong>user-defined</strong> data
+            types.
+        </p>
+
+        <hr class="border-gray-600">
+
+        <!-- Fundamental -->
+        <h2 id="-1-fundamental-primitive-data-types" class="text-2xl font-semibold">🧠 1. Fundamental (Primitive) Data
+            Types</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                    <th>Typical Size*</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>int</code></td>
+                    <td>Integer numbers</td>
+                    <td><code>int age = 25;</code></td>
+                    <td>4 bytes</td>
+                </tr>
+                <tr>
+                    <td><code>float</code></td>
+                    <td>Single-precision floating point</td>
+                    <td><code>float pi = 3.14;</code></td>
+                    <td>4 bytes</td>
+                </tr>
+                <tr>
+                    <td><code>double</code></td>
+                    <td>Double-precision floating point</td>
+                    <td><code>double g = 9.81;</code></td>
+                    <td>8 bytes</td>
+                </tr>
+                <tr>
+                    <td><code>long double</code></td>
+                    <td>Extended precision floating point</td>
+                    <td><code>long double ld = 3.14159265;</code></td>
+                    <td>8–16 bytes</td>
+                </tr>
+                <tr>
+                    <td><code>char</code></td>
+                    <td>Single character</td>
+                    <td><code>char grade = 'A';</code></td>
+                    <td>1 byte</td>
+                </tr>
+                <tr>
+                    <td><code>wchar_t</code></td>
+                    <td>Wide character</td>
+                    <td><code>wchar_t wc = L'Ω';</code></td>
+                    <td>2–4 bytes</td>
+                </tr>
+                <tr>
+                    <td><code>char16_t</code></td>
+                    <td>UTF-16 character</td>
+                    <td><code>char16_t ch = u'あ';</code></td>
+                    <td>2 bytes</td>
+                </tr>
+                <tr>
+                    <td><code>char32_t</code></td>
+                    <td>UTF-32 character</td>
+                    <td><code>char32_t ch = U'𐍈';</code></td>
+                    <td>4 bytes</td>
+                </tr>
+                <tr>
+                    <td><code>bool</code></td>
+                    <td>Boolean (true/false)</td>
+                    <td><code>bool isOn = true;</code></td>
+                    <td>1 byte</td>
+                </tr>
+                <tr>
+                    <td><code>void</code></td>
+                    <td>No value / no return</td>
+                    <td>Used in functions</td>
+                    <td>—</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="text-sm text-gray-400">*Sizes may vary by system and compiler.</p>
+
+        <hr class="border-gray-600">
+
+        <!-- Type Modifiers -->
+        <h2 id="-2-type-modifiers" class="text-2xl font-semibold">🧠 2. Type Modifiers</h2>
+        <p>Modifiers adjust the <strong>size</strong> and/or <strong>range</strong> of numeric types.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Modifier</th>
+                    <th>Example</th>
+                    <th>Meaning</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>signed</code></td>
+                    <td><code>signed int x;</code></td>
+                    <td>Positive &amp; negative</td>
+                </tr>
+                <tr>
+                    <td><code>unsigned</code></td>
+                    <td><code>unsigned int y;</code></td>
+                    <td>Only positive</td>
+                </tr>
+                <tr>
+                    <td><code>short</code></td>
+                    <td><code>short int a;</code></td>
+                    <td>Smaller integer</td>
+                </tr>
+                <tr>
+                    <td><code>long</code></td>
+                    <td><code>long int b;</code></td>
+                    <td>Larger integer</td>
+                </tr>
+                <tr>
+                    <td><code>long long</code></td>
+                    <td><code>long long int c;</code></td>
+                    <td>Even larger integer</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr class="border-gray-600">
+
+        <!-- Derived -->
+        <h2 id="-3-derived-data-types" class="text-2xl font-semibold">🧠 3. Derived Data Types</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Arrays</td>
+                    <td>Collection of elements of same type</td>
+                    <td><code>int nums[5];</code></td>
+                </tr>
+                <tr>
+                    <td>Pointers</td>
+                    <td>Stores memory address</td>
+                    <td><code>int* ptr = &amp;x;</code></td>
+                </tr>
+                <tr>
+                    <td>References</td>
+                    <td>Alias for another variable</td>
+                    <td><code>int&amp; ref = x;</code></td>
+                </tr>
+                <tr>
+                    <td>Functions</td>
+                    <td>Return types &amp; parameters</td>
+                    <td><code>int sum(int a, int b);</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr class="border-gray-600">
+
+        <!-- User Defined -->
+        <h2 id="-4-user-defined-data-types" class="text-2xl font-semibold">🧠 4. User-Defined Data Types</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>struct</code></td>
+                    <td>Group of variables</td>
+                    <td><code>struct Point { int x, y; };</code></td>
+                </tr>
+                <tr>
+                    <td><code>class</code></td>
+                    <td>Encapsulated object blueprint</td>
+                    <td><code>class Car { ... };</code></td>
+                </tr>
+                <tr>
+                    <td><code>enum</code></td>
+                    <td>Named integer constants</td>
+                    <td><code>enum Color { Red, Green, Blue };</code></td>
+                </tr>
+                <tr>
+                    <td><code>typedef</code> / <code>using</code></td>
+                    <td>Type alias</td>
+                    <td><code>typedef unsigned int uint;</code></td>
+                </tr>
+                <tr>
+                    <td><code>union</code></td>
+                    <td>Shares memory between members</td>
+                    <td><code>union Data { int i; float f; };</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr class="border-gray-600">
+
+        <!-- Example Program -->
+        <h2 id="-example-program" class="text-2xl font-semibold">📌 Example Program</h2>
+        <pre><code class="language-c++">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int age = 25;
+    float pi = 3.14f;
+    double g = 9.81;
+    char grade = 'A';
+    bool isOn = true;
+    wchar_t symbol = L'Ω';
+
+    cout &lt;&lt; "Age: " &lt;&lt; age &lt;&lt; endl;
+    cout &lt;&lt; "Pi: " &lt;&lt; pi &lt;&lt; endl;
+    cout &lt;&lt; "Gravity: " &lt;&lt; g &lt;&lt; endl;
+    cout &lt;&lt; "Grade: " &lt;&lt; grade &lt;&lt; endl;
+    cout &lt;&lt; "Is On: " &lt;&lt; isOn &lt;&lt; endl;
+    wcout &lt;&lt; L"Symbol: " &lt;&lt; symbol &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+
+        <!-- sizeof Example -->
+        <h2 id="-checking-sizes-with-sizeof-" class="text-2xl font-semibold">🔄 Checking Sizes with <code>sizeof</code>
+        </h2>
+        <pre><code class="language-c++">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; "Size of int: " &lt;&lt; sizeof(int) &lt;&lt; " bytes\n";
+    cout &lt;&lt; "Size of float: " &lt;&lt; sizeof(float) &lt;&lt; " bytes\n";
+    cout &lt;&lt; "Size of double: " &lt;&lt; sizeof(double) &lt;&lt; " bytes\n";
+    cout &lt;&lt; "Size of char: " &lt;&lt; sizeof(char) &lt;&lt; " bytes\n";
+    cout &lt;&lt; "Size of wchar_t: " &lt;&lt; sizeof(wchar_t) &lt;&lt; " bytes\n";
+    cout &lt;&lt; "Size of bool: " &lt;&lt; sizeof(bool) &lt;&lt; " bytes\n";
+}</code></pre>
+    </section>
+
+    <!-- Bottom Back Button -->
+    <div class="w-full max-w-5xl mt-6 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+</body>
+
+</html>

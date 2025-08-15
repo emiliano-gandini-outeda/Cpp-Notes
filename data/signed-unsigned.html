@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Notes</title>
+    <link rel="icon" type="image/png"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        :root {
+            --color-dark-grey: #2D2D2D;
+            --color-background: #111217;
+            --color-surface: #3A3A3A;
+            --color-dark-red: #B71C1C;
+            --color-dark-red-light: #D32F2F;
+            --color-text-primary: #E0E0E0;
+            --color-text-secondary: #B0B0B0;
+            --color-borders: #4A4A4A;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        pre {
+            background-color: var(--color-dark-grey);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--color-borders);
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--color-surface);
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center py-8 px-4">
+
+    <!-- Top Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+
+
+    <!-- Blog Section -->
+    <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4">
+        <h1 class="text-3xl font-bold">🏛 Signed and Unsigned Types</h1>
+
+        <h2 class="text-2xl font-bold">✅ What are Signed and Unsigned Types?</h2>
+        <p>Integer types like <code>int</code> are <strong>signed</strong> by default, meaning they can store both
+            positive and negative numbers. You can also declare them as <strong>unsigned</strong>, which means they
+            store only non-negative values (zero and positive numbers).</p>
+        <hr>
+
+        <h2 class="text-2xl font-bold">🧠 How Integers Are Stored in Memory</h2>
+        <p>An <code>int</code> is stored as a series of bits (<code>0</code> and <code>1</code>). For <strong>signed
+                integers</strong>, the <strong>most significant bit</strong> (MSB, the leftmost bit) is the <strong>sign
+                bit</strong>:</p>
+        <ul>
+            <li><code>0</code> in MSB → number is positive or zero</li>
+            <li><code>1</code> in MSB → number is negative (two’s complement representation)</li>
+        </ul>
+        <p class="text-1xl font-bold">Example with a <strong>4-bit number</strong>:</p>
+        <ul>
+            <li><code>0001</code> → <strong>+1</strong></li>
+            <li><code>1001</code> → <strong>-7</strong> in two’s complement</li>
+        </ul>
+        <hr>
+
+        <h2 class="text-2xl font-bold">📌 Effect of Signed vs. Unsigned</h2>
+        <p>If you use <strong>unsigned</strong>, the MSB no longer indicates the sign — it becomes part of the number’s
+            magnitude. This <strong>doubles the maximum positive number</strong> you can store.</p>
+        <p>Example with <strong>4 bits</strong>:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Bits</th>
+                    <th>Signed Value</th>
+                    <th>Unsigned Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0001</td>
+                    <td>+1</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>1001</td>
+                    <td>-7</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>0111</td>
+                    <td>+7 (max)</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>1111</td>
+                    <td>-1</td>
+                    <td>15 (max)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>So:</p>
+        <ul>
+            <li><strong>Signed range</strong> (4 bits) → -8 to +7</li>
+            <li><strong>Unsigned range</strong> (4 bits) → 0 to 15</li>
+        </ul>
+        <p class="text-1xl font-bold">Formula:</p>
+        <ul>
+            <li><strong>Unsigned max</strong> = <code>2ⁿ - 1</code></li>
+            <li><strong>Signed range</strong> ≈ <code>-(2ⁿ⁻¹)</code> to <code>(2ⁿ⁻¹) - 1</code></li>
+        </ul>
+        <hr>
+
+        <h2 class="text-2xl font-bold">📌 Typical Ranges (32-bit int)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Range</th>
+                    <th>Reason</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>signed int</td>
+                    <td>-2,147,483,648 to 2,147,483,647</td>
+                    <td>MSB is sign bit</td>
+                </tr>
+                <tr>
+                    <td>unsigned int</td>
+                    <td>0 to 4,294,967,295</td>
+                    <td>All bits store magnitude</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+
+        <h2 class="text-2xl font-bold">📌 Declaring Signed and Unsigned</h2>
+        <pre><code class="language-c">signed int temperature = -15;  // Can be negative
+unsigned int students = 50;    // Cannot be negative
+</code></pre>
+        <p><em>(Tip: <code>int</code> alone means <code>signed int</code> by default)</em></p>
+        <hr>
+
+        <h2 class="text-2xl font-bold">⚠️ Important Notes</h2>
+        <ul>
+            <li><strong>Unsigned</strong> arithmetic never yields negative numbers — overflow wraps around to a large
+                value.</li>
+            <li>Mixing signed and unsigned can lead to <strong>unexpected results</strong> due to implicit type
+                conversion.</li>
+            <li>Use <strong>unsigned</strong> when negative values are impossible (e.g., sizes, counts, indices).</li>
+        </ul>
+        <hr>
+
+        <h2 class="text-2xl font-bold">🧾 Example Program</h2>
+        <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main() {
+    signed int temperature = -5;   // Degrees below zero
+    unsigned int distance = 120;   // Distance in kilometers
+
+    printf("Temperature: %d°C\n", temperature);
+    printf("Distance: %u km\n", distance);
+
+    if (temperature &lt; (int)distance) {
+        printf("Temperature is numerically less than distance.\n");
+    } else {
+        printf("Temperature is not less than distance.\n");
+    }
+
+    return 0;
+}
+</code></pre>
+        <hr>
+
+        <h2 class="text-2xl font-bold">📌 Format Specifiers</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th><code>printf</code> Specifier</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>signed int</td>
+                    <td><code>%d</code> or <code>%i</code></td>
+                </tr>
+                <tr>
+                    <td>unsigned int</td>
+                    <td><code>%u</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </section>
+
+    <!-- Bottom Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+</body>
+
+</html>

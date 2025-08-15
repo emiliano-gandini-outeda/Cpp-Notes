@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Notes</title>
+    <link rel="icon" type="image/png"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        :root {
+            --color-dark-grey: #2D2D2D;
+            --color-background: #111217;
+            --color-surface: #3A3A3A;
+            --color-dark-red: #B71C1C;
+            --color-dark-red-light: #D32F2F;
+            --color-text-primary: #E0E0E0;
+            --color-text-secondary: #B0B0B0;
+            --color-borders: #4A4A4A;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        pre {
+            background-color: var(--color-dark-grey);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--color-borders);
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--color-surface);
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center py-8 px-4">
+
+    <!-- Top Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+
+
+    <!-- Blog Section -->
+    <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4">
+        <h1 class="text-3xl font-bold">📦 Format Specifiers</h1>
+
+        <h2 class="text-2xl font-bold">✅ What are Format Specifiers?</h2>
+        <p>Format specifiers are <strong>placeholders</strong> in functions like <code>printf()</code> and
+            <code>scanf()</code> that tell the compiler <strong>the type, size, and format</strong> of the data to
+            display or read.
+            They <strong>start with <code>%</code></strong> followed by characters that define formatting.
+        </p>
+        <hr>
+
+        <h2 class="text-2xl font-bold">🧠 Syntax</h2>
+        <pre><code class="language-c">printf("format_string", values...);
+scanf("format_string", &amp;variables...);
+</code></pre>
+        <p>Example:</p>
+        <pre><code class="language-c">printf("Value: %d\n", 42);
+scanf("%f", &amp;number);
+</code></pre>
+        <hr>
+
+        <h2 class="text-2xl font-bold">📌 Complete List of Format Specifiers</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Specifier</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>%d</code> / <code>%i</code></td>
+                    <td><code>int</code></td>
+                    <td>Signed decimal integer</td>
+                </tr>
+                <tr>
+                    <td><code>%u</code></td>
+                    <td><code>unsigned int</code></td>
+                    <td>Unsigned decimal integer</td>
+                </tr>
+                <tr>
+                    <td><code>%ld</code></td>
+                    <td><code>long int</code></td>
+                    <td>Signed long integer</td>
+                </tr>
+                <tr>
+                    <td><code>%lu</code></td>
+                    <td><code>unsigned long int</code></td>
+                    <td>Unsigned long integer</td>
+                </tr>
+                <tr>
+                    <td><code>%lld</code></td>
+                    <td><code>long long int</code></td>
+                    <td>Signed long long integer</td>
+                </tr>
+                <tr>
+                    <td><code>%llu</code></td>
+                    <td><code>unsigned long long int</code></td>
+                    <td>Unsigned long long integer</td>
+                </tr>
+                <tr>
+                    <td><code>%hd</code></td>
+                    <td><code>short int</code></td>
+                    <td>Signed short integer</td>
+                </tr>
+                <tr>
+                    <td><code>%hu</code></td>
+                    <td><code>unsigned short int</code></td>
+                    <td>Unsigned short integer</td>
+                </tr>
+                <tr>
+                    <td><code>%f</code></td>
+                    <td><code>float</code></td>
+                    <td>Decimal floating-point</td>
+                </tr>
+                <tr>
+                    <td><code>%lf</code></td>
+                    <td><code>double</code></td>
+                    <td>Double precision floating-point</td>
+                </tr>
+                <tr>
+                    <td><code>%Lf</code></td>
+                    <td><code>long double</code></td>
+                    <td>Long double precision floating-point</td>
+                </tr>
+                <tr>
+                    <td><code>%e</code> / <code>%E</code></td>
+                    <td><code>float</code> / <code>double</code></td>
+                    <td>Scientific notation</td>
+                </tr>
+                <tr>
+                    <td><code>%g</code> / <code>%G</code></td>
+                    <td><code>float</code> / <code>double</code></td>
+                    <td>Shortest representation</td>
+                </tr>
+                <tr>
+                    <td><code>%a</code> / <code>%A</code></td>
+                    <td><code>double</code></td>
+                    <td>Hexadecimal floating-point</td>
+                </tr>
+                <tr>
+                    <td><code>%c</code></td>
+                    <td><code>char</code></td>
+                    <td>Single character</td>
+                </tr>
+                <tr>
+                    <td><code>%s</code></td>
+                    <td><code>char[]</code></td>
+                    <td>String of characters</td>
+                </tr>
+                <tr>
+                    <td><code>%p</code></td>
+                    <td>Pointer</td>
+                    <td>Memory address</td>
+                </tr>
+                <tr>
+                    <td><code>%x</code> / <code>%X</code></td>
+                    <td><code>unsigned int</code></td>
+                    <td>Hexadecimal</td>
+                </tr>
+                <tr>
+                    <td><code>%o</code></td>
+                    <td><code>unsigned int</code></td>
+                    <td>Octal integer</td>
+                </tr>
+                <tr>
+                    <td><code>%%</code></td>
+                    <td>—</td>
+                    <td>Literal <code>%</code> sign</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+
+        <h2 class="text-2xl font-bold">🔹 Modifiers for Width &amp; Precision</h2>
+        <ul>
+            <li><strong>Width</strong> → minimum field size (<code>%6d</code>).</li>
+            <li><strong>Precision</strong> → decimal or string length control (<code>%.2f</code>).</li>
+            <li><strong>Zero-padding</strong> → <code>%06d</code>.</li>
+        </ul>
+        <p class="text-xl font-bold">Example:</p>
+        <pre><code class="language-c">printf("%6d", 42);       // "    42"
+printf("%.2f", 3.14159); // "3.14"
+printf("%06d", 42);      // "000042"
+</code></pre>
+        <hr>
+
+        <h2 class="text-1xl font-bold">⚠️ Important Rules</h2>
+        <ol>
+            <li>Match type with specifier.</li>
+            <li><code>scanf()</code> needs <strong><code>&amp;</code></strong> for variables (except arrays/strings).
+            </li>
+            <li><code>%s</code> stops at whitespace unless width is specified.</li>
+        </ol>
+        <hr>
+
+        <h2 class="text-1xl font-bold">🧾 Example Program</h2>
+        <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main() {
+    int age = 25;
+    unsigned int score = 5000;
+    double pi = 3.1415926535;
+    char grade = 'A';
+    char name[] = "Alice";
+
+    printf("Name: %s\n", name);
+    printf("Age: %d\n", age);
+    printf("Score: %u\n", score);
+    printf("Pi (2 decimals): %.2lf\n", pi);
+    printf("Grade: %c\n", grade);
+
+    return 0;
+}
+</code></pre>
+        <hr>
+
+        <h2 class="text-2xl font-bold">✅ Summary Table</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Purpose</th>
+                    <th>Specifiers</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Signed integers</td>
+                    <td><code>%d</code>, <code>%i</code>, <code>%ld</code>, <code>%lld</code>, <code>%hd</code></td>
+                </tr>
+                <tr>
+                    <td>Unsigned integers</td>
+                    <td><code>%u</code>, <code>%lu</code>, <code>%llu</code>, <code>%hu</code></td>
+                </tr>
+                <tr>
+                    <td>Floating-point</td>
+                    <td><code>%f</code>, <code>%lf</code>, <code>%Lf</code>, <code>%e</code>, <code>%E</code>,
+                        <code>%g</code>, <code>%G</code>, <code>%a</code>, <code>%A</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Characters &amp; Strings</td>
+                    <td><code>%c</code>, <code>%s</code></td>
+                </tr>
+                <tr>
+                    <td>Special</td>
+                    <td><code>%p</code>, <code>%x</code>, <code>%X</code>, <code>%o</code>, <code>%%</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </section>
+
+    <!-- Bottom Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+</body>
+
+</html>
