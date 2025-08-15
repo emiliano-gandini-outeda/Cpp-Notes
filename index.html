@@ -23,115 +23,249 @@
             color: var(--color-text-primary);
             font-family: 'Inter', sans-serif;
         }
+        
+        /* Mobile filter sidebar overlay */
+        .filter-overlay {
+            backdrop-filter: blur(4px);
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Smooth transitions for sidebar */
+        .sidebar-transition {
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        /* Hide scrollbar but keep functionality */
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
     
 <!-- Hero Section -->
-<section class="relative h-[60vh] flex flex-col items-center justify-center text-center bg-cover bg-center" style="background-image: url(c++.jpg)">
+<section class="relative h-[50vh] sm:h-[60vh] flex flex-col items-center justify-center text-center bg-cover bg-center" style="background-image: url(c++.jpg)">
     <div class="bg-[rgba(26,26,26,0.7)] absolute inset-0"></div>
-    <div class="relative z-10">
-        <h1 class="text-4xl md:text-6xl font-extrabold mb-4">C++ Notes</h1>
-        <p class="text-lg text-[var(--color-text-secondary)] max-w-xl mx-auto">
-        C++ notes from my studies, made onto a static site. 
+    <div class="relative z-10 px-4">
+        <h1 class="text-3xl sm:text-4xl md:text-6xl font-extrabold mb-4">C++ Notes</h1>
+        <p class="text-base sm:text-lg text-[var(--color-text-secondary)] max-w-xl mx-auto px-4">
+            C++ notes from my studies, made onto a static site. 
         </p>
     </div>
 </section>
 
 <!-- Main -->
-<section class="container mx-auto py-8 px-4 flex gap-8" x-data="cardApp()">
+<section class="container mx-auto py-4 sm:py-8 px-4" x-data="cardApp()">
 
-    <!-- Sidebar Filters -->
-    <aside class="bg-[var(--color-dark-grey)] p-4 rounded-lg w-64 flex-shrink-0"
-           style="height: fit-content;">
+    <!-- Mobile Filter Overlay -->
+    <div x-show="showMobileFilters" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-40 filter-overlay lg:hidden"
+         @click="showMobileFilters = false">
+    </div>
 
-        <h2 class="text-lg font-bold mb-4">Filters</h2>
+    <div class="flex gap-4 lg:gap-8 relative">
+        <!-- Desktop Sidebar Filters -->
+        <aside class="hidden lg:block bg-[var(--color-dark-grey)] p-4 rounded-lg w-64 flex-shrink-0"
+               style="height: fit-content;">
+            <h2 class="text-lg font-bold mb-4">Filters</h2>
 
-        <!-- Filter checkboxes -->
-        <div class="flex flex-col gap-2">
-            <template x-for="tag in allTags" :key="tag">
-                <label class="flex items-center gap-3 cursor-pointer">
-                    <input type="checkbox"
-                           class="form-checkbox w-5 h-5 text-[var(--color-dark-red)] rounded"
-                           :value="tag"
-                           @change="toggleTag(tag)"
-                           :checked="selectedTags.includes(tag)">
-                    <span x-text="tag" class="text-[var(--color-text-primary)]"></span>
-                </label>
-            </template>
-        </div>
-
-        <!-- Clear filters button -->
-        <button @click="selectedTags = []"
-                class="mt-4 w-full py-2 rounded bg-[var(--color-dark-red)]
-                       text-[var(--color-text-primary)]
-                       hover:bg-[var(--color-dark-red-light)] transition">
-            Clear Filters
-        </button>
-    </aside>
-
-    <!-- Main Content -->
-    <div class="flex-1">
-        <!-- Search Bar -->
-        <div class="relative w-full mb-6">
-            <span class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-[var(--color-text-secondary)]">
-                <!-- Search Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.65 5.65a7.5 7.5 0 016.0 11.0z" />
-                </svg>
-            </span>
-            <input type="text" placeholder="Search cards..."
-                class="w-full pl-12 pr-4 py-2 rounded-full border border-[var(--color-borders)]
-                        bg-[var(--color-surface)] text-[var(--color-text-primary)]
-                        placeholder-[var(--color-text-secondary)]
-                        focus:outline-none
-                        focus:border-[var(--color-dark-red)]
-                        focus:ring-2 focus:ring-[var(--color-dark-red)]
-                        shadow-sm transition"
-                x-model="searchQuery">
-        </div>
-        
-        <!-- Cards -->
-        <div class="mt-8">
-            <h2 class="font-extrabold uppercase text-xl tracking-wide mb-6">Topics</h2>
-
-            <!-- Masonry container -->
-            <div id="masonry-container" class="relative">
-                <template x-for="card in filteredCards" :key="card.title">
-                    <div class="masonry-item bg-[var(--color-surface)] text-[var(--color-text-primary)]
-                                rounded shadow p-4 hover:shadow-lg transition flex flex-col overflow-hidden
-                                absolute opacity-0"
-                         x-init="$nextTick(() => layoutMasonry())">
-                        <!-- Card Title -->
-                        <h3 class="text-xl font-bold mb-2 break-words" x-text="card.title"></h3>
-
-                        <!-- Card Text -->
-                        <p class="text-[var(--color-text-secondary)] mb-4 break-words" x-text="card.text"></p>
-
-                        <!-- More Button (1/3 width, right-aligned) -->
-                        <div class="flex justify-end">
-                            <a :href="card.url"
-                            class="bg-[var(--color-dark-red)] text-[var(--color-text-primary)] px-4 py-2 rounded
-                                    transition duration-300 ease-in-out transform hover:scale-105 active:scale-95
-                                    text-center block"
-                            style="width: 33.333%;">
-                                More
-                            </a>
-                        </div>
-                    </div>
+            <!-- Filter checkboxes -->
+            <div class="flex flex-col gap-2 max-h-96 overflow-y-auto hide-scrollbar">
+                <template x-for="tag in allTags" :key="tag">
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        <input type="checkbox"
+                               class="form-checkbox w-5 h-5 text-[var(--color-dark-red)] rounded"
+                               :value="tag"
+                               @change="toggleTag(tag)"
+                               :checked="selectedTags.includes(tag)">
+                        <span x-text="tag" class="text-[var(--color-text-primary)] text-sm"></span>
+                    </label>
                 </template>
+            </div>
+
+            <!-- Clear filters button -->
+            <button @click="selectedTags = []"
+                    class="mt-4 w-full py-2 rounded bg-[var(--color-dark-red)]
+                           text-[var(--color-text-primary)]
+                           hover:bg-[var(--color-dark-red-light)] transition text-sm">
+                Clear Filters
+            </button>
+        </aside>
+
+        <!-- Mobile Sidebar Filters -->
+        <aside x-show="showMobileFilters"
+               x-transition:enter="transition ease-out duration-300 transform"
+               x-transition:enter-start="-translate-x-full"
+               x-transition:enter-end="translate-x-0"
+               x-transition:leave="transition ease-in duration-200 transform"
+               x-transition:leave-start="translate-x-0"
+               x-transition:leave-end="-translate-x-full"
+               class="fixed left-0 top-0 bottom-0 z-50 bg-[var(--color-dark-grey)] p-4 w-80 max-w-[85vw] lg:hidden sidebar-transition overflow-y-auto hide-scrollbar">
+            
+            <!-- Mobile sidebar header -->
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-lg font-bold">Filters</h2>
+                <button @click="showMobileFilters = false" 
+                        class="p-2 hover:bg-[var(--color-surface)] rounded transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Filter checkboxes -->
+            <div class="flex flex-col gap-3 mb-6">
+                <template x-for="tag in allTags" :key="tag">
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        <input type="checkbox"
+                               class="form-checkbox w-5 h-5 text-[var(--color-dark-red)] rounded"
+                               :value="tag"
+                               @change="toggleTag(tag)"
+                               :checked="selectedTags.includes(tag)">
+                        <span x-text="tag" class="text-[var(--color-text-primary)]"></span>
+                    </label>
+                </template>
+            </div>
+
+            <!-- Clear filters button -->
+            <button @click="selectedTags = []; showMobileFilters = false"
+                    class="w-full py-3 rounded bg-[var(--color-dark-red)]
+                           text-[var(--color-text-primary)]
+                           hover:bg-[var(--color-dark-red-light)] transition">
+                Clear Filters
+            </button>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 min-w-0">
+            <!-- Search Bar with Filter Button -->
+            <div class="flex gap-2 sm:gap-4 mb-6">
+                <!-- Search Bar -->
+                <div class="relative flex-1">
+                    <span class="absolute inset-y-0 left-3 sm:left-4 flex items-center pointer-events-none text-[var(--color-text-secondary)]">
+                        <!-- Search Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" fill="none"
+                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.65 5.65a7.5 7.5 0 016.0 11.0z" />
+                        </svg>
+                    </span>
+                    <input type="text" placeholder="Search cards..."
+                        class="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2 sm:py-3 rounded-full border border-[var(--color-borders)]
+                                bg-[var(--color-surface)] text-[var(--color-text-primary)]
+                                placeholder-[var(--color-text-secondary)]
+                                focus:outline-none
+                                focus:border-[var(--color-dark-red)]
+                                focus:ring-2 focus:ring-[var(--color-dark-red)]
+                                shadow-sm transition text-sm sm:text-base"
+                        x-model="searchQuery">
+                </div>
+                
+                <!-- Mobile Filter Button -->
+                <button @click="showMobileFilters = true"
+                        class="lg:hidden flex items-center gap-2 px-4 py-2 sm:py-3 bg-[var(--color-dark-red)] 
+                               text-[var(--color-text-primary)] rounded-full hover:bg-[var(--color-dark-red-light)] 
+                               transition whitespace-nowrap text-sm sm:text-base">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                              d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z"></path>
+                    </svg>
+                    <span class="hidden sm:inline">Filter</span>
+                </button>
+            </div>
+
+            <!-- Active Filters Display -->
+            <div x-show="selectedTags.length > 0" class="mb-4">
+                <div class="flex flex-wrap gap-2">
+                    <template x-for="tag in selectedTags" :key="tag">
+                        <span class="inline-flex items-center gap-1 px-3 py-1 bg-[var(--color-dark-red)] 
+                                     text-[var(--color-text-primary)] rounded-full text-xs sm:text-sm">
+                            <span x-text="tag"></span>
+                            <button @click="toggleTag(tag)" class="hover:bg-[var(--color-dark-red-light)] rounded-full p-0.5">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </span>
+                    </template>
+                </div>
+            </div>
+            
+            <!-- Cards -->
+            <div class="mt-4 sm:mt-8">
+                <h2 class="font-extrabold uppercase text-lg sm:text-xl tracking-wide mb-4 sm:mb-6">Topics</h2>
+
+                <!-- Results count -->
+                <div class="mb-4 text-sm text-[var(--color-text-secondary)]">
+                    <span x-text="filteredCards.length"></span> 
+                    <span x-text="filteredCards.length === 1 ? 'result' : 'results'"></span>
+                </div>
+
+                <!-- Masonry container -->
+                <div id="masonry-container" class="relative">
+                    <template x-for="card in filteredCards" :key="card.title">
+                        <div class="masonry-item bg-[var(--color-surface)] text-[var(--color-text-primary)]
+                                    rounded-lg shadow-lg p-4 sm:p-6 hover:shadow-xl transition-all duration-300 
+                                    flex flex-col overflow-hidden absolute opacity-0 hover:scale-[1.02]"
+                             x-init="$nextTick(() => layoutMasonry())">
+                            <!-- Card Title -->
+                            <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 break-words leading-tight" x-text="card.title"></h3>
+
+                            <!-- Card Text -->
+                            <p class="text-[var(--color-text-secondary)] mb-4 sm:mb-6 break-words text-sm sm:text-base leading-relaxed flex-grow" x-text="card.text"></p>
+
+                            <!-- More Button -->
+                            <div class="flex justify-end">
+                                <a :href="card.url"
+                                class="bg-[var(--color-dark-red)] text-[var(--color-text-primary)] px-4 sm:px-6 py-2 sm:py-3 rounded-lg
+                                        transition duration-300 ease-in-out transform hover:scale-105 active:scale-95
+                                        text-center block text-sm sm:text-base font-medium hover:bg-[var(--color-dark-red-light)]"
+                                style="width: 33.333%;">
+                                    More
+                                </a>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- No results message -->
+                <div x-show="filteredCards.length === 0" class="text-center py-12">
+                    <div class="text-[var(--color-text-secondary)] mb-4">
+                        <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" 
+                                  d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.291-1.007-5.691-2.709M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">No results found</h3>
+                    <p class="text-[var(--color-text-secondary)] mb-4">Try adjusting your search or filters</p>
+                    <button @click="searchQuery = ''; selectedTags = []" 
+                            class="px-4 py-2 bg-[var(--color-dark-red)] text-[var(--color-text-primary)] 
+                                   rounded-lg hover:bg-[var(--color-dark-red-light)] transition">
+                        Clear all filters
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-
 <script>
 function cardApp() {
     return {
+        // Mobile filter sidebar state
+        showMobileFilters: false,
+        
         // Search input
         searchQuery: '',
 
@@ -139,7 +273,7 @@ function cardApp() {
         selectedTags: [],
 
         // All available filters/tags
-        allTags: ['Algorithms', 'Search', 'Sorting', 'Syntax', "Data Structures", "Functions", "Data Type", "Operators", "Junior", "Intermediate", "Senior", "Conditionals",],
+        allTags: ['Algorithms', 'Search', 'Sorting', 'Syntax', "Data Structures", "Functions", "Data Type", "Operators", "Junior", "Intermediate", "Senior", "Conditionals"],
 
         // Card data
         cards: [
@@ -152,9 +286,9 @@ function cardApp() {
             { title: 'scanf', text: 'scanf is a C standard library function defined in <stdio.h> used to read input from the user via the keyboard. ', tags: ['Functions',"Junior"], url: 'functions/scanf.html' },
             { title: 'Character Arrays', text: 'In C++, strings are stored as character arrays ending with a null character "\\0".', tags: ['Data Type', "Junior",], url: 'data/character-array.html' },
             { title: 'Loops', text: 'Loops let you repeat a block of code multiple times, either a fixed number of times or until a condition is met.', tags: ['Functions', "Junior", "Conditionals"], url: 'functions/loops.html' },
-            { title: 'Conditional Operators', text: 'Conditional operators compare two values or expressions and return either true (1) or false (0). They’re commonly used in if statements and loops.', tags: ['Operators', "Conditionals", "Junior"], url: 'operators/conditional-operators.html' },
-            { title: 'Logical Operators', text: 'Logical operators are used to combine or modify conditions. The result is always either true (1) or false (0).', tags: ['Operators', "Conditionals", "Junior"], url: 'operators/logical-operators.html' },
-            { title: 'Conditional Statements', text: 'Conditio  nal statements, such as if, else if, else and switch, allow a program to execute different blocks of code based on whether specific conditions are true or false. ', tags: ["Conditionals", "Junior", "Functions"], url: 'functions/conditional-statements.html' },
+            { title: 'Conditional Operators', text: "Conditional operators compare two values or expressions and return either true (1) or false (0). They're commonly used in if statements and loops.", tags: ['Operators', "Conditionals", "Junior"], url: 'operators/conditional-operators.html' },
+            { title: 'Logical Operators', text: "Logical operators are used to combine or modify conditions. The result is always either true (1) or false (0).", tags: ['Operators', "Conditionals", "Junior"], url: 'operators/logical-operators.html' },
+            { title: 'Conditional Statements', text: 'Conditional statements, such as if, else if, else and switch, allow a program to execute different blocks of code based on whether specific conditions are true or false. ', tags: ["Conditionals", "Junior", "Functions"], url: 'functions/conditional-statements.html' },
             { title: 'printf', text: 'printf is a standard library function used to print formatted output to the console.', tags: ['Functions', "Junior"], url: 'functions/printf.html' },
             { title: 'struct', text: 'A struct is a user-defined data type in C++ that groups related variables, which can be of different types, under one name.', tags: ['Data Type', "Data Structures", "Junior"], url: 'data/struct.html' },
             { title: 'Classes', text: 'A class is a blueprint for creating objects that combines data (attributes) and functions (methods).', tags: ['Data Type', "Data Structures", "Intermediate"], url: 'data/class.html' },
@@ -172,14 +306,14 @@ function cardApp() {
             { title: 'Hash Map', text: 'A hash map is a data structure designed to store key-value pairs and allow very fast access to data using the key.', tags: ["Data Structures", "Intermediate", "Data Type"], url: 'data/hash-map.html' },
             { title: 'Object Oriented Programming', text: 'Object-Oriented Programming (OOP) is a programming paradigm that models entities from the problem domain as objects. Each object combines data (attributes or properties) and behaviors (methods or operations).', tags: ["Data Structures", "Senior",], url: 'data/oop.html' },
             { title: 'Binary Trees', text: 'A binary tree is one in which each node has at most two children, called the left child and the right child.', tags: ["Data Structures", "Intermediate", "Data Type"], url: 'data/binary-tree.html' },
-            { title: 'Binary Search Trees', text: 'A binary search tree is a binary tree where each node’s left subtree contains smaller values and the right subtree contains larger values.', tags: ["Data Structures", "Intermediate", "Data Type", "Search"], url: 'data/binary-search-tree.html' },
+            { title: 'Binary Search Trees', text: "A binary search tree is a binary tree where each node's left subtree contains smaller values and the right subtree contains larger values.", tags: ["Data Structures", "Intermediate", "Data Type", "Search"], url: 'data/binary-search-tree.html' },
             { title: 'AVL Tree', text: 'An AVL tree is a balanced binary search tree that ensures the height difference between the left and right subtrees of any node (balance factor) is at most 1.', tags: ["Data Structures", "Senior", "Data Type", "Search"], url: 'data/avl-tree.html' },
             { title: 'Red-Black Tree', text: 'A Red-Black Tree is a balanced binary search tree that ensures a maximum height of 2*log₂(n+1), keeping all operations O(log n) in the worst case.', tags: ["Data Structures", "Senior", "Data Type", "Search"], url: 'data/red-black-tree.html' },
             { title: 'Graphs', text: 'A graph is a data structure consisting of a set of nodes (vertices) and a set of edges that connect pairs of nodes.', tags: ["Data Structures", "Intermediate", "Data Type",], url: 'data/graphs.html' },
             { title: 'Priority Queue', text: 'A priority queue is a data structure that stores elements with an associated priority.', tags: ["Data Structures", "Intermediate", "Data Type",], url: 'data/priority-queue.html' },
             { title: 'Recursion', text: 'A function that calls itself directly or indirectly to solve a problem by breaking it into smaller subproblems.', tags: ["Algorithms", "Intermediate", "Functions",], url: 'functions/recursion.html' },
             { title: 'Heaps', text: 'A heap is a complete binary tree where each node follows the heap property: in a max-heap, nodes are greater than or equal to their children; in a min-heap, nodes are less than or equal to their children.', tags: ["Data Structures", "Senior", "Data Type",], url: 'data/heaps.html' },
-            { title: 'Big O Notation', text: 'A mathematical way to describe the upper bound of an algorithm’s running time or space requirement in terms of input size, showing its worst-case growth rate.', tags: ["Algorithms", "Intermediate",], url: 'algorithms/big-o.html' },
+            { title: 'Big O Notation', text: "A mathematical way to describe the upper bound of an algorithm's running time or space requirement in terms of input size, showing its worst-case growth rate.", tags: ["Algorithms", "Intermediate",], url: 'algorithms/big-o.html' },
             { title: 'Bubble Sort', text: 'A simple sorting algorithm that repeatedly compares and swaps adjacent elements in a list until the entire list is sorted.', tags: ["Algorithms", "Junior", "Sorting"], url: 'algorithms/bubble-sort.html' },
             { title: 'Insertion Sort', text: 'A sorting algorithm that builds the final sorted array one element at a time by repeatedly taking the next element and inserting it into its correct position in the already sorted part.', tags: ["Algorithms", "Junior","Sorting"], url: 'algorithms/insertion-sort.html' },
             { title: 'Selection Sort', text: 'A sorting algorithm that repeatedly selects the smallest (or largest) element from the unsorted portion of a list and swaps it with the first unsorted element.', tags: ["Algorithms", "Junior","Sorting"], url: 'algorithms/selection-sort.html' },
@@ -190,9 +324,6 @@ function cardApp() {
             { title: 'Depth-First Search', text: 'A graph traversal algorithm that explores as far as possible along each branch before backtracking.', tags: ["Algorithms", "Intermediate","Search"], url: 'algorithms/depth-first-search.html' },
             { title: 'Breadth-First Search', text: 'A graph traversal algorithm that explores all neighbors of a node level by level before moving to the next level.', tags: ["Algorithms", "Intermediate","Search"], url: 'algorithms/breadth-first-search.html' },
             { title: 'Greedy Algorithms', text: 'Problem-solving methods that make the locally optimal choice at each step, hoping to find a global optimum.', tags: ["Algorithms", "Intermediate",], url: 'algorithms/greedy-search1.html' },
-
-
-
         ],
 
         // Toggle a tag on/off when clicked
@@ -228,11 +359,21 @@ function cardApp() {
             
             if (items.length === 0) return;
 
-            // Get container width and calculate columns
+            // Get container width and calculate columns based on screen size
             const containerWidth = container.offsetWidth;
-            const itemWidth = Math.floor(containerWidth / Math.max(1, Math.floor(containerWidth / 300))); // Min 300px per item
-            const columns = Math.floor(containerWidth / itemWidth);
-            const gap = 16; // 1rem gap
+            let minItemWidth = 280; // Minimum item width
+            
+            // Adjust minimum width for different screen sizes
+            if (window.innerWidth < 640) { // sm breakpoint
+                minItemWidth = 250;
+            } else if (window.innerWidth < 768) { // md breakpoint
+                minItemWidth = 300;
+            } else if (window.innerWidth < 1024) { // lg breakpoint
+                minItemWidth = 320;
+            }
+            
+            const columns = Math.max(1, Math.floor(containerWidth / minItemWidth));
+            const gap = window.innerWidth < 640 ? 12 : 16; // Smaller gap on mobile
             
             // Calculate actual item width with gaps
             const actualItemWidth = (containerWidth - (gap * (columns - 1))) / columns;
@@ -272,11 +413,27 @@ function cardApp() {
     }
 }
 
-// Layout on window resize
+// Layout on window resize with debouncing
+let resizeTimeout;
 window.addEventListener('resize', () => {
-    setTimeout(() => {
-        const app = Alpine.evaluate(document.querySelector('[x-data="cardApp()"]'), 'layoutMasonry()');
-    }, 100);
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        const appElement = document.querySelector('[x-data="cardApp()"]');
+        if (appElement && appElement._x_dataStack) {
+            appElement._x_dataStack[0].layoutMasonry();
+        }
+    }, 150);
+});
+
+// Close mobile filters when clicking outside
+document.addEventListener('click', (e) => {
+    const appElement = document.querySelector('[x-data="cardApp()"]');
+    if (appElement && appElement._x_dataStack) {
+        const app = appElement._x_dataStack[0];
+        if (app.showMobileFilters && !e.target.closest('aside') && !e.target.closest('button[\\@click*="showMobileFilters"]')) {
+            app.showMobileFilters = false;
+        }
+    }
 });
 </script>
 
