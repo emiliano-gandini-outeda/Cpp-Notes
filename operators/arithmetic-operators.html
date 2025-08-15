@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+        <section
+            class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4"
+        >
+            <h1 id="-arithmetic-operators" class="text-3xl font-bold">
+                📦 Arithmetic Operators
+            </h1>
+
+            <h2
+                id="-what-are-arithmetic-operators-"
+                class="text-2xl font-semibold mt-6"
+            >
+                ✅ What are Arithmetic Operators?
+            </h2>
+            <p>
+                Arithmetic operators are
+                <strong>symbols used to perform mathematical operations</strong>
+                on numeric variables and values in C.
+            </p>
+            <hr class="border-borders" />
+
+            <h2
+                id="-list-of-arithmetic-operators"
+                class="text-2xl font-semibold mt-6"
+            >
+                🧠 List of Arithmetic Operators
+            </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Operator</th>
+                        <th>Meaning</th>
+                        <th>Example</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>+</code></td>
+                        <td>Addition</td>
+                        <td><code>5 + 3</code></td>
+                        <td><code>8</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>-</code></td>
+                        <td>Subtraction</td>
+                        <td><code>5 - 3</code></td>
+                        <td><code>2</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>*</code></td>
+                        <td>Multiplication</td>
+                        <td><code>5 * 3</code></td>
+                        <td><code>15</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/</code></td>
+                        <td>Division</td>
+                        <td><code>5 / 2</code></td>
+                        <td><code>2</code> <em>(integer division)</em></td>
+                    </tr>
+                    <tr>
+                        <td><code>%</code></td>
+                        <td>Modulus (remainder)</td>
+                        <td><code>5 % 2</code></td>
+                        <td><code>1</code></td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr class="border-borders" />
+
+            <h2
+                id="-integer-vs-floating-point-division"
+                class="text-2xl font-semibold mt-6"
+            >
+                📌 Integer vs Floating-Point Division
+            </h2>
+            <ul class="list-disc list-inside space-y-1">
+                <li>
+                    <strong>Integer division</strong>: Both operands are
+                    integers → result is an integer. Example:
+                    <code>7 / 2</code> → <code>3</code>
+                </li>
+                <li>
+                    <strong>Floating-point division</strong>: At least one
+                    operand is a float → result is decimal. Example:
+                    <code>7 / 2.0</code> → <code>3.5</code>
+                </li>
+            </ul>
+            <hr class="border-borders" />
+
+            <h2 id="-example-program" class="text-2xl font-semibold mt-6">
+                🧾 Example Program
+            </h2>
+            <pre><code class="lang-c">#include &lt;stdio.h&gt;
+
+int main() {
+    int a = 10, b = 3;
+
+    printf("a + b = %d\n", a + b);
+    printf("a - b = %d\n", a - b);
+    printf("a * b = %d\n", a * b);
+    printf("a / b = %d\n", a / b);   // Integer division
+    printf("a %% b = %d\n", a % b);  // Modulus
+
+    return 0;
+}</code></pre>
+            <hr class="border-borders" />
+
+            <h2
+                id="-floating-point-example"
+                class="text-2xl font-semibold mt-6"
+            >
+                🔄 Floating-Point Example
+            </h2>
+            <pre><code class="lang-c">#include &lt;stdio.h&gt;
+
+int main() {
+    double x = 10.0, y = 3.0;
+
+    printf("x / y = %.2f\n", x / y);
+
+    return 0;
+}</code></pre>
+            <hr class="border-borders" />
+
+            <h2 id="-important-rules" class="text-2xl font-semibold mt-6">
+                ⚠️ Important Rules
+            </h2>
+            <ol class="list-decimal list-inside space-y-1">
+                <li>
+                    <code>%</code> can only be used with
+                    <strong>integers</strong>.
+                </li>
+                <li>
+                    Division by zero causes <strong>undefined behavior</strong>.
+                </li>
+                <li>
+                    For decimal results, at least one operand must be
+                    <strong>float/double</strong>.
+                </li>
+                <li>
+                    Operator precedence: <code>*</code>, <code>/</code>,
+                    <code>%</code> have higher priority than <code>+</code>,
+                    <code>-</code>.
+                </li>
+            </ol>
+            <hr class="border-borders" />
+
+            <h2 id="-summary-table" class="text-2xl font-semibold mt-6">
+                ✅ Summary Table
+            </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Operator</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>+</code></td>
+                        <td>Addition</td>
+                        <td><code>4 + 2</code></td>
+                        <td><code>6</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>-</code></td>
+                        <td>Subtraction</td>
+                        <td><code>4 - 2</code></td>
+                        <td><code>2</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>*</code></td>
+                        <td>Multiplication</td>
+                        <td><code>4 * 2</code></td>
+                        <td><code>8</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/</code></td>
+                        <td>Division</td>
+                        <td><code>4 / 2</code></td>
+                        <td><code>2</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>%</code></td>
+                        <td>Modulus</td>
+                        <td><code>5 % 2</code></td>
+                        <td><code>1</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>

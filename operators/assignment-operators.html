@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+        <section
+            class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4"
+        >
+            <h1 class="text-3xl font-bold mb-4">📦 Assignment</h1>
+
+            <h2 class="text-2xl font-semibold mt-4">
+                ✅ What are Assignment Operators?
+            </h2>
+            <p>
+                Assignment operators are used to
+                <strong>store a value into a variable</strong> or
+                <strong>update its value</strong>. C++ also supports
+                <strong>increment (<code>++</code>)</strong> and
+                <strong>decrement (<code>--</code>)</strong> operators to
+                increase or decrease a variable by 1.
+            </p>
+            <hr class="border-borders" />
+
+            <h2 class="text-2xl font-semibold mt-4">🧠 Basic Syntax</h2>
+            <pre><code class="lang-c++">variable operator value;
+variable++;    // Increment by 1
+variable--;    // Decrement by 1
+++variable;    // Pre-increment
+--variable;    // Pre-decrement</code></pre>
+            <hr class="border-borders" />
+
+            <h2 class="text-2xl font-semibold mt-4">📌 List of Operators</h2>
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Meaning</th>
+                            <th>Example</th>
+                            <th>Equivalent To</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>=</code></td>
+                            <td>Assign</td>
+                            <td><code>x = 5;</code></td>
+                            <td><code>x = 5;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>+=</code></td>
+                            <td>Add and assign</td>
+                            <td><code>x += 3;</code></td>
+                            <td><code>x = x + 3;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>-=</code></td>
+                            <td>Subtract and assign</td>
+                            <td><code>x -= 2;</code></td>
+                            <td><code>x = x - 2;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>*=</code></td>
+                            <td>Multiply and assign</td>
+                            <td><code>x *= 4;</code></td>
+                            <td><code>x = x * 4;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/=</code></td>
+                            <td>Divide and assign</td>
+                            <td><code>x /= 2;</code></td>
+                            <td><code>x = x / 2;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>%=</code></td>
+                            <td>Modulus and assign</td>
+                            <td><code>x %= 3;</code></td>
+                            <td><code>x = x % 3;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>++</code></td>
+                            <td>Increment by 1</td>
+                            <td><code>x++;</code> or <code>++x;</code></td>
+                            <td><code>x = x + 1;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>--</code></td>
+                            <td>Decrement by 1</td>
+                            <td><code>x--;</code> or <code>--x;</code></td>
+                            <td><code>x = x - 1;</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr class="border-borders" />
+
+            <h2 class="text-2xl font-semibold mt-4">🧾 Example Program</h2>
+            <pre><code class="lang-c++">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int x = 10;
+
+    x += 5;  // x = 15
+    cout &lt;&lt; "x = " &lt;&lt; x &lt;&lt; endl;
+
+    x -= 3;  // x = 12
+    cout &lt;&lt; "x = " &lt;&lt; x &lt;&lt; endl;
+
+    x *= 2;  // x = 24
+    cout &lt;&lt; "x = " &lt;&lt; x &lt;&lt; endl;
+
+    x /= 4;  // x = 6
+    cout &lt;&lt; "x = " &lt;&lt; x &lt;&lt; endl;
+
+    x %= 5;  // x = 1
+    cout &lt;&lt; "x = " &lt;&lt; x &lt;&lt; endl;
+
+    x++;     // x = 2
+    cout &lt;&lt; "x after x++ = " &lt;&lt; x &lt;&lt; endl;
+
+    ++x;     // x = 3
+    cout &lt;&lt; "x after ++x = " &lt;&lt; x &lt;&lt; endl;
+
+    x--;     // x = 2
+    cout &lt;&lt; "x after x-- = " &lt;&lt; x &lt;&lt; endl;
+
+    --x;     // x = 1
+    cout &lt;&lt; "x after --x = " &lt;&lt; x &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+            <hr class="border-borders" />
+
+            <h2 class="text-2xl font-semibold mt-4">⚠️ Important Rules</h2>
+            <ol class="list-decimal list-inside space-y-1">
+                <li>
+                    <code>++</code> and <code>--</code> can be
+                    <strong>pre</strong> (<code>++x</code>) or
+                    <strong>post</strong> (<code>x++</code>), with slightly
+                    different evaluation order.
+                </li>
+                <li>
+                    Combined operators (<code>+=</code>, <code>-=</code> etc.)
+                    work with <strong>all numeric types</strong>.
+                </li>
+                <li>
+                    Division by zero is still
+                    <strong>undefined behavior</strong>.
+                </li>
+                <li>
+                    <code>++</code>/<code>--</code>
+                    <strong>increment or decrement by 1</strong>, and can be
+                    used in loops, expressions, or standalone.
+                </li>
+            </ol>
+            <hr class="border-borders" />
+
+            <h2 class="text-2xl font-semibold mt-4">✅ Summary Table</h2>
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Action</th>
+                            <th>Example</th>
+                            <th>Result (if x = 10)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>=</code></td>
+                            <td>Assign</td>
+                            <td><code>x = 5;</code></td>
+                            <td><code>5</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>+=</code></td>
+                            <td>Add &amp; assign</td>
+                            <td><code>x += 3;</code></td>
+                            <td><code>13</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>-=</code></td>
+                            <td>Subtract &amp; assign</td>
+                            <td><code>x -= 2;</code></td>
+                            <td><code>8</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>*=</code></td>
+                            <td>Multiply &amp; assign</td>
+                            <td><code>x *= 4;</code></td>
+                            <td><code>40</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>/=</code></td>
+                            <td>Divide &amp; assign</td>
+                            <td><code>x /= 2;</code></td>
+                            <td><code>5</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>%=</code></td>
+                            <td>Modulus &amp; assign</td>
+                            <td><code>x %= 4;</code></td>
+                            <td><code>2</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>x++</code></td>
+                            <td>Post-increment</td>
+                            <td><code>x++</code></td>
+                            <td><code>x = x + 1</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>++x</code></td>
+                            <td>Pre-increment</td>
+                            <td><code>++x</code></td>
+                            <td><code>x = x + 1</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>x--</code></td>
+                            <td>Post-decrement</td>
+                            <td><code>x--</code></td>
+                            <td><code>x = x - 1</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>--x</code></td>
+                            <td>Pre-decrement</td>
+                            <td><code>--x</code></td>
+                            <td><code>x = x - 1</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>

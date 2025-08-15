@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+        <section
+            class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4"
+        >
+            <h1 id="-pointer-arithmetic" class="text-3xl font-bold">
+                📦 Pointer Arithmetic
+            </h1>
+
+            <h2
+                id="-what-is-pointer-arithmetic-"
+                class="text-2xl font-semibold mt-6"
+            >
+                ✅ What is Pointer Arithmetic?
+            </h2>
+            <p>
+                Pointer arithmetic lets you
+                <strong>move a pointer to different memory locations</strong> by
+                adding or subtracting integers. The movement depends on the
+                <strong>size of the data type</strong> the pointer points to.
+            </p>
+            <hr class="border-borders" />
+
+            <h2 id="-basic-operations" class="text-2xl font-semibold mt-6">
+                🧠 Basic Operations
+            </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Operation</th>
+                        <th>Meaning</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>ptr + n</code></td>
+                        <td>Move forward <code>n</code> elements</td>
+                    </tr>
+                    <tr>
+                        <td><code>ptr - n</code></td>
+                        <td>Move backward <code>n</code> elements</td>
+                    </tr>
+                    <tr>
+                        <td><code>ptr1 - ptr2</code></td>
+                        <td>
+                            Get the number of elements between two pointers
+                            (must point to the same array)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>++ptr</code></td>
+                        <td>Move to next element</td>
+                    </tr>
+                    <tr>
+                        <td><code>--ptr</code></td>
+                        <td>Move to previous element</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr class="border-borders" />
+
+            <h2 id="-how-it-works" class="text-2xl font-semibold mt-6">
+                📌 How It Works
+            </h2>
+            <ul class="list-disc list-inside space-y-1">
+                <li>
+                    If <code>ptr</code> is an <code>int*</code> and
+                    <code>sizeof(int) = 4</code>, then
+                    <code>ptr + 1</code> moves <strong>4 bytes forward</strong>.
+                </li>
+                <li>
+                    Pointer arithmetic moves
+                    <strong>in units of the pointed type</strong>, not raw
+                    bytes.
+                </li>
+            </ul>
+            <hr class="border-borders" />
+
+            <h2 id="-example-program" class="text-2xl font-semibold mt-6">
+                🧾 Example Program
+            </h2>
+            <pre><code class="lang-c">#include &lt;stdio.h&gt;
+
+int main() {
+    int arr[] = {10, 20, 30, 40, 50};
+    int *ptr = arr; // Points to first element
+
+    printf("First element: %d\n", *ptr);
+    ptr++; // Move to next element
+    printf("Second element: %d\n", *ptr);
+
+    ptr += 2; // Move forward 2 elements
+    printf("Fourth element: %d\n", *ptr);
+
+    ptr--; // Move back one element
+    printf("Third element: %d\n", *ptr);
+
+    return 0;
+}</code></pre>
+            <hr class="border-borders" />
+
+            <h2
+                id="-pointer-difference-example"
+                class="text-2xl font-semibold mt-6"
+            >
+                🔄 Pointer Difference Example
+            </h2>
+            <pre><code class="lang-c">#include &lt;stdio.h&gt;
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+    int *p1 = &amp;arr[0];
+    int *p2 = &amp;arr[4];
+
+    printf("Elements between p1 and p2: %ld\n", p2 - p1);
+
+    return 0;
+}</code></pre>
+            <hr class="border-borders" />
+
+            <h2 id="-important-rules" class="text-2xl font-semibold mt-6">
+                ⚠️ Important Rules
+            </h2>
+            <ol class="list-decimal list-inside space-y-1">
+                <li>
+                    Pointer arithmetic is valid
+                    <strong>only within the same array</strong> (or one past the
+                    end).
+                </li>
+                <li>
+                    Moving outside an array’s bounds causes
+                    <strong>undefined behavior</strong>.
+                </li>
+                <li>
+                    The increment/decrement size depends on
+                    <code>sizeof(type)</code>.
+                </li>
+                <li>
+                    Works with all pointer types except
+                    <code>void*</code> (requires casting).
+                </li>
+            </ol>
+            <hr class="border-borders" />
+
+            <h2 id="-summary-table" class="text-2xl font-semibold mt-6">
+                ✅ Summary Table
+            </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Operation</th>
+                        <th>Example</th>
+                        <th>Effect</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Increment</td>
+                        <td><code>ptr++</code></td>
+                        <td>Next element</td>
+                    </tr>
+                    <tr>
+                        <td>Decrement</td>
+                        <td><code>ptr--</code></td>
+                        <td>Previous element</td>
+                    </tr>
+                    <tr>
+                        <td>Add offset</td>
+                        <td><code>ptr + 3</code></td>
+                        <td>Move forward 3 elements</td>
+                    </tr>
+                    <tr>
+                        <td>Subtract offset</td>
+                        <td><code>ptr - 2</code></td>
+                        <td>Move back 2 elements</td>
+                    </tr>
+                    <tr>
+                        <td>Pointer difference</td>
+                        <td><code>p2 - p1</code></td>
+                        <td>Number of elements between</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>
