@@ -39,7 +39,8 @@
             border-collapse: collapse;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid var(--color-borders);
             padding: 0.5rem;
             text-align: left;
@@ -57,98 +58,103 @@
     <div class="w-full max-w-3xl mb-4 flex">
         <button onclick="window.location.href='../index.html'"
             class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
             <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
                 fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
                     d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
                     clip-rule="evenodd" />
             </svg>
+
+            <!-- C++ Logo SVG -->
             <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
                 alt="C++ Logo">
+
             <span class="pl-8">Back to Main</span>
         </button>
     </div>
 
+
+
+    <!-- Blog Section -->
     <!-- Blog Section -->
     <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6">
 
-        <h1 class="text-3xl font-bold mb-4">📦 The <code>printf</code> Function</h1>
+        <h1 class="text-3xl font-bold mb-4">📦 The <code>strcpy</code> Function</h1>
 
-        <h2 class="text-2xl font-semibold mt-4">✅ What is <code>printf</code>?</h2>
-        <p><code>printf</code> is a <strong>standard library function</strong> used to <strong>print formatted output to the console</strong>.
-            It allows you to display text, numbers, characters, and variables in a controlled format.</p>
+        <h2 class="text-2xl font-semibold mt-4">✅ What is <code>strcpy</code>?</h2>
+        <p><code>strcpy</code> is a <strong>standard library function</strong> used to <strong>copy a string from one
+                character array to another</strong>.
+            The destination string must have enough space to hold the source string including the null character
+            <code>\0</code>.</p>
 
         <hr>
 
         <h2 class="text-2xl font-semibold mt-4">🧠 Syntax</h2>
-        <pre><code class="lang-cpp">int printf(const char *format, ...);</code></pre>
+        <pre><code class="lang-c">char *strcpy(char *destination, const char *source);</code></pre>
         <ul class="list-disc ml-6 space-y-1">
-            <li><code>format</code>: A string containing text and <strong>format specifiers</strong>.</li>
-            <li><code>...</code>: Optional additional arguments corresponding to the format specifiers.</li>
-            <li>Returns the <strong>number of characters printed</strong>.</li>
+            <li><code>destination</code>: The array where the string will be copied.</li>
+            <li><code>source</code>: The string to copy.</li>
+            <li>Returns a pointer to <code>destination</code>.</li>
         </ul>
 
         <hr>
 
-        <h2 class="text-2xl font-semibold mt-4">📌 Common Format Specifiers</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Specifier</th>
-                    <th>Meaning</th>
-                    <th>Example</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td><code>%d</code></td><td>Integer</td><td><code>printf("%d", 10);</code></td></tr>
-                <tr><td><code>%f</code></td><td>Floating-point</td><td><code>printf("%f", 3.14);</code></td></tr>
-                <tr><td><code>%c</code></td><td>Character</td><td><code>printf("%c", 'A');</code></td></tr>
-                <tr><td><code>%s</code></td><td>String</td><td><code>printf("%s", "Hello");</code></td></tr>
-                <tr><td><code>%%</code></td><td>Literal <code>%</code></td><td><code>printf("100%%");</code></td></tr>
-            </tbody>
-        </table>
+        <h2 class="text-2xl font-semibold mt-4">📌 Important Rules</h2>
+        <ol class="list-decimal ml-6 space-y-1">
+            <li><strong>Destination must be large enough</strong> to store the source string and the null character.
+            </li>
+            <li><strong>Overlapping strings</strong> in source and destination cause <strong>undefined
+                    behavior</strong>.</li>
+            <li>Strings must be <strong>null-terminated</strong> (<code>\0</code>).</li>
+            <li>Defined in <code>&lt;string.h&gt;</code>.</li>
+        </ol>
 
         <hr>
 
         <h2 class="text-2xl font-semibold mt-4">🧾 Example Program</h2>
         <pre><code class="lang-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
 
 int main() {
-    int age = 25;
-    float height = 1.75;
-    char initial = 'E';
-    char name[] = "Emiliano";
+    char src[] = "Hello, World!";
+    char dest[50];  // Ensure enough space
 
-    printf("Name: %s\n", name);
-    printf("Initial: %c\n", initial);
-    printf("Age: %d years\n", age);
-    printf("Height: %.2f meters\n", height);
+    strcpy(dest, src);
+
+    printf("Source: %s\n", src);
+    printf("Destination: %s\n", dest);
 
     return 0;
 }</code></pre>
 
         <hr>
 
-        <h2 class="text-2xl font-semibold mt-4">🔄 Multiple Variables</h2>
+        <h2 class="text-2xl font-semibold mt-4">🔄 Copying Multiple Strings</h2>
         <pre><code class="lang-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
 
 int main() {
-    int a = 5, b = 10;
+    char name1[] = "Emiliano";
+    char name2[20];
 
-    printf("a = %d, b = %d, sum = %d\n", a, b, a+b);
+    strcpy(name2, name1);   // Copy name1 into name2
+
+    printf("name2: %s\n", name2);
 
     return 0;
 }</code></pre>
 
         <hr>
 
-        <h2 class="text-2xl font-semibold mt-4">⚠️ Important Rules</h2>
+        <h2 class="text-2xl font-semibold mt-4">⚠️ Important Notes</h2>
         <ol class="list-decimal ml-6 space-y-1">
-            <li><strong>Format specifiers must match argument types</strong>, or behavior is undefined.</li>
-            <li><strong>Strings must be null-terminated</strong> (<code>\0</code>).</li>
-            <li><strong>Escape sequences</strong> like <code>\n</code>, <code>\t</code> can be used inside the format string.</li>
-            <li><strong>Order matters</strong>: each format specifier consumes one argument in order.</li>
+            <li>Always ensure <strong>destination buffer is large enough</strong>.</li>
+            <li>Use <code>strncpy</code> for <strong>safer copying with maximum length</strong>.</li>
+            <li><code>strcpy</code> <strong>does not check bounds</strong>, so careless use may cause <strong>buffer
+                    overflow</strong>.</li>
         </ol>
 
         <hr>
@@ -162,30 +168,50 @@ int main() {
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Print integer</td><td><code>printf("%d", x);</code></td></tr>
-                <tr><td>Print float</td><td><code>printf("%.2f", y);</code></td></tr>
-                <tr><td>Print char</td><td><code>printf("%c", ch);</code></td></tr>
-                <tr><td>Print string</td><td><code>printf("%s", str);</code></td></tr>
-                <tr><td>Print literal <code>%</code></td><td><code>printf("50%%");</code></td></tr>
-                <tr><td>Multiple variables</td><td><code>printf("%d %d", a, b);</code></td></tr>
+                <tr>
+                    <td>Copy string</td>
+                    <td><code>strcpy(dest, src);</code></td>
+                </tr>
+                <tr>
+                    <td>Destination buffer</td>
+                    <td><code>char dest[50];</code></td>
+                </tr>
+                <tr>
+                    <td>Include header</td>
+                    <td><code>#include &lt;string.h&gt;</code></td>
+                </tr>
+                <tr>
+                    <td>Safer alternative</td>
+                    <td><code>strncpy(dest, src, n);</code></td>
+                </tr>
+                <tr>
+                    <td>Returns</td>
+                    <td>Pointer to destination</td>
+                </tr>
             </tbody>
         </table>
 
     </section>
 
+
     <!-- Bottom Back Button -->
     <div class="w-full max-w-3xl mb-4 flex">
         <button onclick="window.location.href='../index.html'"
             class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
             <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
                 fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd"
                     d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
                     clip-rule="evenodd" />
             </svg>
+
+            <!-- C++ Logo SVG -->
             <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
                 alt="C++ Logo">
+
             <span class="pl-8">Back to Main</span>
         </button>
     </div>

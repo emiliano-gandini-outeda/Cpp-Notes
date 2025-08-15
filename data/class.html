@@ -39,7 +39,8 @@
             border-collapse: collapse;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid var(--color-borders);
             padding: 0.5rem;
             text-align: left;
@@ -73,70 +74,90 @@
     <!-- Blog Section -->
     <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6">
 
-        <h1 class="text-3xl font-bold mb-4">📦 The <code>printf</code> Function</h1>
+        <h1 class="text-3xl font-bold mb-4">📦 Classes</h1>
 
-        <h2 class="text-2xl font-semibold mt-4">✅ What is <code>printf</code>?</h2>
-        <p><code>printf</code> is a <strong>standard library function</strong> used to <strong>print formatted output to the console</strong>.
-            It allows you to display text, numbers, characters, and variables in a controlled format.</p>
+        <h2 class="text-2xl font-semibold mt-4">✅ What is a <code>class</code>?</h2>
+        <p>A <code>class</code> is a <strong>user-defined data type</strong> that allows you to <strong>combine data
+                (attributes) and functions (methods)</strong> into a single unit.
+            Classes are the foundation of <strong>object-oriented programming</strong> in C++.</p>
 
         <hr>
 
         <h2 class="text-2xl font-semibold mt-4">🧠 Syntax</h2>
-        <pre><code class="lang-cpp">int printf(const char *format, ...);</code></pre>
+        <pre><code class="lang-c++">class ClassName {
+public:
+    type member1;
+    type member2;
+
+    void method1();
+    returnType method2(type param);
+};</code></pre>
         <ul class="list-disc ml-6 space-y-1">
-            <li><code>format</code>: A string containing text and <strong>format specifiers</strong>.</li>
-            <li><code>...</code>: Optional additional arguments corresponding to the format specifiers.</li>
-            <li>Returns the <strong>number of characters printed</strong>.</li>
+            <li><code>ClassName</code>: The name of the class.</li>
+            <li><code>members</code>: Variables or functions that belong to the class.</li>
+            <li><code>public</code>, <code>private</code>, <code>protected</code> control <strong>access to
+                    members</strong>.</li>
         </ul>
 
         <hr>
 
-        <h2 class="text-2xl font-semibold mt-4">📌 Common Format Specifiers</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Specifier</th>
-                    <th>Meaning</th>
-                    <th>Example</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td><code>%d</code></td><td>Integer</td><td><code>printf("%d", 10);</code></td></tr>
-                <tr><td><code>%f</code></td><td>Floating-point</td><td><code>printf("%f", 3.14);</code></td></tr>
-                <tr><td><code>%c</code></td><td>Character</td><td><code>printf("%c", 'A');</code></td></tr>
-                <tr><td><code>%s</code></td><td>String</td><td><code>printf("%s", "Hello");</code></td></tr>
-                <tr><td><code>%%</code></td><td>Literal <code>%</code></td><td><code>printf("100%%");</code></td></tr>
-            </tbody>
-        </table>
+        <h2 class="text-2xl font-semibold mt-4">📌 Declaring Objects</h2>
+        <pre><code class="lang-c++">ClassName obj1, obj2;</code></pre>
+        <ul class="list-disc ml-6 space-y-1">
+            <li>Objects are <strong>instances of a class</strong>.</li>
+            <li>Access <strong>public members</strong> using the <strong>dot operator <code>.</code></strong>.</li>
+        </ul>
 
         <hr>
 
         <h2 class="text-2xl font-semibold mt-4">🧾 Example Program</h2>
-        <pre><code class="lang-c">#include &lt;stdio.h&gt;
+        <pre><code class="lang-c++">#include &lt;iostream&gt;
+using namespace std;
+
+class Person {
+public:
+    string name;
+    int age;
+
+    void greet() {
+        cout &lt;&lt; "Hello, my name is " &lt;&lt; name &lt;&lt; " and I am " &lt;&lt; age &lt;&lt; " years old.\n";
+    }
+};
 
 int main() {
-    int age = 25;
-    float height = 1.75;
-    char initial = 'E';
-    char name[] = "Emiliano";
+    Person p1;
+    p1.name = "Emiliano";
+    p1.age = 30;
 
-    printf("Name: %s\n", name);
-    printf("Initial: %c\n", initial);
-    printf("Age: %d years\n", age);
-    printf("Height: %.2f meters\n", height);
+    p1.greet();
 
     return 0;
 }</code></pre>
 
         <hr>
 
-        <h2 class="text-2xl font-semibold mt-4">🔄 Multiple Variables</h2>
-        <pre><code class="lang-c">#include &lt;stdio.h&gt;
+        <h2 class="text-2xl font-semibold mt-4">🔄 Constructor Example</h2>
+        <pre><code class="lang-c++">#include &lt;iostream&gt;
+using namespace std;
+
+class Point {
+public:
+    int x, y;
+
+    // Constructor
+    Point(int px, int py) {
+        x = px;
+        y = py;
+    }
+
+    void display() {
+        cout &lt;&lt; "(" &lt;&lt; x &lt;&lt; ", " &lt;&lt; y &lt;&lt; ")\n";
+    }
+};
 
 int main() {
-    int a = 5, b = 10;
-
-    printf("a = %d, b = %d, sum = %d\n", a, b, a+b);
+    Point p(5, 10);
+    p.display();
 
     return 0;
 }</code></pre>
@@ -145,10 +166,17 @@ int main() {
 
         <h2 class="text-2xl font-semibold mt-4">⚠️ Important Rules</h2>
         <ol class="list-decimal ml-6 space-y-1">
-            <li><strong>Format specifiers must match argument types</strong>, or behavior is undefined.</li>
-            <li><strong>Strings must be null-terminated</strong> (<code>\0</code>).</li>
-            <li><strong>Escape sequences</strong> like <code>\n</code>, <code>\t</code> can be used inside the format string.</li>
-            <li><strong>Order matters</strong>: each format specifier consumes one argument in order.</li>
+            <li>
+                <p><strong>Access specifiers</strong>:</p>
+                <ul class="list-disc ml-6 space-y-1">
+                    <li><code>public</code>: accessible from anywhere</li>
+                    <li><code>private</code>: accessible only inside the class</li>
+                    <li><code>protected</code>: accessible in derived classes</li>
+                </ul>
+            </li>
+            <li><strong>Objects store their own copies of member variables</strong>.</li>
+            <li><strong>Methods operate on the object’s data</strong>.</li>
+            <li>Classes can have <strong>constructors, destructors, and member functions</strong>.</li>
         </ol>
 
         <hr>
@@ -162,12 +190,30 @@ int main() {
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Print integer</td><td><code>printf("%d", x);</code></td></tr>
-                <tr><td>Print float</td><td><code>printf("%.2f", y);</code></td></tr>
-                <tr><td>Print char</td><td><code>printf("%c", ch);</code></td></tr>
-                <tr><td>Print string</td><td><code>printf("%s", str);</code></td></tr>
-                <tr><td>Print literal <code>%</code></td><td><code>printf("50%%");</code></td></tr>
-                <tr><td>Multiple variables</td><td><code>printf("%d %d", a, b);</code></td></tr>
+                <tr>
+                    <td>Define class</td>
+                    <td><code>class Person { public: string name; int age; void greet(); };</code></td>
+                </tr>
+                <tr>
+                    <td>Declare object</td>
+                    <td><code>Person p1;</code></td>
+                </tr>
+                <tr>
+                    <td>Access member</td>
+                    <td><code>p1.name</code>, <code>p1.age</code></td>
+                </tr>
+                <tr>
+                    <td>Call method</td>
+                    <td><code>p1.greet();</code></td>
+                </tr>
+                <tr>
+                    <td>Constructor</td>
+                    <td><code>Point p(5, 10);</code></td>
+                </tr>
+                <tr>
+                    <td>Private member</td>
+                    <td><code>private: int id;</code></td>
+                </tr>
             </tbody>
         </table>
 
