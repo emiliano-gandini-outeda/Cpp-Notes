@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Notes</title>
+    <link rel="icon" type="image/png"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        :root {
+            --color-dark-grey: #2D2D2D;
+            --color-background: #111217;
+            --color-surface: #3A3A3A;
+            --color-dark-red: #B71C1C;
+            --color-dark-red-light: #D32F2F;
+            --color-text-primary: #E0E0E0;
+            --color-text-secondary: #B0B0B0;
+            --color-borders: #4A4A4A;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        pre {
+            background-color: var(--color-dark-grey);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--color-borders);
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--color-surface);
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center py-8 px-4">
+
+    <!-- Top Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+
+
+    <!-- Blog Section -->
+    <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6">
+
+        <h1 class="text-3xl font-bold">📦 Hash Maps</h1>
+
+        <div class="space-y-4">
+            <h2 class="text-2xl font-semibold">✅ What is a Hash Map?</h2>
+            <p>A <strong>hash map</strong> (also called a <strong>hash table</strong>) is a <strong>data
+                    structure</strong> that stores <strong>key-value pairs</strong>. It provides <strong>fast insertion,
+                    deletion, and lookup</strong>, typically in <strong>O(1) average time</strong>.</p>
+            <ul class="list-disc list-inside space-y-1">
+                <li>Keys are <strong>unique identifiers</strong>.</li>
+                <li>Values are <strong>associated data</strong> for each key.</li>
+                <li>Internally, a <strong>hash function</strong> converts a key into an <strong>index</strong> in an
+                    array (bucket).</li>
+            </ul>
+            <p>Hash maps are widely used for <strong>dictionaries, counting frequencies, caching</strong>, and more.</p>
+        </div>
+
+        <hr class="border-gray-700">
+
+        <div class="space-y-4">
+            <h2 class="text-2xl font-semibold">🧠 Core Concepts</h2>
+            <table class="table-auto">
+                <thead>
+                    <tr>
+                        <th>Term</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Key</td>
+                        <td>Unique identifier used to access a value</td>
+                    </tr>
+                    <tr>
+                        <td>Value</td>
+                        <td>Data associated with a key</td>
+                    </tr>
+                    <tr>
+                        <td>Hash Function</td>
+                        <td>Algorithm converting a key into an <strong>array index</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Bucket / Slot</td>
+                        <td>Position in the array to store key-value pairs</td>
+                    </tr>
+                    <tr>
+                        <td>Collision</td>
+                        <td>Occurs when <strong>two keys hash to the same index</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Load Factor</td>
+                        <td>Ratio of elements to number of buckets; affects resizing</td>
+                    </tr>
+                    <tr>
+                        <td>Rehashing</td>
+                        <td>Increasing the number of buckets when load factor exceeds a threshold</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="border-gray-700">
+
+        <div class="space-y-4">
+            <h2 class="text-2xl font-semibold">📌 Collision Handling Techniques</h2>
+            <ol class="list-decimal list-inside space-y-2">
+                <li>
+                    <strong>Chaining</strong>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>Each bucket stores a <strong>linked list</strong> of key-value pairs.</li>
+                        <li>Colliding elements are added to the list.</li>
+                    </ul>
+                    <p>Example:</p>
+                    <pre><code>Bucket 2 → ("Alice", 25) → ("Bob", 30) → NULL</code></pre>
+                </li>
+                <li>
+                    <strong>Open Addressing</strong>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>Store colliding elements in <strong>another empty slot</strong>.</li>
+                        <li>Techniques:
+                            <ul class="list-disc list-inside ml-4">
+                                <li><strong>Linear Probing:</strong> Move sequentially to the next free slot.</li>
+                                <li><strong>Quadratic Probing:</strong> Move by increasing quadratic steps.</li>
+                                <li><strong>Double Hashing:</strong> Use a second hash function to find the next slot.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <hr class="border-gray-700">
+
+        <div class="space-y-4">
+            <h2 class="text-2xl font-semibold">🧾 Example Program (STL <code>unordered_map</code>)</h2>
+            <pre><code class="lang-c++">#include &lt;iostream&gt;
+#include &lt;unordered_map&gt;
+using namespace std;
+
+int main() {
+    // Create a hash map
+    unordered_map&lt;string, int&gt; ages;
+
+    // Insert key-value pairs
+    ages["Alice"] = 25;
+    ages["Bob"] = 30;
+    ages["Charlie"] = 22;
+
+    // Access value by key
+    cout &lt;&lt; "Alice's age: " &lt;&lt; ages["Alice"] &lt;&lt; endl;
+
+    // Update a value
+    ages["Alice"] = 26;
+    cout &lt;&lt; "Alice's new age: " &lt;&lt; ages["Alice"] &lt;&lt; endl;
+
+    // Check if key exists
+    if(ages.find("David") == ages.end())
+        cout &lt;&lt; "David not found\n";
+
+    // Iterate over hash map
+    cout &lt;&lt; "\nAll key-value pairs:\n";
+    for(auto &pair : ages) {
+        cout &lt;&lt; pair.first &lt;&lt; ": " &lt;&lt; pair.second &lt;&lt; endl;
+    }
+
+    // Remove a key
+    ages.erase("Bob");
+
+    // Size of hash map
+    cout &lt;&lt; "\nNumber of elements: " &lt;&lt; ages.size() &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+        </div>
+
+        <hr class="border-gray-700">
+
+        <div class="space-y-4">
+            <h2 class="text-2xl font-semibold">🔄 Common Operations</h2>
+            <table class="table-auto">
+                <thead>
+                    <tr>
+                        <th>Operation</th>
+                        <th>STL Method / Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Insert / Update</td>
+                        <td><code>map[key] = value;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Access</td>
+                        <td><code>map[key]</code> or <code>map.at(key)</code> (throws exception if key not found)</td>
+                    </tr>
+                    <tr>
+                        <td>Check existence</td>
+                        <td><code>map.find(key) != map.end()</code></td>
+                    </tr>
+                    <tr>
+                        <td>Delete</td>
+                        <td><code>map.erase(key)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Iteration</td>
+                        <td><code>for(auto &amp;pair : map)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Size</td>
+                        <td><code>map.size()</code></td>
+                    </tr>
+                    <tr>
+                        <td>Clear all</td>
+                        <td><code>map.clear()</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="border-gray-700">
+
+        <div class="space-y-4">
+            <h2 class="text-2xl font-semibold">📌 Advanced Examples</h2>
+
+            <h3 class="text-xl font-semibold">Counting Frequency of Elements</h3>
+            <pre><code class="lang-c++">#include &lt;iostream&gt;
+#include &lt;unordered_map&gt;
+using namespace std;
+
+int main() {
+    int arr[] = {1, 2, 2, 3, 3, 3};
+    unordered_map&lt;int, int&gt; freq;
+
+    for(int num : arr) {
+        freq[num]++;  // Increment count for each element
+    }
+
+    for(auto &p : freq) {
+        cout &lt;&lt; "Number " &lt;&lt; p.first &lt;&lt; " appears " &lt;&lt; p.second &lt;&lt; " times\n";
+    }
+}</code></pre>
+
+            <h3 class="text-xl font-semibold">Using Custom Keys (Struct)</h3>
+            <pre><code class="lang-c++">#include &lt;iostream&gt;
+#include &lt;unordered_map&gt;
+using namespace std;
+
+struct Point {
+    int x, y;
+    bool operator==(const Point &other) const {
+        return x == other.x &amp;&amp; y == other.y;
+    }
+};
+
+// Custom hash function
+struct PointHash {
+    size_t operator()(const Point &p) const {
+        return hash&lt;int&gt;()(p.x) ^ hash&lt;int&gt;()(p.y &lt;&lt; 1);
+    }
+};
+
+int main() {
+    unordered_map&lt;Point, string, PointHash&gt; points;
+    points[{1,2}] = "A";
+    points[{3,4}] = "B";
+
+    for(auto &p : points) {
+        cout &lt;&lt; "(" &lt;&lt; p.first.x &lt;&lt; "," &lt;&lt; p.first.y &lt;&lt; ") -&gt; " &lt;&lt; p.second &lt;&lt; endl;
+    }
+}</code></pre>
+        </div>
+
+        <hr class="border-gray-700">
+
+        <div class="space-y-4">
+            <h2 class="text-2xl font-semibold">⚠️ Important Rules</h2>
+            <ol class="list-decimal list-inside space-y-1">
+                <li><strong>Keys must be unique</strong>, values can repeat.</li>
+                <li>Use a <strong>good hash function</strong> to minimize collisions.</li>
+                <li><code>unordered_map</code> provides <strong>O(1) average time</strong>, worst-case
+                    <strong>O(n)</strong>.</li>
+                <li><code>map</code> (ordered map) stores keys <strong>sorted</strong>, with <strong>O(log n)</strong>
+                    operations.</li>
+                <li>STL <code>unordered_map</code> automatically <strong>rehashes</strong> when load factor exceeds
+                    threshold.</li>
+            </ol>
+        </div>
+
+        <hr class="border-gray-700">
+
+        <div class="space-y-4">
+            <h2 class="text-2xl font-semibold">✅ Summary Table</h2>
+            <table class="table-auto">
+                <thead>
+                    <tr>
+                        <th>Concept</th>
+                        <th>STL Method</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Insert / Update</td>
+                        <td><code>map[key] = value</code></td>
+                        <td>Add or update a key-value pair</td>
+                    </tr>
+                    <tr>
+                        <td>Access</td>
+                        <td><code>map[key]</code> / <code>map.at(key)</code></td>
+                        <td>Get value by key</td>
+                    </tr>
+                    <tr>
+                        <td>Existence Check</td>
+                        <td><code>map.find(key)</code></td>
+                        <td>Check if key exists</td>
+                    </tr>
+                    <tr>
+                        <td>Deletion</td>
+                        <td><code>map.erase(key)</code></td>
+                        <td>Remove key-value pair</td>
+                    </tr>
+                    <tr>
+                        <td>Iteration</td>
+                        <td><code>for(auto &amp;p : map)</code></td>
+                        <td>Visit all key-value pairs</td>
+                    </tr>
+                    <tr>
+                        <td>Size</td>
+                        <td><code>map.size()</code></td>
+                        <td>Number of elements</td>
+                    </tr>
+                    <tr>
+                        <td>Clear</td>
+                        <td><code>map.clear()</code></td>
+                        <td>Remove all elements</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+
+    <!-- Bottom Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+</body>
+
+</html>

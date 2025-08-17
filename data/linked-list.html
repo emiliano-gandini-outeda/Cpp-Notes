@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Notes</title>
+    <link rel="icon" type="image/png"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        :root {
+            --color-dark-grey: #2D2D2D;
+            --color-background: #111217;
+            --color-surface: #3A3A3A;
+            --color-dark-red: #B71C1C;
+            --color-dark-red-light: #D32F2F;
+            --color-text-primary: #E0E0E0;
+            --color-text-secondary: #B0B0B0;
+            --color-borders: #4A4A4A;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        pre {
+            background-color: var(--color-dark-grey);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--color-borders);
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--color-surface);
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center py-8 px-4">
+
+    <!-- Top Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+
+
+    <!-- Blog Section -->
+    <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6">
+
+        <h1 class="text-3xl font-bold">📦 Linked Lists</h1>
+
+        <div class="space-y-4">
+            <h2 class="text-2xl font-semibold">✅ What is a Linked List?</h2>
+            <p>A linked list is a <strong>linear data structure</strong> where <strong>elements (nodes) are connected
+                    using pointers</strong>.
+                Unlike arrays, <strong>elements are not stored in contiguous memory</strong>, allowing dynamic memory
+                allocation.</p>
+        </div>
+
+        <hr class="border-gray-700">
+
+        <div class="space-y-4">
+            <h2 class="text-2xl font-semibold">🧠 Basic Concepts</h2>
+            <table class="table-auto">
+                <thead>
+                    <tr>
+                        <th>Term</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Node</td>
+                        <td>Basic unit of a linked list containing <strong>data</strong> and a <strong>pointer</strong>
+                            to the next node</td>
+                    </tr>
+                    <tr>
+                        <td>Head</td>
+                        <td>Pointer to the <strong>first node</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Tail</td>
+                        <td>Pointer to the <strong>last node</strong> (optional)</td>
+                    </tr>
+                    <tr>
+                        <td>NULL</td>
+                        <td>Indicates the <strong>end of the list</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="border-gray-700">
+
+        <div class="space-y-4">
+            <h2 class="text-2xl font-semibold">📌 Types of Linked Lists</h2>
+            <table class="table-auto">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Singly Linked List</td>
+                        <td>Each node points to the <strong>next node only</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Doubly Linked List</td>
+                        <td>Each node has <strong>next</strong> and <strong>previous</strong> pointers</td>
+                    </tr>
+                    <tr>
+                        <td>Circular Linked List</td>
+                        <td>Last node points back to the <strong>head</strong>, forming a circle</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="border-gray-700">
+
+        <div class="space-y-4">
+            <h2 class="text-2xl font-semibold">🧾 Example Program (Singly Linked List)</h2>
+            <pre><code class="lang-c++">#include &lt;iostream&gt;
+using namespace std;
+
+// Node structure
+struct Node {
+    int data;
+    Node* next;
+};
+
+int main() {
+    // Create nodes
+    Node* head = new Node();
+    Node* second = new Node();
+    Node* third = new Node();
+
+    // Assign data
+    head->data = 10;
+    head->next = second;
+
+    second->data = 20;
+    second->next = third;
+
+    third->data = 30;
+    third->next = NULL;
+
+    // Traverse the list
+    Node* temp = head;
+    while(temp != NULL) {
+        cout &lt;&lt; temp->data &lt;&lt; " -&gt; ";
+        temp = temp->next;
+    }
+    cout &lt;&lt; "NULL" &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+        </div>
+
+        <hr class="border-gray-700">
+
+        <div class="space-y-4">
+            <h2 class="text-2xl font-semibold">🔄 Operations on Linked List</h2>
+            <table class="table-auto">
+                <thead>
+                    <tr>
+                        <th>Operation</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Insertion at beginning</td>
+                        <td>Add a new node at the start</td>
+                    </tr>
+                    <tr>
+                        <td>Insertion at end</td>
+                        <td>Add a new node at the end</td>
+                    </tr>
+                    <tr>
+                        <td>Insertion at position</td>
+                        <td>Add a new node at a given position</td>
+                    </tr>
+                    <tr>
+                        <td>Deletion at beginning</td>
+                        <td>Remove the first node</td>
+                    </tr>
+                    <tr>
+                        <td>Deletion at end</td>
+                        <td>Remove the last node</td>
+                    </tr>
+                    <tr>
+                        <td>Deletion at position</td>
+                        <td>Remove a node at a given position</td>
+                    </tr>
+                    <tr>
+                        <td>Traversal</td>
+                        <td>Visit each node in order</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="border-gray-700">
+
+        <div class="space-y-4">
+            <h2 class="text-2xl font-semibold">⚠️ Important Rules</h2>
+            <ol class="list-decimal list-inside space-y-1">
+                <li>Always <strong>initialize pointers</strong> (<code>NULL</code>) to avoid undefined behavior.</li>
+                <li>Dynamically allocated memory should be <strong>freed</strong> (<code>delete</code>) to prevent
+                    memory leaks.</li>
+                <li>Accessing nodes beyond the list boundaries causes <strong>runtime errors</strong>.</li>
+                <li>Linked lists allow <strong>efficient insertion/deletion</strong>, but <strong>slower random
+                        access</strong> compared to arrays.</li>
+            </ol>
+        </div>
+
+        <hr class="border-gray-700">
+
+        <div class="space-y-4">
+            <h2 class="text-2xl font-semibold">✅ Summary Table</h2>
+            <table class="table-auto">
+                <thead>
+                    <tr>
+                        <th>Concept</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Node</td>
+                        <td>Stores data + pointer</td>
+                        <td><code>struct Node { int data; Node* next; };</code></td>
+                    </tr>
+                    <tr>
+                        <td>Head</td>
+                        <td>Pointer to first node</td>
+                        <td><code>Node* head;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Traversal</td>
+                        <td>Visit all nodes</td>
+                        <td><code>while(temp != NULL) { temp = temp->next; }</code></td>
+                    </tr>
+                    <tr>
+                        <td>Insertion</td>
+                        <td>Add node</td>
+                        <td><code>newNode->next = head; head = newNode;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Deletion</td>
+                        <td>Remove node</td>
+                        <td><code>temp = head; head = head->next; delete temp;</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+
+    <!-- Bottom Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+</body>
+
+</html>
