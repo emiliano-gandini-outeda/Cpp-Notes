@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+        <!-- Blog Section -->
+        <section
+            class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4"
+        >
+            <h1 id="-depth-first-search-dfs-" class="text-3xl font-bold mb-4">
+                🌳 Depth-First Search (DFS)
+            </h1>
+
+            <h2
+                id="-what-is-depth-first-search-"
+                class="text-2xl font-semibold mt-4"
+            >
+                ✅ What is Depth-First Search?
+            </h2>
+            <p>
+                <strong>Depth-First Search (DFS)</strong> is a
+                <strong>graph traversal algorithm</strong> that explores as far
+                as possible along each branch before backtracking.
+            </p>
+            <ul class="list-disc list-inside space-y-1">
+                <li>
+                    It starts at a <strong>source node</strong>, then visits an
+                    adjacent unvisited node recursively.
+                </li>
+                <li>
+                    If a node has no unvisited neighbors, DFS
+                    <strong>backtracks</strong> to the previous node.
+                </li>
+                <li>
+                    Can be implemented <strong>recursively</strong> or using a
+                    <strong>stack</strong>.
+                </li>
+                <li>
+                    Works for
+                    <strong>both directed and undirected graphs</strong>.
+                </li>
+            </ul>
+            <hr class="border-gray-600" />
+
+            <h2 id="-key-concepts" class="text-2xl font-semibold mt-4">
+                🧠 Key Concepts
+            </h2>
+            <table class="border border-gray-600">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Concept
+                        </th>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Description
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Traversal type
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Explores graph depth-first
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Graph type
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Directed or undirected
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Implementation
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Recursive or stack-based
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Visited tracking
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Keeps track of visited nodes to avoid cycles
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Time complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            O(V + E) → V = vertices, E = edges
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Space complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            O(V) for recursion stack or explicit stack
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Use cases
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Detect cycles, connectivity, topological sort, path
+                            finding
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr class="border-gray-600" />
+
+            <h2 id="-how-dfs-works" class="text-2xl font-semibold mt-4">
+                📌 How DFS Works
+            </h2>
+            <ol class="list-decimal list-inside space-y-1">
+                <li>Start at the <strong>source node</strong>.</li>
+                <li>Mark the node as <strong>visited</strong>.</li>
+                <li>
+                    For each <strong>adjacent unvisited node</strong>, perform
+                    DFS recursively.
+                </li>
+                <li>Backtrack when all neighbors are visited.</li>
+                <li>Repeat until all reachable nodes are visited.</li>
+            </ol>
+            <hr class="border-gray-600" />
+
+            <h2
+                id="-example-dfs-using-adjacency-list"
+                class="text-2xl font-semibold mt-4"
+            >
+                🧾 Example – DFS using adjacency list
+            </h2>
+            <pre><code class="lang-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+void dfs(int node, vector&lt;vector&lt;int&gt;&gt;&amp; graph, vector&lt;bool&gt;&amp; visited) {
+    visited[node] = true;
+    cout &lt;&lt; node &lt;&lt; " ";
+
+    for (int neighbor : graph[node]) {
+        if (!visited[neighbor])
+            dfs(neighbor, graph, visited);
+    }
+}
+
+int main() {
+    int vertices = 5;
+    vector&lt;vector&lt;int&gt;&gt; graph(vertices);
+
+    // Add edges
+    graph[0] = {1, 2};
+    graph[1] = {2};
+    graph[2] = {0, 3};
+    graph[3] = {3, 4};
+
+    vector&lt;bool&gt; visited(vertices, false);
+
+    cout &lt;&lt; "DFS traversal starting from node 0: ";
+    dfs(0, graph, visited);
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+            <p><strong>Output (one possible traversal):</strong></p>
+            <pre><code>DFS traversal starting from node 0: 0 1 2 3 4</code></pre>
+            <hr class="border-gray-600" />
+
+            <h2 id="-step-by-step-example" class="text-2xl font-semibold mt-4">
+                🔄 Step-by-Step Example
+            </h2>
+            <p>Graph (edges):</p>
+            <pre><code>0 → 1, 0 → 2, 1 → 2, 2 → 0, 2 → 3, 3 → 3, 3 → 4</code></pre>
+            <p>DFS starting at node 0:</p>
+            <ol class="list-decimal list-inside space-y-1">
+                <li>Visit 0 → mark visited</li>
+                <li>Go to 1 → mark visited</li>
+                <li>1’s neighbor 2 → visit 2</li>
+                <li>2’s neighbors 0 (visited) and 3 → visit 3</li>
+                <li>3’s neighbors 3 (visited) and 4 → visit 4</li>
+                <li>All nodes reachable from 0 are visited → finish</li>
+            </ol>
+            <hr class="border-gray-600" />
+
+            <h2 id="-important-rules" class="text-2xl font-semibold mt-4">
+                ⚠️ Important Rules
+            </h2>
+            <ol class="list-decimal list-inside space-y-2">
+                <li>
+                    <strong>DFS may not find the shortest path</strong> in
+                    weighted or unweighted graphs.
+                </li>
+                <li>
+                    <strong>Requires visited tracking</strong> to avoid infinite
+                    loops in cyclic graphs.
+                </li>
+                <li>
+                    <strong>Time complexity:</strong> O(V + E) → visits each
+                    vertex and edge once.
+                </li>
+                <li>
+                    <strong>Space complexity:</strong> O(V) for recursion stack
+                    (or explicit stack in iterative DFS).
+                </li>
+                <li>
+                    Can be used for:
+                    <ul class="list-disc list-inside ml-6">
+                        <li>Detecting cycles in a graph</li>
+                        <li>Topological sorting</li>
+                        <li>Pathfinding in mazes</li>
+                        <li>Solving puzzles (e.g., Sudoku, N-Queens)</li>
+                    </ul>
+                </li>
+            </ol>
+            <hr class="border-gray-600" />
+
+            <h2 id="-summary-table" class="text-2xl font-semibold mt-4">
+                ✅ Summary Table
+            </h2>
+            <table class="border border-gray-600">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Concept
+                        </th>
+                        <th class="border border-gray-600 px-2 py-1">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Traversal type
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Depth-first
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Graph type
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Directed/undirected
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Implementation
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Recursive / Stack
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Time complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            O(V + E)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Space complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">O(V)</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Visited tracking
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Required
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Best use case
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Exploring all paths, cycle detection, topological
+                            sort
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>

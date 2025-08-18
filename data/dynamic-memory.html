@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+        <section
+            class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4"
+        >
+            <h1 id="-dynamic-memory-allocation" class="text-3xl font-bold mb-4">
+                🟦 Dynamic Memory Allocation
+            </h1>
+
+            <h2
+                id="-what-is-dynamic-memory-allocation-"
+                class="text-2xl font-semibold mt-4"
+            >
+                ✅ What is Dynamic Memory Allocation?
+            </h2>
+            <p>
+                Dynamic memory allocation allows a C++ program to
+                <strong>allocate memory at runtime</strong> instead of at
+                compile-time.
+            </p>
+            <ul class="list-disc list-inside space-y-1">
+                <li>
+                    Memory is allocated from the <strong>heap</strong>, not the
+                    stack.
+                </li>
+                <li>
+                    Useful when the
+                    <strong>size of data is unknown at compile time</strong>.
+                </li>
+                <li>
+                    Managed manually using the <code>new</code> and
+                    <code>delete</code> operators.
+                </li>
+            </ul>
+            <hr class="border-gray-600" />
+
+            <h2 id="-key-concepts" class="text-2xl font-semibold mt-4">
+                🧠 Key Concepts
+            </h2>
+            <table class="border border-gray-600">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Concept
+                        </th>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Description
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Memory type
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Heap memory
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Allocation
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            <code>new</code> operator
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Deallocation
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            <code>delete</code> operator
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Array allocation
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            <code>new[]</code> and <code>delete[]</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Lifetime
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Until explicitly deallocated
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Advantages
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Flexible, allows variable-sized data structures at
+                            runtime
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">Risks</td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Memory leaks if <code>delete</code> is forgotten
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr class="border-gray-600" />
+
+            <h2
+                id="-how-new-and-delete-work"
+                class="text-2xl font-semibold mt-4"
+            >
+                📌 How <code>new</code> and <code>delete</code> Work
+            </h2>
+            <ul class="list-disc list-inside space-y-1">
+                <li>
+                    <code>new</code> allocates memory and returns a
+                    <strong>pointer</strong> to it.
+                </li>
+                <li>
+                    <code>delete</code> frees memory previously allocated by
+                    <code>new</code>.
+                </li>
+                <li>
+                    <p>For arrays:</p>
+                    <ul class="list-disc list-inside ml-6 space-y-1">
+                        <li>Use <code>new[]</code> to allocate an array.</li>
+                        <li>
+                            Use <code>delete[]</code> to deallocate the array.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Failing to <code>delete</code> memory causes
+                    <strong>memory leaks</strong>.
+                </li>
+            </ul>
+            <hr class="border-gray-600" />
+
+            <h2 id="-syntax" class="text-2xl font-semibold mt-4">🧾 Syntax</h2>
+
+            <h3 id="single-variable" class="text-xl font-semibold mt-2">
+                Single variable
+            </h3>
+            <pre><code class="lang-cpp">int* ptr = new int;    // Allocate memory for one int
+*ptr = 42;             // Assign value
+delete ptr;            // Free memory
+</code></pre>
+
+            <h3 id="array-of-variables" class="text-xl font-semibold mt-2">
+                Array of variables
+            </h3>
+            <pre><code class="lang-cpp">int* arr = new int[5]; // Allocate array of 5 ints
+arr[0] = 10;           // Assign values
+arr[1] = 20;
+delete[] arr;          // Free array memory
+</code></pre>
+            <hr class="border-gray-600" />
+
+            <h2 id="-example-program" class="text-2xl font-semibold mt-4">
+                🧾 Example Program
+            </h2>
+            <pre><code class="lang-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    // Allocate a single int
+    int* num = new int;
+    *num = 100;
+    cout &lt;&lt; "Value: " &lt;&lt; *num &lt;&lt; endl;
+    delete num; // Free memory
+
+    // Allocate an array
+    int size = 5;
+    int* numbers = new int[size];
+    for (int i = 0; i &lt; size; i++)
+        numbers[i] = i * 10;
+
+    cout &lt;&lt; "Array values: ";
+    for (int i = 0; i &lt; size; i++)
+        cout &lt;&lt; numbers[i] &lt;&lt; " ";
+    cout &lt;&lt; endl;
+
+    delete[] numbers; // Free array memory
+
+    return 0;
+}
+</code></pre>
+            <p><strong>Output:</strong></p>
+            <pre><code>Value: 100
+Array values: 0 10 20 30 40</code></pre>
+            <hr class="border-gray-600" />
+
+            <h2 id="-important-rules" class="text-2xl font-semibold mt-4">
+                ⚠️ Important Rules
+            </h2>
+            <ol class="list-decimal list-inside space-y-2">
+                <li>
+                    Always
+                    <strong
+                        >use <code>delete</code> or
+                        <code>delete[]</code></strong
+                    >
+                    to free memory allocated with <code>new</code> /
+                    <code>new[]</code>.
+                </li>
+                <li>
+                    <strong>Do not mix</strong> <code>delete</code> and
+                    <code>new[]</code> (or <code>delete[]</code> with
+                    <code>new</code>).
+                </li>
+                <li>
+                    Uninitialized pointers can cause
+                    <strong>undefined behavior</strong>; always initialize or
+                    assign after allocation.
+                </li>
+                <li>
+                    Accessing memory <strong>after deletion</strong> is
+                    <strong>undefined behavior</strong> (dangling pointer).
+                </li>
+                <li>
+                    Dynamic allocation is slower than stack allocation and
+                    increases <strong>risk of memory leaks</strong> if not
+                    handled properly.
+                </li>
+            </ol>
+            <hr class="border-gray-600" />
+
+            <h2 id="-summary-table" class="text-2xl font-semibold mt-4">
+                ✅ Summary Table
+            </h2>
+            <table class="border border-gray-600">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Concept
+                        </th>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Example / Notes
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Allocate single variable
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            <code>int* p = new int;</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Allocate array
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            <code>int* arr = new int[10];</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Assign value
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            <code>*p = 5; arr[0] = 1;</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Free single variable
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            <code>delete p;</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Free array
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            <code>delete[] arr;</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Lifetime
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Until <code>delete</code> is called
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Common mistakes
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Forgetting <code>delete</code>, mixing
+                            <code>delete</code>/<code>delete[]</code>, using
+                            dangling pointers
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>

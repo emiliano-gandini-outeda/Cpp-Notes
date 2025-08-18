@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+        <section
+            class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4"
+        >
+            <h1 id="-quick-sort" class="text-3xl font-bold mb-4">
+                🟪 Quick Sort
+            </h1>
+
+            <h2 id="-what-is-quick-sort-" class="text-2xl font-semibold mt-4">
+                ✅ What is Quick Sort?
+            </h2>
+            <p>
+                <strong>Quick Sort</strong> is a
+                <strong>divide and conquer</strong> sorting algorithm.
+            </p>
+            <ul class="list-disc list-inside space-y-1">
+                <li>
+                    It works by selecting a
+                    <strong>pivot element</strong> and
+                    <strong>partitioning</strong> the array into two subarrays:
+
+                    <ol class="list-decimal list-inside ml-6 space-y-1">
+                        <li>
+                            Elements
+                            <strong>less than or equal to the pivot</strong>
+                        </li>
+                        <li>
+                            Elements <strong>greater than the pivot</strong>
+                        </li>
+                    </ol>
+                </li>
+                <li>Recursively applies the same process to the subarrays.</li>
+                <li>
+                    Efficient for <strong>large datasets</strong>, often faster
+                    in practice than Merge Sort because it
+                    <strong>does not require extra memory</strong>.
+                </li>
+            </ul>
+            <hr class="border-gray-600" />
+
+            <h2 id="-key-concepts" class="text-2xl font-semibold mt-4">
+                🧠 Key Concepts
+            </h2>
+            <table class="border border-gray-600">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Concept
+                        </th>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Description
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Divide and Conquer
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Splits the array around a pivot element
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Partitioning
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Reorders elements so that left &lt; pivot &lt; right
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Recursive
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Sorts subarrays recursively
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            In-place
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Usually does not require extra memory
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Not stable
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Equal elements may change relative order
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Time complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Average: O(n log n), Worst-case: O(n²)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Best for
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Large arrays, practical general-purpose sorting
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr class="border-gray-600" />
+
+            <h2 id="-how-quick-sort-works" class="text-2xl font-semibold mt-4">
+                📌 How Quick Sort Works
+            </h2>
+            <ol class="list-decimal list-inside space-y-1">
+                <li>
+                    Pick a <strong>pivot element</strong> (first, last, random,
+                    or median).
+                </li>
+                <li><strong>Partition</strong> the array around the pivot.</li>
+                <li>
+                    Recursively <strong>apply Quick Sort</strong> to the left
+                    and right subarrays.
+                </li>
+                <li>
+                    Combine results (no merging needed since partitioning
+                    ensures order).
+                </li>
+            </ol>
+            <hr class="border-gray-600" />
+
+            <h2
+                id="-example-standard-quick-sort"
+                class="text-2xl font-semibold mt-4"
+            >
+                🧾 Example – Standard Quick Sort
+            </h2>
+            <pre><code class="lang-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+// Partition the array
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high]; // Choose last element as pivot
+    int i = low - 1;
+
+    for (int j = low; j &lt; high; j++) {
+        if (arr[j] &lt;= pivot) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+
+// Recursive quick sort
+void quickSort(int arr[], int low, int high) {
+    if (low &lt; high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+int main() {
+    int arr[] = {10, 7, 8, 9, 1, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    quickSort(arr, 0, n - 1);
+
+    cout &lt;&lt; "Sorted array: ";
+    for (int i = 0; i &lt; n; i++) cout &lt;&lt; arr[i] &lt;&lt; " ";
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+            <p><strong>Output:</strong></p>
+            <pre><code>Sorted array: 1 5 7 8 9 10</code></pre>
+            <hr class="border-gray-600" />
+
+            <h2 id="-step-by-step-example" class="text-2xl font-semibold mt-4">
+                🔄 Step-by-Step Example
+            </h2>
+            <p>Array: <code>[10, 7, 8, 9, 1, 5]</code></p>
+            <ol class="list-decimal list-inside space-y-1">
+                <li>
+                    Pivot = 5 → Partition → <code>[1, 5, 8, 9, 10, 7]</code>
+                </li>
+                <li>Left subarray <code>[1]</code> → Already sorted</li>
+                <li>
+                    Right subarray <code>[8, 9, 10, 7]</code> → Pivot = 7 →
+                    Partition → <code>[7, 8, 9, 10]</code>
+                </li>
+                <li>Left <code>[]</code> → Empty</li>
+                <li>
+                    Right <code>[8, 9, 10]</code> → Pivot = 10 → Partition →
+                    <code>[8, 9, 10]</code>
+                </li>
+                <li>Fully sorted array → <code>[1, 5, 7, 8, 9, 10]</code></li>
+            </ol>
+            <hr class="border-gray-600" />
+
+            <h2 id="-important-rules" class="text-2xl font-semibold mt-4">
+                ⚠️ Important Rules
+            </h2>
+            <ol class="list-decimal list-inside space-y-2">
+                <li>
+                    <strong>Not stable</strong> → equal elements may change
+                    relative order.
+                </li>
+                <li>
+                    <strong>In-place</strong> → does not require extra memory
+                    for merging.
+                </li>
+                <li>
+                    <p><strong>Time complexity:</strong></p>
+                    <ul class="list-disc list-inside ml-6">
+                        <li>Best-case: O(n log n) → balanced partitioning</li>
+                        <li>Average-case: O(n log n) → typical random data</li>
+                        <li>
+                            Worst-case: O(n²) → already sorted or reversed array
+                            (can be improved with random pivots)
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Space complexity:</strong> O(log n) due to recursion
+                    stack.
+                </li>
+                <li>
+                    Quick Sort is
+                    <strong>usually faster than Merge Sort in practice</strong>
+                    for arrays.
+                </li>
+                <li>
+                    Choosing a <strong>good pivot</strong> is key to efficiency.
+                </li>
+            </ol>
+            <hr class="border-gray-600" />
+
+            <h2 id="-summary-table" class="text-2xl font-semibold mt-4">
+                ✅ Summary Table
+            </h2>
+            <table class="border border-gray-600">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Concept
+                        </th>
+                        <th class="border border-gray-600 px-2 py-1">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Algorithm type
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Divide and conquer
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Stable?
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">❌ No</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            In-place?
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">✅ Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Worst-case complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">O(n²)</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Best-case complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            O(n log n)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Average-case complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            O(n log n)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Space complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            O(log n) (recursion)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Basic idea
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Partition array around pivot and sort subarrays
+                            recursively
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Best use case
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Large arrays, practical general-purpose sorting
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>

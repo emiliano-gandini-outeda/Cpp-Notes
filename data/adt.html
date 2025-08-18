@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+        <!-- Blog Section -->
+        <section
+            class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4"
+        >
+            <h1 id="-abstract-data-types-adts-" class="text-3xl font-bold mb-4">
+                🟦 Abstract Data Types (ADTs)
+            </h1>
+
+            <h2
+                id="-what-is-an-abstract-data-type-"
+                class="text-2xl font-semibold mt-4"
+            >
+                ✅ What is an Abstract Data Type?
+            </h2>
+            <p>
+                An <strong>Abstract Data Type (ADT)</strong> is a
+                <strong>mathematical model</strong> for a data structure that
+                defines:
+            </p>
+            <ol class="list-decimal list-inside space-y-1">
+                <li><strong>A set of values</strong> the type can hold</li>
+                <li>
+                    <strong>A set of operations</strong> that can be performed
+                    on the values
+                </li>
+            </ol>
+            <p><strong>Key idea:</strong></p>
+            <ul class="list-disc list-inside space-y-1">
+                <li>
+                    ADTs define <strong>what operations do</strong>, but
+                    <strong>not how they are implemented</strong>.
+                </li>
+                <li>
+                    They provide an <strong>interface</strong> that hides
+                    implementation details.
+                </li>
+            </ul>
+            <p><strong>Common ADTs:</strong></p>
+            <ul class="list-disc list-inside space-y-1">
+                <li><strong>Stack</strong> – Last-In, First-Out (LIFO)</li>
+                <li><strong>Queue</strong> – First-In, First-Out (FIFO)</li>
+                <li><strong>List</strong> – Ordered collection of elements</li>
+                <li>
+                    <strong>Priority Queue</strong> – Queue with element
+                    priorities
+                </li>
+                <li><strong>Deque</strong> – Double-ended queue</li>
+                <li><strong>Graph</strong> – Set of vertices and edges</li>
+            </ul>
+            <hr class="border-gray-600" />
+
+            <h2 id="-key-concepts-of-adts" class="text-2xl font-semibold mt-4">
+                🧠 Key Concepts of ADTs
+            </h2>
+            <table class="border border-gray-600">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Concept
+                        </th>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Description
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">Data</td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            The values stored in the ADT
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Operations
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Functions allowed on the ADT (push, pop, insert,
+                            delete, search, etc.)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Interface
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Defines operations
+                            <strong>without specifying implementation</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Encapsulation
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Implementation details are hidden from the user
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Flexibility
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Same ADT can have multiple implementations (arrays,
+                            linked lists, trees)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Benefits
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Modularity, maintainability, reusable code,
+                            implementation independence
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr class="border-gray-600" />
+
+            <h2 id="-adt-vs-data-structure" class="text-2xl font-semibold mt-4">
+                📌 ADT vs Data Structure
+            </h2>
+            <table class="border border-gray-600">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-600 px-2 py-1">Aspect</th>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Abstract Data Type (ADT)
+                        </th>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Data Structure
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">Focus</td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            <strong>What operations are allowed</strong>
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            <strong>How data is stored</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Example
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Stack with push/pop/top
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Stack implemented using array or linked list
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Implementation
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">Hidden</td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Explicit in code
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Purpose
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Interface
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Performance and memory optimization
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr class="border-gray-600" />
+
+            <h2 id="-example-stack-adt" class="text-2xl font-semibold mt-4">
+                🧾 Example – Stack ADT
+            </h2>
+            <p><strong>Stack ADT Operations:</strong></p>
+            <ol class="list-decimal list-inside space-y-1">
+                <li><code>push(element)</code> – Add an element to the top</li>
+                <li><code>pop()</code> – Remove the top element</li>
+                <li>
+                    <code>top()</code> / <code>peek()</code> – Access the top
+                    element without removing
+                </li>
+                <li><code>isEmpty()</code> – Check if the stack is empty</li>
+            </ol>
+            <p>
+                <strong>Implementation using C++ class (Array-based):</strong>
+            </p>
+            <pre><code class="lang-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+class Stack {
+private:
+    int arr[100];
+    int topIndex;
+
+public:
+    Stack() { topIndex = -1; }
+
+    void push(int x) {
+        if (topIndex &lt; 99) arr[++topIndex] = x;
+        else cout &lt;&lt; "Stack overflow!" &lt;&lt; endl;
+    }
+
+    void pop() {
+        if (topIndex &gt;= 0) topIndex--;
+        else cout &lt;&lt; "Stack underflow!" &lt;&lt; endl;
+    }
+
+    int top() {
+        if (topIndex &gt;= 0) return arr[topIndex];
+        else return -1; // Empty stack
+    }
+
+    bool isEmpty() {
+        return topIndex == -1;
+    }
+};
+
+int main() {
+    Stack s;
+    s.push(10);
+    s.push(20);
+    cout &lt;&lt; "Top element: " &lt;&lt; s.top() &lt;&lt; endl;
+    s.pop();
+    cout &lt;&lt; "Top after pop: " &lt;&lt; s.top() &lt;&lt; endl;
+}
+</code></pre>
+            <p><strong>Output:</strong></p>
+            <pre><code>Top element: 20
+Top after pop: 10</code></pre>
+            <hr class="border-gray-600" />
+
+            <h2
+                id="-key-points-from-example"
+                class="text-2xl font-semibold mt-4"
+            >
+                🔄 Key Points from Example
+            </h2>
+            <ol class="list-decimal list-inside space-y-1">
+                <li>
+                    <strong>User interacts only via the interface</strong>
+                    (<code>push</code>, <code>pop</code>, <code>top</code>,
+                    <code>isEmpty</code>).
+                </li>
+                <li>
+                    <strong>Internal array and <code>topIndex</code></strong>
+                    are hidden (encapsulation).
+                </li>
+                <li>
+                    Same <strong>Stack ADT</strong> can be implemented using a
+                    <strong>linked list</strong> instead of an array.
+                </li>
+                <li>
+                    ADTs ensure <strong>modularity</strong>: code using
+                    <code>Stack</code> doesn’t need to know its internal
+                    implementation.
+                </li>
+            </ol>
+            <hr class="border-gray-600" />
+
+            <h2 id="-important-rules" class="text-2xl font-semibold mt-4">
+                ⚠️ Important Rules
+            </h2>
+            <ol class="list-decimal list-inside space-y-1">
+                <li>
+                    ADTs <strong>define behavior, not implementation</strong>.
+                </li>
+                <li>
+                    <strong
+                        >Operations must maintain the ADT’s invariants</strong
+                    >
+                    (e.g., LIFO for stack, FIFO for queue).
+                </li>
+                <li>
+                    Multiple data structures can implement the same ADT
+                    differently depending on performance needs.
+                </li>
+                <li>
+                    Using ADTs allows <strong>clean interfaces</strong>, making
+                    code easier to maintain, test, and extend.
+                </li>
+                <li>
+                    ADTs are <strong>language-independent concepts</strong>,
+                    though implemented in languages like C++, Java, or Python.
+                </li>
+            </ol>
+            <hr class="border-gray-600" />
+
+            <h2 id="-summary-table" class="text-2xl font-semibold mt-4">
+                ✅ Summary Table
+            </h2>
+            <table class="border border-gray-600">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Concept
+                        </th>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Example / Notes
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Abstract Data Type
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Stack, Queue, List, Priority Queue
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Operations
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Defined by the ADT, e.g., <code>push</code>,
+                            <code>pop</code>, <code>insert</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Implementation
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Hidden, can use arrays, linked lists, trees, etc.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Interface
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Exposed operations only
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Benefits
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Modular, maintainable, reusable, hides complexity
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>

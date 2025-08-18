@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>C++ Notes</title>
+    <link rel="icon" type="image/png"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        :root {
+            --color-dark-grey: #2d2d2d;
+            --color-background: #111217;
+            --color-surface: #3a3a3a;
+            --color-dark-red: #b71c1c;
+            --color-dark-red-light: #d32f2f;
+            --color-text-primary: #e0e0e0;
+            --color-text-secondary: #b0b0b0;
+            --color-borders: #4a4a4a;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: "Inter", sans-serif;
+        }
+
+        pre {
+            background-color: var(--color-dark-grey);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--color-borders);
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--color-surface);
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center py-8 px-4">
+    <!-- Top Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo" />
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+    <!-- Blog Section -->
+
+
+
+    <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4">
+        <h1 id="-breadth-first-search-bfs-" class="text-3xl font-bold mb-4">🌐 Breadth-First Search (BFS)</h1>
+
+        <h2 id="-what-is-breadth-first-search-" class="text-2xl font-semibold mt-4">✅ What is Breadth-First Search?</h2>
+        <p><strong>Breadth-First Search (BFS)</strong> is a <strong>graph traversal algorithm</strong> that explores the
+            graph <strong>level by level</strong>, visiting all nodes at the current depth before moving to the next.
+        </p>
+        <ul class="list-disc list-inside space-y-1">
+            <li>Starts at a <strong>source node</strong>.</li>
+            <li>Explores all <strong>neighboring nodes</strong> first, then moves to their neighbors.</li>
+            <li>Implemented using a <strong>queue</strong> to maintain the order of nodes.</li>
+            <li>Works for <strong>both directed and undirected graphs</strong>.</li>
+        </ul>
+        <hr class="border-gray-600" />
+
+        <h2 id="-key-concepts" class="text-2xl font-semibold mt-4">🧠 Key Concepts</h2>
+        <table class="border border-gray-600">
+            <thead>
+                <tr>
+                    <th class="border border-gray-600 px-2 py-1">Concept</th>
+                    <th class="border border-gray-600 px-2 py-1">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="border border-gray-600 px-2 py-1">Traversal type</td>
+                    <td class="border border-gray-600 px-2 py-1">Level-order, breadth-first</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-2 py-1">Graph type</td>
+                    <td class="border border-gray-600 px-2 py-1">Directed or undirected</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-2 py-1">Implementation</td>
+                    <td class="border border-gray-600 px-2 py-1">Queue-based</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-2 py-1">Visited tracking</td>
+                    <td class="border border-gray-600 px-2 py-1">Keeps track of visited nodes to avoid revisiting</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-2 py-1">Time complexity</td>
+                    <td class="border border-gray-600 px-2 py-1">O(V + E) → V = vertices, E = edges</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-2 py-1">Space complexity</td>
+                    <td class="border border-gray-600 px-2 py-1">O(V) for the queue</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-2 py-1">Use cases</td>
+                    <td class="border border-gray-600 px-2 py-1">Shortest path in unweighted graphs, connectivity,
+                        bipartite check</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr class="border-gray-600" />
+
+        <h2 id="-how-bfs-works" class="text-2xl font-semibold mt-4">📌 How BFS Works</h2>
+        <ol class="list-decimal list-inside space-y-1">
+            <li>Start at the <strong>source node</strong>.</li>
+            <li>Mark it as <strong>visited</strong> and <strong>enqueue</strong> it.</li>
+            <li>
+                <p>While the queue is not empty:</p>
+                <ul class="list-disc list-inside ml-6">
+                    <li>Dequeue a node <code>u</code>.</li>
+                    <li>Visit <code>u</code> (e.g., print or process).</li>
+                    <li>
+                        <p>For each <strong>unvisited neighbor</strong> of <code>u</code>:</p>
+                        <ul class="list-disc list-inside ml-6">
+                            <li>Mark as visited</li>
+                            <li>Enqueue neighbor</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Repeat until all reachable nodes are visited.</li>
+        </ol>
+        <hr class="border-gray-600" />
+
+        <h2 id="-example-bfs-using-adjacency-list" class="text-2xl font-semibold mt-4">🧾 Example – BFS using adjacency
+            list</h2>
+        <pre><code class="lang-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+void bfs(int start, vector<vector<int>>& graph, vector<bool>& visited) {
+    queue<int> q;
+    visited[start] = true;
+    q.push(start);
+
+    while (!q.empty()) {
+        int node = q.front();
+        q.pop();
+        cout &lt;&lt; node &lt;&lt; " ";
+
+        for (int neighbor : graph[node]) {
+            if (!visited[neighbor]) {
+                visited[neighbor] = true;
+                q.push(neighbor);
+            }
+        }
+    }
+}
+
+int main() {
+    int vertices = 5;
+    vector<vector<int>> graph(vertices);
+
+    // Add edges
+    graph[0] = {1, 2};
+    graph[1] = {2};
+    graph[2] = {0, 3};
+    graph[3] = {3, 4};
+
+    vector<bool> visited(vertices, false);
+
+    cout &lt;&lt; "BFS traversal starting from node 0: ";
+    bfs(0, graph, visited);
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+        <p><strong>Output (one possible traversal):</strong></p>
+        <pre><code>BFS traversal starting from node 0: 0 1 2 3 4</code></pre>
+        <hr class="border-gray-600" />
+
+        <h2 id="-step-by-step-example" class="text-2xl font-semibold mt-4">🔄 Step-by-Step Example</h2>
+        <p>Graph (edges):</p>
+        <pre><code>0 → 1, 0 → 2, 1 → 2, 2 → 0, 2 → 3, 3 → 3, 3 → 4</code></pre>
+        <p>BFS starting at node 0:</p>
+        <ol class="list-decimal list-inside space-y-1">
+            <li>Start with queue = [0], visit 0 → neighbors 1,2 → enqueue → queue = [1,2]</li>
+            <li>Dequeue 1 → visit → neighbor 2 already visited → queue = [2]</li>
+            <li>Dequeue 2 → visit → neighbors 0,3 → 0 visited, enqueue 3 → queue = [3]</li>
+            <li>Dequeue 3 → visit → neighbors 3,4 → 3 visited, enqueue 4 → queue = [4]</li>
+            <li>Dequeue 4 → visit → no unvisited neighbors → queue empty → finish</li>
+        </ol>
+        <p>Traversal order: <code>0 1 2 3 4</code> ✅</p>
+        <hr class="border-gray-600" />
+
+        <h2 id="-important-rules" class="text-2xl font-semibold mt-4">⚠️ Important Rules</h2>
+        <ol class="list-decimal list-inside space-y-2">
+            <li><strong>BFS finds the shortest path</strong> in <strong>unweighted graphs</strong>.</li>
+            <li>Requires <strong>visited tracking</strong> to avoid infinite loops in cyclic graphs.</li>
+            <li><strong>Time complexity:</strong> O(V + E) → visits each vertex and edge once.</li>
+            <li><strong>Space complexity:</strong> O(V) → queue stores nodes at each level.</li>
+            <li>
+                <p>BFS is often used for:</p>
+                <ul class="list-disc list-inside ml-6">
+                    <li>Finding shortest paths</li>
+                    <li>Checking connectivity</li>
+                    <li>Bipartite graph check</li>
+                    <li>Level-order traversal in trees</li>
+                </ul>
+            </li>
+        </ol>
+        <hr class="border-gray-600" />
+
+        <h2 id="-summary-table" class="text-2xl font-semibold mt-4">✅ Summary Table</h2>
+        <table class="border border-gray-600">
+            <thead>
+                <tr>
+                    <th class="border border-gray-600 px-2 py-1">Concept</th>
+                    <th class="border border-gray-600 px-2 py-1">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="border border-gray-600 px-2 py-1">Traversal type</td>
+                    <td class="border border-gray-600 px-2 py-1">Breadth-first, level-order</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-2 py-1">Graph type</td>
+                    <td class="border border-gray-600 px-2 py-1">Directed/undirected</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-2 py-1">Implementation</td>
+                    <td class="border border-gray-600 px-2 py-1">Queue-based</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-2 py-1">Time complexity</td>
+                    <td class="border border-gray-600 px-2 py-1">O(V + E)</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-2 py-1">Space complexity</td>
+                    <td class="border border-gray-600 px-2 py-1">O(V)</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-2 py-1">Visited tracking</td>
+                    <td class="border border-gray-600 px-2 py-1">Required</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-600 px-2 py-1">Best use case</td>
+                    <td class="border border-gray-600 px-2 py-1">Shortest path, connectivity, level-order traversal</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr class="border-gray-600" />
+
+        <p>BFS is <strong>complementary to DFS</strong>: DFS explores depth-first, while BFS explores <strong>level by
+                level</strong>.</p>
+    </section>
+
+
+    <!-- Bottom Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+            <!-- Arrow SVG -->
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+
+            <!-- C++ Logo SVG -->
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo" />
+
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+</body>
+
+</html>

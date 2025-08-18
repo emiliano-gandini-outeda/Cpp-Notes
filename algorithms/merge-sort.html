@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+        <!-- Blog Section -->
+        <section
+            class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4"
+        >
+            <h1 id="-merge-sort" class="text-3xl font-bold mb-4">
+                🟩 Merge Sort
+            </h1>
+
+            <h2 id="-what-is-merge-sort-" class="text-2xl font-semibold mt-4">
+                ✅ What is Merge Sort?
+            </h2>
+            <p>
+                <strong>Merge Sort</strong> is a
+                <strong>divide and conquer</strong> algorithm that sorts an
+                array by:
+            </p>
+            <ol class="list-decimal list-inside space-y-1">
+                <li><strong>Dividing</strong> the array into two halves,</li>
+                <li><strong>Recursively sorting</strong> each half,</li>
+                <li>
+                    <strong>Merging</strong> the two sorted halves into one
+                    sorted array.
+                </li>
+            </ol>
+            <p>
+                It is one of the most efficient general-purpose sorting
+                algorithms, especially for <strong>large datasets</strong>.
+            </p>
+            <hr class="border-gray-600" />
+
+            <h2 id="-key-concepts" class="text-2xl font-semibold mt-4">
+                🧠 Key Concepts
+            </h2>
+            <table class="border border-gray-600">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Concept
+                        </th>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Description
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Divide and Conquer
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Splits the problem into smaller subproblems until
+                            trivial (single element)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Recursive
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Sorting is done by recursion on subarrays
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Merge step
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Combines two sorted arrays into one sorted array
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">Stable</td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Preserves the relative order of equal elements
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Not in-place
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Requires O(n) extra memory for merging
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Time complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Always O(n log n)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Best for
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Large datasets and linked lists
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr class="border-gray-600" />
+
+            <h2 id="-how-merge-sort-works" class="text-2xl font-semibold mt-4">
+                📌 How Merge Sort Works
+            </h2>
+            <ol class="list-decimal list-inside space-y-1">
+                <li>
+                    If the array has <strong>0 or 1 element</strong>, it is
+                    already sorted.
+                </li>
+                <li>Otherwise, split the array into two halves.</li>
+                <li>Recursively sort both halves.</li>
+                <li>Merge the two sorted halves into one sorted array.</li>
+            </ol>
+            <hr class="border-gray-600" />
+
+            <h2
+                id="-example-standard-merge-sort"
+                class="text-2xl font-semibold mt-4"
+            >
+                🧾 Example – Standard Merge Sort
+            </h2>
+            <pre><code class="lang-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+// Merge two sorted subarrays into one sorted array
+void merge(int arr[], int left, int mid, int right) {
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+
+    int L[n1], R[n2];
+
+    // Copy data into temporary arrays
+    for (int i = 0; i &lt; n1; i++)
+        L[i] = arr[left + i];
+    for (int j = 0; j &lt; n2; j++)
+        R[j] = arr[mid + 1 + j];
+
+    int i = 0, j = 0, k = left;
+
+    // Merge back into arr[]
+    while (i &lt; n1 &amp;&amp; j &lt; n2) {
+        if (L[i] &lt;= R[j]) arr[k++] = L[i++];
+        else arr[k++] = R[j++];
+    }
+
+    // Copy remaining elements
+    while (i &lt; n1) arr[k++] = L[i++];
+    while (j &lt; n2) arr[k++] = R[j++];
+}
+
+// Recursive merge sort function
+void mergeSort(int arr[], int left, int right) {
+    if (left &lt; right) {
+        int mid = left + (right - left) / 2;
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        merge(arr, left, mid, right);
+    }
+}
+
+int main() {
+    int arr[] = {38, 27, 43, 3, 9, 82, 10};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    mergeSort(arr, 0, n - 1);
+
+    cout &lt;&lt; "Sorted array: ";
+    for (int i = 0; i &lt; n; i++) cout &lt;&lt; arr[i] &lt;&lt; " ";
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+            <p><strong>Output:</strong></p>
+            <pre><code>Sorted array: 3 9 10 27 38 43 82</code></pre>
+            <hr class="border-gray-600" />
+
+            <h2 id="-step-by-step-example" class="text-2xl font-semibold mt-4">
+                🔄 Step-by-Step Example
+            </h2>
+            <p>Array: <code>[38, 27, 43, 3, 9, 82, 10]</code></p>
+            <ol class="list-decimal list-inside space-y-1">
+                <li>
+                    Split → <code>[38, 27, 43, 3]</code> and
+                    <code>[9, 82, 10]</code>
+                </li>
+                <li>
+                    Split left half → <code>[38, 27]</code> and
+                    <code>[43, 3]</code>
+                </li>
+                <li>
+                    Split further → <code>[38] [27]</code> → Merge →
+                    <code>[27, 38]</code>
+                </li>
+                <li><code>[43] [3]</code> → Merge → <code>[3, 43]</code></li>
+                <li>
+                    Merge → <code>[27, 38]</code> and <code>[3, 43]</code> →
+                    <code>[3, 27, 38, 43]</code>
+                </li>
+                <li>
+                    Split right half → <code>[9, 82]</code> and
+                    <code>[10]</code>
+                </li>
+                <li><code>[9, 82]</code> → Already sorted</li>
+                <li>
+                    Merge <code>[9, 82]</code> and <code>[10]</code> →
+                    <code>[9, 10, 82]</code>
+                </li>
+                <li>
+                    Final merge <code>[3, 27, 38, 43]</code> and
+                    <code>[9, 10, 82]</code> →
+                    <code>[3, 9, 10, 27, 38, 43, 82]</code>
+                </li>
+            </ol>
+            <p>✅ Sorted!</p>
+            <hr class="border-gray-600" />
+
+            <h2 id="-important-rules" class="text-2xl font-semibold mt-4">
+                ⚠️ Important Rules
+            </h2>
+            <ol class="list-decimal list-inside space-y-2">
+                <li>
+                    <strong>Stable sort</strong> → keeps equal elements in
+                    original order.
+                </li>
+                <li>
+                    <strong>Not in-place</strong> → needs extra space
+                    proportional to array size.
+                </li>
+                <li>
+                    <strong>Recursive</strong> → needs function calls, may cause
+                    stack overhead.
+                </li>
+                <li>
+                    <p><strong>Time complexity</strong>:</p>
+                    <ul class="list-disc list-inside ml-6">
+                        <li>Best-case: O(n log n)</li>
+                        <li>Worst-case: O(n log n)</li>
+                        <li>Average-case: O(n log n) → Always efficient.</li>
+                    </ul>
+                </li>
+                <li><strong>Space complexity</strong>: O(n).</li>
+            </ol>
+            <hr class="border-gray-600" />
+
+            <h2 id="-summary-table" class="text-2xl font-semibold mt-4">
+                ✅ Summary Table
+            </h2>
+            <table class="border border-gray-600">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Concept
+                        </th>
+                        <th class="border border-gray-600 px-2 py-1">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Algorithm type
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Divide and conquer
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Stable?
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">✅ Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            In-place?
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">❌ No</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Worst-case complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            O(n log n)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Best-case complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            O(n log n)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Average-case complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            O(n log n)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Space complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">O(n)</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Best use case
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Large datasets, linked lists
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>

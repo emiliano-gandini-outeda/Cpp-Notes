@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+        <section
+            class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4"
+        >
+            <h1 id="-linear-search" class="text-3xl font-bold mb-4">
+                🔍 Linear Search
+            </h1>
+
+            <h2
+                id="-what-is-linear-search-"
+                class="text-2xl font-semibold mt-4"
+            >
+                ✅ What is Linear Search?
+            </h2>
+            <p>
+                <strong>Linear Search</strong> (or
+                <strong>Sequential Search</strong>) is the
+                <strong>simplest searching algorithm</strong>.
+            </p>
+            <ul class="list-disc list-inside space-y-1">
+                <li>
+                    It checks <strong>each element</strong> of an array (or
+                    list) <strong>one by one</strong> until it finds the target
+                    element.
+                </li>
+                <li>
+                    If the element is found, it returns its
+                    <strong>position</strong>.
+                </li>
+                <li>
+                    If the element is not found, it returns
+                    <strong>-1</strong> or indicates “not found.”
+                </li>
+                <li>Works on <strong>unsorted or sorted arrays</strong>.</li>
+            </ul>
+            <hr class="border-gray-600" />
+
+            <h2 id="-key-concepts" class="text-2xl font-semibold mt-4">
+                🧠 Key Concepts
+            </h2>
+            <table class="border border-gray-600">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Concept
+                        </th>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Description
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Search type
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Sequential/iterative search
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">Input</td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Array or list and a target element
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">Output</td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Index of element if found, -1 if not found
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Applicable
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Sorted or unsorted data
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Time: O(n), Space: O(1)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">Stable</td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Not applicable
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            In-place
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Best use case
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Small arrays or unsorted data
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr class="border-gray-600" />
+
+            <h2
+                id="-how-linear-search-works"
+                class="text-2xl font-semibold mt-4"
+            >
+                📌 How Linear Search Works
+            </h2>
+            <ol class="list-decimal list-inside space-y-1">
+                <li>
+                    Start from the <strong>first element</strong> of the array.
+                </li>
+                <li>Compare it with the <strong>target element</strong>.</li>
+                <li>If it matches, <strong>return the index</strong>.</li>
+                <li>
+                    If it doesn’t, move to the <strong>next element</strong>.
+                </li>
+                <li>Repeat until the <strong>end of the array</strong>.</li>
+                <li>
+                    If the element is <strong>not found</strong>, return -1.
+                </li>
+            </ol>
+            <hr class="border-gray-600" />
+
+            <h2 id="-example-linear-search" class="text-2xl font-semibold mt-4">
+                🧾 Example – Linear Search
+            </h2>
+            <pre><code class="lang-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int linearSearch(int arr[], int n, int target) {
+    for (int i = 0; i &lt; n; i++) {
+        if (arr[i] == target)
+            return i; // Element found
+    }
+    return -1; // Element not found
+}
+
+int main() {
+    int arr[] = {10, 20, 30, 40, 50};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int target = 30;
+
+    int index = linearSearch(arr, n, target);
+
+    if (index != -1)
+        cout &lt;&lt; "Element found at index: " &lt;&lt; index &lt;&lt; endl;
+    else
+        cout &lt;&lt; "Element not found" &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+            <p><strong>Output:</strong></p>
+            <pre><code>Element found at index: 2</code></pre>
+            <hr class="border-gray-600" />
+
+            <h2 id="-step-by-step-example" class="text-2xl font-semibold mt-4">
+                🔄 Step-by-Step Example
+            </h2>
+            <p>Array: <code>[10, 20, 30, 40, 50]</code>, Target = 30</p>
+            <ol class="list-decimal list-inside space-y-1">
+                <li>Compare 10 → not equal</li>
+                <li>Compare 20 → not equal</li>
+                <li>Compare 30 → <strong>found</strong> → return index 2</li>
+            </ol>
+            <hr class="border-gray-600" />
+
+            <h2 id="-important-rules" class="text-2xl font-semibold mt-4">
+                ⚠️ Important Rules
+            </h2>
+            <ol class="list-decimal list-inside space-y-2">
+                <li>
+                    Works on <strong>both sorted and unsorted arrays</strong>.
+                </li>
+                <li>
+                    <p><strong>Time complexity:</strong></p>
+                    <ul class="list-disc list-inside ml-6">
+                        <li>
+                            Best-case: O(1) → element is at the first position
+                        </li>
+                        <li>
+                            Worst-case: O(n) → element is at the last position
+                            or not present
+                        </li>
+                        <li>
+                            Average-case: O(n) → element is somewhere in the
+                            middle
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Space complexity:</strong> O(1) → no extra memory
+                    needed
+                </li>
+                <li>
+                    Simple to implement but
+                    <strong>inefficient for large arrays</strong> compared to
+                    Binary Search.
+                </li>
+            </ol>
+            <hr class="border-gray-600" />
+
+            <h2 id="-summary-table" class="text-2xl font-semibold mt-4">
+                ✅ Summary Table
+            </h2>
+            <table class="border border-gray-600">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-600 px-2 py-1">
+                            Concept
+                        </th>
+                        <th class="border border-gray-600 px-2 py-1">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Algorithm type
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Sequential search
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Stable?
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">N/A</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            In-place?
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">✅ Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Worst-case complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">O(n)</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Best-case complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">O(1)</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Average-case complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">O(n)</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Space complexity
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">O(1)</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Basic idea
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Check each element one by one until target is found
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Best use case
+                        </td>
+                        <td class="border border-gray-600 px-2 py-1">
+                            Small or unsorted arrays
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>
