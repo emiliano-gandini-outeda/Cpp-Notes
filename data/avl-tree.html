@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+        <section
+            class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6"
+        >
+            <h1 class="text-3xl font-bold mb-4">🌳 AVL Tree in C++</h1>
+
+            <h2 class="text-2xl font-semibold mt-4">✅ What is an AVL Tree?</h2>
+            <p>
+                An <strong>AVL tree</strong> is a
+                <strong>self-balancing Binary Search Tree (BST)</strong> where
+                the
+                <strong
+                    >height difference (balance factor) between the left and
+                    right subtrees of any node is at most 1</strong
+                >.
+            </p>
+            <ul class="list-disc list-inside ml-4">
+                <li>
+                    This ensures the tree remains <strong>balanced</strong>,
+                    providing <strong>O(log n)</strong> time complexity for
+                    search, insertion, and deletion.
+                </li>
+                <li>
+                    Named after its inventors:
+                    <strong>Adelson-Velsky and Landis</strong>.
+                </li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mt-4">Key Terms:</h3>
+            <ul class="list-disc list-inside ml-4">
+                <li>
+                    <strong>Balance Factor</strong>:
+                    <code>height(left subtree) - height(right subtree)</code>
+                </li>
+                <li>
+                    <strong>Rotation</strong>: Operation used to
+                    <strong>rebalance the tree</strong>. Types:
+                    <ul class="list-disc list-inside ml-6">
+                        <li><strong>Right Rotation (LL)</strong></li>
+                        <li><strong>Left Rotation (RR)</strong></li>
+                        <li><strong>Left-Right Rotation (LR)</strong></li>
+                        <li><strong>Right-Left Rotation (RL)</strong></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">
+                🧠 Syntax (Node Definition)
+            </h2>
+            <pre><code class="lang-c++">struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    int height;  // Height of the node
+};</code></pre>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">
+                🧾 Example Program – Insertion in AVL Tree
+            </h2>
+            <pre><code class="lang-c++">#include &lt;iostream&gt;
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    int height;
+};
+
+// Get height of a node
+int height(Node* node) { return node ? node-&gt;height : 0; }
+
+// Get balance factor
+int getBalance(Node* node) {
+    return node ? height(node-&gt;left) - height(node-&gt;right) : 0;
+}
+
+// Right rotation
+Node* rightRotate(Node* y) {
+    Node* x = y-&gt;left;
+    Node* T2 = x-&gt;right;
+
+    x-&gt;right = y;
+    y-&gt;left = T2;
+
+    y-&gt;height = max(height(y-&gt;left), height(y-&gt;right)) + 1;
+    x-&gt;height = max(height(x-&gt;left), height(x-&gt;right)) + 1;
+
+    return x;
+}
+
+// Left rotation
+Node* leftRotate(Node* x) {
+    Node* y = x-&gt;right;
+    Node* T2 = y-&gt;left;
+
+    y-&gt;left = x;
+    x-&gt;right = T2;
+
+    x-&gt;height = max(height(x-&gt;left), height(x-&gt;right)) + 1;
+    y-&gt;height = max(height(y-&gt;left), height(y-&gt;right)) + 1;
+
+    return y;
+}
+
+// Create a new node
+Node* createNode(int value) { return new Node{value, nullptr, nullptr, 1}; }
+
+// Insert a node
+Node* insert(Node* root, int value) {
+    if (!root) return createNode(value);
+
+    if (value &lt; root-&gt;data)
+        root-&gt;left = insert(root-&gt;left, value);
+    else if (value &gt; root-&gt;data)
+        root-&gt;right = insert(root-&gt;right, value);
+    else
+        return root;  // No duplicates allowed
+
+    root-&gt;height = 1 + max(height(root-&gt;left), height(root-&gt;right));
+    int balance = getBalance(root);
+
+    if (balance &gt; 1 &amp;&amp; value &lt; root-&gt;left-&gt;data) return rightRotate(root); // LL
+    if (balance &lt; -1 &amp;&amp; value &gt; root-&gt;right-&gt;data) return leftRotate(root); // RR
+    if (balance &gt; 1 &amp;&amp; value &gt; root-&gt;left-&gt;data) { // LR
+        root-&gt;left = leftRotate(root-&gt;left);
+        return rightRotate(root);
+    }
+    if (balance &lt; -1 &amp;&amp; value &lt; root-&gt;right-&gt;data) { // RL
+        root-&gt;right = rightRotate(root-&gt;right);
+        return leftRotate(root);
+    }
+
+    return root;
+}
+
+// In-order traversal
+void inOrder(Node* root) {
+    if (root) {
+        inOrder(root-&gt;left);
+        cout &lt;&lt; root-&gt;data &lt;&lt; " ";
+        inOrder(root-&gt;right);
+    }
+}
+
+int main() {
+    Node* root = nullptr;
+    root = insert(root, 10);
+    root = insert(root, 20);
+    root = insert(root, 30);
+    root = insert(root, 40);
+    root = insert(root, 50);
+    root = insert(root, 25);
+
+    cout &lt;&lt; "In-order traversal of AVL tree: ";
+    inOrder(root);
+    cout &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">⚠️ Important Notes</h2>
+            <ol class="list-decimal list-inside ml-4">
+                <li>
+                    AVL trees
+                    <strong>maintain balance automatically</strong> after
+                    insertions and deletions.
+                </li>
+                <li>
+                    <strong>Rotations</strong> are used to restore balance when
+                    the balance factor is ±2.
+                </li>
+                <li>
+                    Guarantees <strong>O(log n) operations</strong> even in the
+                    worst case.
+                </li>
+                <li>
+                    Slightly more complex than plain BST due to height and
+                    rotation management.
+                </li>
+            </ol>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">✅ Summary Table</h2>
+            <table class="mt-2">
+                <thead>
+                    <tr>
+                        <th>Concept</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Node definition</td>
+                        <td>
+                            <code
+                                >struct Node { int data; Node* left; Node*
+                                right; int height; };</code
+                            >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Balance factor</td>
+                        <td><code>height(left) - height(right)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Right rotation</td>
+                        <td><code>root = rightRotate(root);</code></td>
+                    </tr>
+                    <tr>
+                        <td>Left rotation</td>
+                        <td><code>root = leftRotate(root);</code></td>
+                    </tr>
+                    <tr>
+                        <td>Insert with balancing</td>
+                        <td><code>root = insert(root, value);</code></td>
+                    </tr>
+                    <tr>
+                        <td>Traversal</td>
+                        <td><code>inOrder(root);</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>

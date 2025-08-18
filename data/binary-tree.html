@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+        <section
+            class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4"
+        >
+            <h1 id="-binary-tree" class="text-3xl font-bold mb-4">
+                🌳 Binary Tree
+            </h1>
+
+            <h2
+                id="-what-is-a-binary-tree-"
+                class="text-2xl font-semibold mt-6 mb-2"
+            >
+                ✅ What is a Binary Tree?
+            </h2>
+            <p class="mb-3">
+                A <strong>binary tree</strong> is a hierarchical data structure
+                where <strong>each node has at most two children</strong>:
+            </p>
+            <ul class="list-disc list-inside mb-3">
+                <li><strong>Left child</strong></li>
+                <li><strong>Right child</strong></li>
+            </ul>
+
+            <h3 id="key-terms-" class="text-xl font-semibold mt-4 mb-2">
+                🔑 Key Terms
+            </h3>
+            <ul class="list-disc list-inside mb-3">
+                <li><strong>Root</strong>: The topmost node of the tree.</li>
+                <li><strong>Leaf</strong>: A node with no children.</li>
+                <li>
+                    <strong>Depth/Level</strong>: The distance from the root to
+                    a node.
+                </li>
+                <li>
+                    <strong>Height</strong>: The length of the longest path from
+                    a node to a leaf.
+                </li>
+            </ul>
+
+            <hr class="my-6 border-gray-300" />
+
+            <h2
+                id="-syntax-node-definition-"
+                class="text-2xl font-semibold mt-6 mb-2"
+            >
+                🧠 Syntax (Node Definition)
+            </h2>
+            <pre
+                class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto mb-4"
+            ><code class="lang-c++">struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+</code></pre>
+
+            <hr class="my-6 border-gray-300" />
+
+            <h2
+                id="-example-program-simple-binary-tree"
+                class="text-2xl font-semibold mt-6 mb-2"
+            >
+                🧾 Example Program – Simple Binary Tree
+            </h2>
+            <pre
+                class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto mb-4"
+            ><code class="lang-c++">#include &lt;iostream&gt;
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+Node* createNode(int value) {
+    Node* node = new Node;
+    node-&gt;data = value;
+    node-&gt;left = node-&gt;right = nullptr;
+    return node;
+}
+
+// In-order traversal
+void inOrder(Node* root) {
+    if (root) {
+        inOrder(root-&gt;left);
+        cout &lt;&lt; root-&gt;data &lt;&lt; " ";
+        inOrder(root-&gt;right);
+    }
+}
+
+int main() {
+    Node* root = createNode(10);
+    root-&gt;left = createNode(5);
+    root-&gt;right = createNode(15);
+    root-&gt;left-&gt;left = createNode(2);
+    root-&gt;left-&gt;right = createNode(7);
+
+    cout &lt;&lt; "In-order traversal: ";
+    inOrder(root);  // Output: 2 5 7 10 15
+    cout &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+
+            <hr class="my-6 border-gray-300" />
+
+            <h2 id="-important-notes" class="text-2xl font-semibold mt-6 mb-2">
+                ⚠️ Important Notes
+            </h2>
+            <ol class="list-decimal list-inside mb-3">
+                <li>Each node has <strong>up to 2 children</strong>.</li>
+                <li>
+                    Traversals are common: <strong>in-order</strong>,
+                    <strong>pre-order</strong>, <strong>post-order</strong>.
+                </li>
+                <li>Not necessarily ordered (unlike BST).</li>
+                <li>
+                    Useful as the base for more advanced trees (BST, AVL, Heaps,
+                    etc.).
+                </li>
+            </ol>
+
+            <hr class="my-6 border-gray-300" />
+
+            <h2 id="-summary-table" class="text-2xl font-semibold mt-6 mb-2">
+                ✅ Summary Table
+            </h2>
+            <div class="overflow-x-auto">
+                <table
+                    class="table-auto border border-gray-400 w-full text-left"
+                >
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="border border-gray-400 px-3 py-2">
+                                Concept
+                            </th>
+                            <th class="border border-gray-400 px-3 py-2">
+                                Example
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-400 px-3 py-2">
+                                Node definition
+                            </td>
+                            <td class="border border-gray-400 px-3 py-2">
+                                <code
+                                    >struct Node { int data; Node* left; Node*
+                                    right; };</code
+                                >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-400 px-3 py-2">
+                                Create root
+                            </td>
+                            <td class="border border-gray-400 px-3 py-2">
+                                <code>Node* root = createNode(10);</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-400 px-3 py-2">
+                                Traversal (in-order)
+                            </td>
+                            <td class="border border-gray-400 px-3 py-2">
+                                <code>inOrder(root);</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-400 px-3 py-2">
+                                Root
+                            </td>
+                            <td class="border border-gray-400 px-3 py-2">
+                                Top node of the tree
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-400 px-3 py-2">
+                                Leaf
+                            </td>
+                            <td class="border border-gray-400 px-3 py-2">
+                                Node with no children
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>

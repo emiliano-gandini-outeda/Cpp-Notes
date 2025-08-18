@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+        <section
+            class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6"
+        >
+            <h1 class="text-3xl font-bold mb-4">🌐 Graphs</h1>
+
+            <h2 class="text-2xl font-semibold mt-4">✅ What is a Graph?</h2>
+            <p>A <strong>graph</strong> is a data structure consisting of:</p>
+            <ul class="list-disc list-inside ml-4">
+                <li>A set of <strong>nodes (vertices)</strong></li>
+                <li>
+                    A set of <strong>edges</strong> connecting pairs of nodes
+                </li>
+            </ul>
+            <p>
+                Graphs are used to model
+                <strong>complex relationships</strong> between elements, such
+                as:
+            </p>
+            <ul class="list-disc list-inside ml-4">
+                <li>Social networks</li>
+                <li>Transportation routes</li>
+                <li>Task dependencies</li>
+                <li>Internet connections</li>
+            </ul>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">🧠 Key Concepts</h2>
+            <table class="mt-2 w-full table-auto border border-gray-600">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border px-2 py-1">Concept</th>
+                        <th class="border px-2 py-1">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border px-2 py-1">Vertex (Node)</td>
+                        <td class="border px-2 py-1">
+                            The basic unit of a graph
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1">Edge</td>
+                        <td class="border px-2 py-1">
+                            A connection between two vertices
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1">Directed Graph</td>
+                        <td class="border px-2 py-1">
+                            Edges have a direction (from one node to another)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1">Undirected Graph</td>
+                        <td class="border px-2 py-1">
+                            Edges have no direction
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1">Edge Weight</td>
+                        <td class="border px-2 py-1">
+                            A numerical value representing cost, distance, or
+                            capacity
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">
+                📌 Graph Representations
+            </h2>
+            <ol class="list-decimal list-inside ml-4 space-y-2">
+                <li>
+                    <strong>Adjacency List</strong>
+                    <ul class="list-disc list-inside ml-6">
+                        <li>
+                            Each node stores a
+                            <strong>list of its connected nodes</strong>.
+                        </li>
+                        <li>Efficient for <strong>sparse graphs</strong>.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Adjacency Matrix</strong>
+                    <ul class="list-disc list-inside ml-6">
+                        <li>
+                            A <strong>n × n matrix</strong> where each cell
+                            indicates
+                            <strong>presence or weight of an edge</strong>.
+                        </li>
+                        <li>Efficient for <strong>dense graphs</strong>.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">
+                🧾 Example – Directed Graph Using Adjacency List
+            </h2>
+            <pre><code class="lang-c++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    int vertices = 5;
+    vector&lt;vector&lt;int&gt;&gt; graph(vertices);
+
+    // Add edges
+    graph[0].push_back(1);
+    graph[0].push_back(2);
+    graph[1].push_back(2);
+    graph[2].push_back(3);
+    graph[3].push_back(4);
+
+    // Print graph
+    for (int i = 0; i &lt; vertices; i++) {
+        cout &lt;&lt; "Node " &lt;&lt; i &lt;&lt; " -&gt; ";
+        for (int j : graph[i]) cout &lt;&lt; j &lt;&lt; " ";
+        cout &lt;&lt; endl;
+    }
+
+    return 0;
+}</code></pre>
+            <h3 class="text-xl font-semibold mt-2">Explanation:</h3>
+            <ul class="list-disc list-inside ml-4">
+                <li>
+                    Each index of the vector represents a <strong>node</strong>.
+                </li>
+                <li>
+                    The inner vectors store the <strong>adjacent nodes</strong>.
+                </li>
+                <li>
+                    This structure allows traversal using algorithms like
+                    <strong>DFS</strong> and <strong>BFS</strong>.
+                </li>
+            </ul>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">
+                🔄 Traversal Example (DFS)
+            </h2>
+            <pre><code class="lang-c++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+void DFS(int node, vector&lt;vector&lt;int&gt;&gt;&amp; graph, vector&lt;bool&gt;&amp; visited) {
+    visited[node] = true;
+    cout &lt;&lt; node &lt;&lt; " ";
+
+    for (int adj : graph[node]) {
+        if (!visited[adj]) DFS(adj, graph, visited);
+    }
+}
+
+int main() {
+    int vertices = 5;
+    vector&lt;vector&lt;int&gt;&gt; graph(vertices);
+    graph[0] = {1, 2};
+    graph[1] = {2};
+    graph[2] = {3};
+    graph[3] = {4};
+
+    vector&lt;bool&gt; visited(vertices, false);
+
+    cout &lt;&lt; "DFS starting from node 0: ";
+    DFS(0, graph, visited);
+    cout &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">⚠️ Important Notes</h2>
+            <ol class="list-decimal list-inside ml-4 space-y-2">
+                <li>
+                    <strong>Directed vs. undirected</strong> affects traversal
+                    and connectivity.
+                </li>
+                <li>
+                    <strong>Weighted edges</strong> allow modeling costs,
+                    distances, or capacities.
+                </li>
+                <li>
+                    <strong>Choice of representation</strong> affects algorithm
+                    efficiency:
+                    <ul class="list-disc list-inside ml-6">
+                        <li>Adjacency list → faster for sparse graphs</li>
+                        <li>
+                            Adjacency matrix → faster for dense graphs or quick
+                            edge checks
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Graph algorithms</strong> include: DFS, BFS,
+                    Dijkstra, Bellman-Ford, Prim, Kruskal, etc.
+                </li>
+            </ol>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">✅ Summary Table</h2>
+            <table class="mt-2 w-full table-auto border border-gray-600">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border px-2 py-1">Concept</th>
+                        <th class="border px-2 py-1">Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border px-2 py-1">Vertex</td>
+                        <td class="border px-2 py-1">
+                            <code>0, 1, 2, 3</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1">Edge</td>
+                        <td class="border px-2 py-1">
+                            <code>graph[0].push_back(1);</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1">Directed graph</td>
+                        <td class="border px-2 py-1">
+                            Edges have direction from source → destination
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1">Adjacency list</td>
+                        <td class="border px-2 py-1">
+                            <code
+                                >vector&lt;vector&lt;int&gt;&gt;
+                                graph(vertices);</code
+                            >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1">Adjacency matrix</td>
+                        <td class="border px-2 py-1">
+                            <code
+                                >int matrix[n][n]; matrix[i][j] = weight;</code
+                            >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1">DFS traversal</td>
+                        <td class="border px-2 py-1">
+                            <code>DFS(0, graph, visited);</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1">BFS traversal</td>
+                        <td class="border px-2 py-1">
+                            <code>queue&lt;int&gt; q;</code>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>

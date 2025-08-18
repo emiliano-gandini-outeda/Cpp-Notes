@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+        <section
+            class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6"
+        >
+            <h1 class="text-3xl font-bold mb-4">🌳 Red-Black Tree</h1>
+
+            <h2 class="text-2xl font-semibold mt-4">
+                ✅ What is a Red-Black Tree?
+            </h2>
+            <p>
+                A <strong>Red-Black Tree</strong> is a
+                <strong>self-balancing binary search tree</strong> where each
+                node has a <strong>color attribute</strong>:
+                <strong>red</strong> or <strong>black</strong>.
+            </p>
+            <p>
+                It ensures the tree remains roughly balanced, giving
+                <strong>O(log n)</strong> time complexity for insertion,
+                deletion, and search.
+            </p>
+
+            <h3 class="text-xl font-semibold mt-4">
+                Properties of a Red-Black Tree:
+            </h3>
+            <ol class="list-decimal list-inside ml-4">
+                <li><strong>Every node is either red or black.</strong></li>
+                <li><strong>The root is always black.</strong></li>
+                <li><strong>All leaves (NULL nodes) are black.</strong></li>
+                <li>
+                    <strong>Red nodes cannot have red children</strong> (no two
+                    consecutive red nodes).
+                </li>
+                <li>
+                    <strong
+                        >Every path from a node to its descendant leaves
+                        contains the same number of black nodes</strong
+                    >
+                    (black-height).
+                </li>
+            </ol>
+            <p>
+                These rules guarantee that the longest path is at most twice the
+                length of the shortest path, maintaining balance.
+            </p>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">
+                🧠 Syntax (Node Definition)
+            </h2>
+            <pre><code class="lang-c++">enum Color { RED, BLACK };
+
+struct Node {
+    int data;
+    Color color;
+    Node* left;
+    Node* right;
+    Node* parent;
+};</code></pre>
+            <ul class="list-disc list-inside ml-4">
+                <li><code>data</code>: The value stored in the node.</li>
+                <li><code>color</code>: Red or Black.</li>
+                <li>
+                    <code>left</code>, <code>right</code>, <code>parent</code>:
+                    Pointers to children and parent node.
+                </li>
+            </ul>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">
+                🧾 Example Program – Basic Insertion (Conceptual)
+            </h2>
+            <pre><code class="lang-c++">#include &lt;iostream&gt;
+using namespace std;
+
+enum Color { RED, BLACK };
+
+struct Node {
+    int data;
+    Color color;
+    Node* left;
+    Node* right;
+    Node* parent;
+};
+
+// Create a new red node
+Node* createNode(int data) {
+    Node* node = new Node{data, RED, nullptr, nullptr, nullptr};
+    return node;
+}
+
+// In-order traversal
+void inOrder(Node* root) {
+    if (root) {
+        inOrder(root-&gt;left);
+        cout &lt;&lt; root-&gt;data &lt;&lt; (root-&gt;color == RED ? "(R) " : "(B) ");
+        inOrder(root-&gt;right);
+    }
+}
+
+int main() {
+    Node* root = createNode(10);
+    root-&gt;color = BLACK; // root must be black
+    Node* node1 = createNode(5);
+    Node* node2 = createNode(20);
+
+    // Conceptual linking
+    root-&gt;left = node1; node1-&gt;parent = root;
+    root-&gt;right = node2; node2-&gt;parent = root;
+
+    cout &lt;&lt; "In-order traversal: ";
+    inOrder(root);  // Output: 5(R) 10(B) 20(R)
+    cout &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+            <blockquote class="border-l-4 border-yellow-500 pl-4 italic">
+                ⚠️ Note: Real Red-Black insertion involves rotations and
+                recoloring to maintain all properties. This example shows the
+                basic structure and traversal.
+            </blockquote>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">⚠️ Important Rules</h2>
+            <ol class="list-decimal list-inside ml-4">
+                <li><strong>Root is always black.</strong></li>
+                <li><strong>No two consecutive red nodes.</strong></li>
+                <li>
+                    <strong
+                        >All paths from node to leaves must have the same number
+                        of black nodes.</strong
+                    >
+                </li>
+                <li>
+                    <strong
+                        >Insertion/deletion may require rotations and
+                        recoloring</strong
+                    >
+                    to maintain properties.
+                </li>
+                <li>
+                    Provides <strong>guaranteed O(log n) operations</strong>,
+                    even in worst case.
+                </li>
+            </ol>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">✅ Summary Table</h2>
+            <table class="mt-2 w-full table-auto border border-gray-600">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border px-2 py-1">Concept</th>
+                        <th class="border px-2 py-1">Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border px-2 py-1">Node definition</td>
+                        <td class="border px-2 py-1">
+                            <code
+                                >struct Node { int data; Color color; Node*
+                                left; Node* right; Node* parent; };</code
+                            >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1">Colors</td>
+                        <td class="border px-2 py-1">
+                            <code>RED</code>, <code>BLACK</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1">Root rule</td>
+                        <td class="border px-2 py-1">Root must be black</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1">No consecutive red</td>
+                        <td class="border px-2 py-1">
+                            Red node cannot have red child
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1">Black-height</td>
+                        <td class="border px-2 py-1">
+                            All paths from node to leaves have same black nodes
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1">Traversal</td>
+                        <td class="border px-2 py-1">
+                            <code>inOrder(root);</code>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>

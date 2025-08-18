@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+        <section
+            class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4"
+        >
+            <h1 class="text-3xl font-bold mb-4" id="-insertion-sort">
+                🟩 Insertion Sort
+            </h1>
+
+            <h2
+                class="text-2xl font-semibold mt-4"
+                id="-what-is-insertion-sort-"
+            >
+                ✅ What is Insertion Sort?
+            </h2>
+            <p>
+                <strong>Insertion Sort</strong> is a
+                <strong>simple comparison-based sorting algorithm</strong>.
+            </p>
+            <ul class="list-disc list-inside">
+                <li>
+                    It builds the
+                    <strong>sorted array one element at a time</strong>.
+                </li>
+                <li>
+                    At each step, it
+                    <strong>picks the next element</strong> from the unsorted
+                    portion and
+                    <strong>inserts it into the correct position</strong> in the
+                    sorted portion.
+                </li>
+                <li>
+                    Efficient for
+                    <strong>small arrays or nearly sorted arrays</strong>.
+                </li>
+            </ul>
+
+            <h2 class="text-2xl font-semibold mt-4" id="-key-concepts">
+                🧠 Key Concepts
+            </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Concept</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Comparison-based</td>
+                        <td>Sorts by comparing elements</td>
+                    </tr>
+                    <tr>
+                        <td>Sorted and unsorted partition</td>
+                        <td>
+                            Divides the array into a sorted and unsorted part
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Insertion</td>
+                        <td>
+                            Places the current element in its correct position
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Stable</td>
+                        <td>Preserves relative order of equal elements</td>
+                    </tr>
+                    <tr>
+                        <td>In-place</td>
+                        <td>Does not require extra memory</td>
+                    </tr>
+                    <tr>
+                        <td>Time complexity</td>
+                        <td>O(n²) worst-case, O(n) best-case</td>
+                    </tr>
+                    <tr>
+                        <td>Best for</td>
+                        <td>Small arrays or nearly sorted arrays</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2
+                class="text-2xl font-semibold mt-4"
+                id="-how-insertion-sort-works"
+            >
+                📌 How Insertion Sort Works
+            </h2>
+            <ol class="list-decimal list-inside">
+                <li>
+                    Start with the <strong>second element</strong> (assume first
+                    element is already sorted).
+                </li>
+                <li>
+                    Compare it with
+                    <strong>elements in the sorted portion</strong> from right
+                    to left.
+                </li>
+                <li>
+                    <strong>Shift elements</strong> that are greater to the
+                    right.
+                </li>
+                <li>
+                    <strong>Insert the current element</strong> in its correct
+                    position.
+                </li>
+                <li>Repeat for all remaining elements.</li>
+            </ol>
+
+            <h2
+                class="text-2xl font-semibold mt-4"
+                id="-example-standard-insertion-sort"
+            >
+                🧾 Example – Standard Insertion Sort
+            </h2>
+            <pre><code class="lang-c++">#include &lt;iostream&gt;
+using namespace std;
+
+void insertionSort(int arr[], int n) {
+    for (int i = 1; i &lt; n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        while (j &gt;= 0 &amp;&amp; arr[j] &gt; key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+int main() {
+    int arr[] = {12, 11, 13, 5, 6};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    insertionSort(arr, n);
+    cout &lt;&lt; "Sorted array: ";
+    for (int i = 0; i &lt; n; i++) cout &lt;&lt; arr[i] &lt;&lt; " ";
+    cout &lt;&lt; endl;
+    return 0;
+}</code></pre>
+            <p><strong>Output:</strong> Sorted array: 5 6 11 12 13</p>
+
+            <h2
+                class="text-2xl font-semibold mt-4"
+                id="-step-by-step-explanation"
+            >
+                🔄 Step-by-Step Explanation
+            </h2>
+            <ul class="list-disc list-inside">
+                <li>
+                    <strong>Iteration 1:</strong> Key = 11 → Compare with 12 →
+                    Shift 12 → Insert 11
+                </li>
+                <li>
+                    <strong>Iteration 2:</strong> Key = 13 → Already in correct
+                    position → No shifts
+                </li>
+                <li>
+                    <strong>Iteration 3:</strong> Key = 5 → Shift 12, 11 →
+                    Insert 5
+                </li>
+                <li>
+                    <strong>Iteration 4:</strong> Key = 6 → Shift 12 → Insert 6
+                </li>
+                <li>
+                    The sorted portion
+                    <strong>grows from left to right</strong>, while the
+                    unsorted portion <strong>shrinks</strong>.
+                </li>
+            </ul>
+
+            <h2 class="text-2xl font-semibold mt-4" id="-important-rules">
+                ⚠️ Important Rules
+            </h2>
+            <ol class="list-decimal list-inside">
+                <li>
+                    <strong>Stable algorithm</strong> → preserves relative order
+                    of equal elements.
+                </li>
+                <li>
+                    <strong>In-place sorting</strong> → requires O(1) extra
+                    memory.
+                </li>
+                <li>
+                    <p><strong>Time complexity:</strong></p>
+                    <ul class="list-disc list-inside">
+                        <li>
+                            Worst-case: O(n²) → array sorted in reverse order
+                        </li>
+                        <li>Best-case: O(n) → array already sorted</li>
+                        <li>Average-case: O(n²)</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Efficient for small or nearly sorted arrays</strong
+                    >, but inefficient for large arrays.
+                </li>
+                <li>
+                    Works well as a
+                    <strong>subroutine in more advanced algorithms</strong> like
+                    <strong>Timsort</strong>.
+                </li>
+            </ol>
+
+            <h2 class="text-2xl font-semibold mt-4" id="-summary-table">
+                ✅ Summary Table
+            </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Concept</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Algorithm type</td>
+                        <td>Comparison-based</td>
+                    </tr>
+                    <tr>
+                        <td>Stable?</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>In-place?</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Worst-case complexity</td>
+                        <td>O(n²)</td>
+                    </tr>
+                    <tr>
+                        <td>Best-case complexity</td>
+                        <td>O(n)</td>
+                    </tr>
+                    <tr>
+                        <td>Average-case complexity</td>
+                        <td>O(n²)</td>
+                    </tr>
+                    <tr>
+                        <td>Basic idea</td>
+                        <td>
+                            Pick element from unsorted portion and insert it in
+                            the sorted portion
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Best use case</td>
+                        <td>Small arrays or nearly sorted arrays</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>

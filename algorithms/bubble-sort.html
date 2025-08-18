@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+        <section
+            class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-4"
+        >
+            <h1 class="text-3xl font-bold mb-4" id="-bubble-sort">
+                🟦 Bubble Sort
+            </h1>
+
+            <h2 class="text-2xl font-semibold mt-4" id="-what-is-bubble-sort-">
+                ✅ What is Bubble Sort?
+            </h2>
+            <p>
+                <strong>Bubble Sort</strong> is a
+                <strong>simple comparison-based sorting algorithm</strong>.
+            </p>
+            <ul class="list-disc list-inside">
+                <li>
+                    It repeatedly
+                    <strong>compares adjacent elements</strong> and
+                    <strong>swaps them if they are in the wrong order</strong>.
+                </li>
+                <li>
+                    This “bubbling” process continues until the
+                    <strong>entire array is sorted</strong>.
+                </li>
+                <li>
+                    Easy to understand and implement but
+                    <strong>inefficient for large datasets</strong>.
+                </li>
+            </ul>
+
+            <h2 class="text-2xl font-semibold mt-4" id="-key-concepts">
+                🧠 Key Concepts
+            </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Concept</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Comparison-based</td>
+                        <td>Sorts by comparing elements</td>
+                    </tr>
+                    <tr>
+                        <td>Adjacent swap</td>
+                        <td>Swaps elements if they are in wrong order</td>
+                    </tr>
+                    <tr>
+                        <td>Pass</td>
+                        <td>One iteration through the array comparing pairs</td>
+                    </tr>
+                    <tr>
+                        <td>Early exit optimization</td>
+                        <td>Stops if no swaps are made in a pass</td>
+                    </tr>
+                    <tr>
+                        <td>Stable</td>
+                        <td>Preserves relative order of equal elements</td>
+                    </tr>
+                    <tr>
+                        <td>Time complexity</td>
+                        <td>O(n²) worst-case, O(n) best-case (optimized)</td>
+                    </tr>
+                    <tr>
+                        <td>Space complexity</td>
+                        <td>O(1), in-place sorting</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 class="text-2xl font-semibold mt-4" id="-how-bubble-sort-works">
+                📌 How Bubble Sort Works
+            </h2>
+            <ol class="list-decimal list-inside">
+                <li>
+                    Start from the <strong>first element</strong> of the array.
+                </li>
+                <li>Compare it with the <strong>next element</strong>.</li>
+                <li>
+                    If they are in the <strong>wrong order</strong>, swap them.
+                </li>
+                <li>
+                    Move to the <strong>next pair</strong> and repeat until the
+                    end of the array.
+                </li>
+                <li>
+                    <strong>After each pass</strong>, the
+                    <strong
+                        >largest element moves to its correct position</strong
+                    >.
+                </li>
+                <li>
+                    Repeat for all remaining elements until the array is sorted.
+                </li>
+            </ol>
+
+            <h2
+                class="text-2xl font-semibold mt-4"
+                id="-example-standard-bubble-sort"
+            >
+                🧾 Example – Standard Bubble Sort
+            </h2>
+            <pre><code class="lang-c++">#include &lt;iostream&gt;
+using namespace std;
+
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i &lt; n-1; i++) {           
+        for (int j = 0; j &lt; n-i-1; j++) {     
+            if (arr[j] &gt; arr[j+1]) {
+                swap(arr[j], arr[j+1]);       
+            }
+        }
+    }
+}
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    bubbleSort(arr, n);
+    cout &lt;&lt; "Sorted array: ";
+    for (int i = 0; i &lt; n; i++) cout &lt;&lt; arr[i] &lt;&lt; " ";
+    cout &lt;&lt; endl;
+    return 0;
+}</code></pre>
+            <p><strong>Output:</strong> Sorted array: 11 12 22 25 34 64 90</p>
+
+            <h2
+                class="text-2xl font-semibold mt-4"
+                id="-example-optimized-bubble-sort"
+            >
+                🔄 Example – Optimized Bubble Sort
+            </h2>
+            <p>
+                Optimization: Stop if no swaps are made during a pass → array is
+                already sorted.
+            </p>
+            <pre><code class="lang-c++">#include &lt;iostream&gt;
+using namespace std;
+
+void optimizedBubbleSort(int arr[], int n) {
+    bool swapped;
+    for (int i = 0; i &lt; n-1; i++) {
+        swapped = false;
+        for (int j = 0; j &lt; n-i-1; j++) {
+            if (arr[j] &gt; arr[j+1]) {
+                swap(arr[j], arr[j+1]);
+                swapped = true;
+            }
+        }
+        if (!swapped) break;
+    }
+}
+
+int main() {
+    int arr[] = {11, 12, 22, 25, 34, 64, 90};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    optimizedBubbleSort(arr, n);
+    cout &lt;&lt; "Sorted array: ";
+    for (int i = 0; i &lt; n; i++) cout &lt;&lt; arr[i] &lt;&lt; " ";
+    cout &lt;&lt; endl;
+    return 0;
+}</code></pre>
+            <ul class="list-disc list-inside">
+                <li>
+                    <strong>Explanation:</strong> Best-case complexity becomes
+                    O(n) if the array is already sorted.
+                </li>
+            </ul>
+
+            <h2 class="text-2xl font-semibold mt-4" id="-important-rules">
+                ⚠️ Important Rules
+            </h2>
+            <ol class="list-decimal list-inside">
+                <li>
+                    <strong>In-place sorting</strong> → does not require extra
+                    memory.
+                </li>
+                <li>
+                    <strong>Stable algorithm</strong> → equal elements maintain
+                    relative order.
+                </li>
+                <li>
+                    <p><strong>Time complexity:</strong></p>
+                    <ul class="list-disc list-inside">
+                        <li>Worst-case: O(n²) → reversed array</li>
+                        <li>
+                            Best-case: O(n) → already sorted (with optimization)
+                        </li>
+                        <li>Average-case: O(n²)</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Not suitable for large arrays</strong> → inefficient
+                    compared to quicksort, mergesort, or heapsort.
+                </li>
+                <li>
+                    Can be <strong>optimized</strong> using early exit or by
+                    reducing the inner loop boundary.
+                </li>
+            </ol>
+
+            <h2 class="text-2xl font-semibold mt-4" id="-summary-table">
+                ✅ Summary Table
+            </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Concept</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Algorithm type</td>
+                        <td>Comparison-based</td>
+                    </tr>
+                    <tr>
+                        <td>Stable?</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>In-place?</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Worst-case complexity</td>
+                        <td>O(n²)</td>
+                    </tr>
+                    <tr>
+                        <td>Best-case complexity</td>
+                        <td>O(n) (optimized)</td>
+                    </tr>
+                    <tr>
+                        <td>Average-case complexity</td>
+                        <td>O(n²)</td>
+                    </tr>
+                    <tr>
+                        <td>Basic idea</td>
+                        <td>
+                            Repeatedly swap adjacent elements if out of order
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Optimization</td>
+                        <td>Stop if no swaps in a pass</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>

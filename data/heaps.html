@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+        <section
+            class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6"
+        >
+            <h1 class="text-3xl font-bold mb-4">🗃️ Heaps</h1>
+
+            <h2 class="text-2xl font-semibold mt-4">✅ What is a Heap?</h2>
+            <p>
+                A <strong>heap</strong> is a
+                <strong>complete binary tree</strong> that satisfies the
+                <strong>heap property</strong>:
+            </p>
+            <ul class="list-disc list-inside ml-4">
+                <li>
+                    <strong>Max-Heap:</strong> Every parent node is
+                    <strong>greater than or equal to</strong> its children.
+                </li>
+                <li>
+                    <strong>Min-Heap:</strong> Every parent node is
+                    <strong>less than or equal to</strong> its children.
+                </li>
+            </ul>
+            <p>
+                <strong>Complete binary tree</strong> means all levels are fully
+                filled except possibly the last, which is filled from
+                <strong>left to right</strong>.
+            </p>
+            <p>Heaps are commonly used to implement:</p>
+            <ul class="list-disc list-inside ml-4">
+                <li>Priority queues</li>
+                <li>Heap sort</li>
+                <li>Graph algorithms (Dijkstra, Prim)</li>
+            </ul>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">🧠 Key Concepts</h2>
+            <table
+                class="table-auto border-collapse border border-gray-600 w-full text-left"
+            >
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border border-gray-600 px-4 py-2">
+                            Concept
+                        </th>
+                        <th class="border border-gray-600 px-4 py-2">
+                            Description
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-600 px-4 py-2">
+                            Complete binary tree
+                        </td>
+                        <td class="border border-gray-600 px-4 py-2">
+                            All levels filled except possibly last, filled left
+                            to right
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-4 py-2">
+                            Heap property
+                        </td>
+                        <td class="border border-gray-600 px-4 py-2">
+                            Parent node is ≥ (max-heap) or ≤ (min-heap) its
+                            children
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-4 py-2">Root</td>
+                        <td class="border border-gray-600 px-4 py-2">
+                            Contains the maximum (max-heap) or minimum
+                            (min-heap) value
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-4 py-2">
+                            Leaf nodes
+                        </td>
+                        <td class="border border-gray-600 px-4 py-2">
+                            Nodes without children, automatically satisfy heap
+                            property
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-4 py-2">
+                            Array representation
+                        </td>
+                        <td class="border border-gray-600 px-4 py-2">
+                            Heaps are usually stored as arrays for efficiency
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">📌 Array Representation</h2>
+            <p>For a node at <strong>index i</strong>:</p>
+            <ul class="list-disc list-inside ml-4">
+                <li>Left child → <code>2*i + 1</code></li>
+                <li>Right child → <code>2*i + 2</code></li>
+                <li>Parent → <code>(i - 1) / 2</code></li>
+            </ul>
+            <p>
+                This allows a
+                <strong
+                    >heap to be efficiently implemented using an array</strong
+                >
+                without pointers.
+            </p>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">
+                🧾 Example 1 – Max-Heap Using <code>std::priority_queue</code>
+            </h2>
+            <pre
+                class="bg-gray-900 text-white p-4 rounded overflow-x-auto"
+            ><code>#include &lt;iostream&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+int main() {
+    priority_queue&lt;int&gt; maxHeap;
+
+    maxHeap.push(10);
+    maxHeap.push(5);
+    maxHeap.push(20);
+    maxHeap.push(15);
+
+    cout &lt;&lt; "Max-Heap elements: ";
+    while (!maxHeap.empty()) {
+        cout &lt;&lt; maxHeap.top() &lt;&lt; " ";
+        maxHeap.pop();
+    }
+    cout &lt;&lt; endl;
+    return 0;
+}</code></pre>
+            <p><strong>Output:</strong> <code>20 15 10 5</code></p>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">
+                🔄 Example 2 – Min-Heap Using <code>std::priority_queue</code>
+            </h2>
+            <pre
+                class="bg-gray-900 text-white p-4 rounded overflow-x-auto"
+            ><code>#include &lt;iostream&gt;
+#include &lt;queue&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; minHeap;
+
+    minHeap.push(10);
+    minHeap.push(5);
+    minHeap.push(20);
+    minHeap.push(15);
+
+    cout &lt;&lt; "Min-Heap elements: ";
+    while (!minHeap.empty()) {
+        cout &lt;&lt; minHeap.top() &lt;&lt; " ";
+        minHeap.pop();
+    }
+    cout &lt;&lt; endl;
+    return 0;
+}</code></pre>
+            <p><strong>Output:</strong> <code>5 10 15 20</code></p>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">
+                🧩 Example 3 – Manual Heapify (Array Representation)
+            </h2>
+            <pre
+                class="bg-gray-900 text-white p-4 rounded overflow-x-auto"
+            ><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+void heapify(vector&lt;int&gt;&amp; arr, int n, int i) {
+    int largest = i;
+    int left = 2*i + 1;
+    int right = 2*i + 2;
+
+    if (left &lt; n &amp;&amp; arr[left] &gt; arr[largest])
+        largest = left;
+    if (right &lt; n &amp;&amp; arr[right] &gt; arr[largest])
+        largest = right;
+    if (largest != i) {
+        swap(arr[i], arr[largest]);
+        heapify(arr, n, largest);
+    }
+}
+
+void buildHeap(vector&lt;int&gt;&amp; arr) {
+    int n = arr.size();
+    for (int i = n/2 - 1; i &gt;= 0; i--) {
+        heapify(arr, n, i);
+    }
+}
+
+int main() {
+    vector&lt;int&gt; arr = {3, 5, 1, 10, 2, 7};
+    buildHeap(arr);
+
+    cout &lt;&lt; "Heap array: ";
+    for (int x : arr) cout &lt;&lt; x &lt;&lt; " ";
+    cout &lt;&lt; endl;
+    return 0;
+}</code></pre>
+            <p><strong>Explanation:</strong></p>
+            <ul class="list-disc list-inside ml-4">
+                <li>
+                    Start heapifying from
+                    <strong>last non-leaf node</strong> down to root.
+                </li>
+                <li>
+                    Ensures <strong>heap property</strong> is satisfied for the
+                    entire tree.
+                </li>
+            </ul>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">⚠️ Important Rules</h2>
+            <ol class="list-decimal list-inside ml-4 space-y-1">
+                <li>
+                    <strong>Heap property</strong> must be maintained after
+                    insertion and deletion.
+                </li>
+                <li>
+                    <strong>Insertion</strong> → add at end, then
+                    <strong>bubble up</strong> to restore heap property.
+                </li>
+                <li>
+                    <strong>Deletion (root)</strong> → replace root with last
+                    element, then <strong>heapify down</strong>.
+                </li>
+                <li>
+                    <strong>Array representation</strong> is efficient and
+                    avoids explicit pointers.
+                </li>
+                <li>
+                    <strong>Time complexity:</strong>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>insert → O(log n)</li>
+                        <li>delete root → O(log n)</li>
+                        <li>buildHeap → O(n)</li>
+                    </ul>
+                </li>
+                <li>
+                    Heaps are widely used in
+                    <strong>priority queues and sorting algorithms</strong>
+                    (heap sort).
+                </li>
+            </ol>
+
+            <hr class="border-gray-600" />
+
+            <h2 class="text-2xl font-semibold mt-4">✅ Summary Table</h2>
+            <table
+                class="table-auto border-collapse border border-gray-600 w-full text-left"
+            >
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border border-gray-600 px-4 py-2">
+                            Concept
+                        </th>
+                        <th class="border border-gray-600 px-4 py-2">
+                            Example
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-gray-600 px-4 py-2">
+                            Max-heap
+                        </td>
+                        <td class="border border-gray-600 px-4 py-2">
+                            <code>priority_queue&lt;int&gt; pq;</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-4 py-2">
+                            Min-heap
+                        </td>
+                        <td class="border border-gray-600 px-4 py-2">
+                            <code
+                                >priority_queue&lt;int, vector&lt;int&gt;,
+                                greater&lt;int&gt;&gt; pq;</code
+                            >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-4 py-2">
+                            Insert element
+                        </td>
+                        <td class="border border-gray-600 px-4 py-2">
+                            <code>pq.push(x);</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-4 py-2">
+                            Access root
+                        </td>
+                        <td class="border border-gray-600 px-4 py-2">
+                            <code>pq.top();</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-4 py-2">
+                            Delete root
+                        </td>
+                        <td class="border border-gray-600 px-4 py-2">
+                            <code>pq.pop();</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-4 py-2">
+                            Heapify array
+                        </td>
+                        <td class="border border-gray-600 px-4 py-2">
+                            <code>heapify(arr, n, i);</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-4 py-2">
+                            Build heap
+                        </td>
+                        <td class="border border-gray-600 px-4 py-2">
+                            <code
+                                >for(i=n/2-1;i&gt;=0;i--)
+                                heapify(arr,n,i);</code
+                            >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-4 py-2">
+                            Time complexity insert/delete
+                        </td>
+                        <td class="border border-gray-600 px-4 py-2">
+                            O(log n)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-600 px-4 py-2">
+                            Build heap complexity
+                        </td>
+                        <td class="border border-gray-600 px-4 py-2">O(n)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>

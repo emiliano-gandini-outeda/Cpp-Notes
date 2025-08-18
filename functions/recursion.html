@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>C++ Notes</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <style>
+            :root {
+                --color-dark-grey: #2d2d2d;
+                --color-background: #111217;
+                --color-surface: #3a3a3a;
+                --color-dark-red: #b71c1c;
+                --color-dark-red-light: #d32f2f;
+                --color-text-primary: #e0e0e0;
+                --color-text-secondary: #b0b0b0;
+                --color-borders: #4a4a4a;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+                font-family: "Inter", sans-serif;
+            }
+
+            pre {
+                background-color: var(--color-dark-grey);
+                padding: 1rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                border: 1px solid var(--color-borders);
+                padding: 0.5rem;
+                text-align: left;
+            }
+
+            th {
+                background-color: var(--color-surface);
+            }
+        </style>
+    </head>
+
+    <body class="flex flex-col items-center py-8 px-4">
+        <!-- Top Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+
+        <!-- Blog Section -->
+ <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6">
+    <h1 class="text-3xl font-bold mb-4">🔄 Recursion</h1>
+
+    <h2 class="text-2xl font-semibold mt-4">✅ What is Recursion?</h2>
+    <p><strong>Recursion</strong> is a programming technique where a <strong>function calls itself</strong> to solve a problem.</p>
+    <ul class="list-disc list-inside ml-4">
+        <li>Each recursive call <strong>solves a smaller or simpler version</strong> of the original problem.</li>
+        <li>Recursion is often used to solve problems that are <strong>naturally hierarchical</strong>, <strong>divide-and-conquer</strong>, or <strong>mathematical</strong> in nature.</li>
+    </ul>
+
+    <h3 class="text-xl font-semibold mt-2">Key Idea:</h3>
+    <p>A recursive function has two main parts:</p>
+    <ol class="list-decimal list-inside ml-4 space-y-2">
+        <li>
+            <p><strong>Base Case</strong>:</p>
+            <ul class="list-disc list-inside ml-6">
+                <li>The condition where the recursion <strong>stops</strong>.</li>
+                <li>Without a base case, recursion would continue indefinitely, causing a <strong>stack overflow</strong>.</li>
+            </ul>
+        </li>
+        <li>
+            <p><strong>Recursive Case</strong>:</p>
+            <ul class="list-disc list-inside ml-6">
+                <li>The part where the function <strong>calls itself</strong> with a simpler or smaller input.</li>
+            </ul>
+        </li>
+    </ol>
+
+    <hr class="border-gray-600">
+
+    <h2 class="text-2xl font-semibold mt-4">🧠 Why Use Recursion?</h2>
+    <p>Recursion is powerful because it allows:</p>
+    <ul class="list-disc list-inside ml-4">
+        <li>Elegant solutions for problems like <strong>factorial, Fibonacci numbers, tree traversals, graph searches</strong>.</li>
+        <li>Natural implementation of <strong>divide-and-conquer algorithms</strong> (e.g., quicksort, mergesort).</li>
+        <li>Traversal of <strong>nested or hierarchical structures</strong> like trees, graphs, or directories.</li>
+    </ul>
+
+    <hr class="border-gray-600">
+
+    <h2 class="text-2xl font-semibold mt-4">📌 How Recursion Works (Step by Step)</h2>
+    <p>Consider this general form:</p>
+    <pre><code class="lang-c++">returnType functionName(parameters) {
+    if (base_condition_met)       // Base case
+        return base_value;
+
+    // Recursive case
+    return functionName(smaller_problem);
+}</code></pre>
+    <p><strong>Execution Flow</strong>:</p>
+    <ol class="list-decimal list-inside ml-4 space-y-1">
+        <li>Function is called.</li>
+        <li>If <strong>base case</strong> is reached → return value.</li>
+        <li>Otherwise, function <strong>calls itself</strong>.</li>
+        <li>Each call is <strong>pushed onto the call stack</strong>.</li>
+        <li>Once a base case is reached, calls <strong>start returning in reverse order</strong>.</li>
+    </ol>
+
+    <hr class="border-gray-600">
+
+    <h2 class="text-2xl font-semibold mt-4">🧾 Example 1 – Factorial Function</h2>
+    <p>Factorial is a classic example:</p>
+    <p>$$n! = n \times (n-1) \times (n-2) \dots 1$$</p>
+    <pre><code class="lang-c++">#include &lt;iostream&gt;
+using namespace std;
+
+int factorial(int n) {
+    if (n == 0 || n == 1)    // Base case
+        return 1;
+    return n * factorial(n - 1);  // Recursive case
+}
+
+int main() {
+    int num = 5;
+    cout &lt;&lt; "Factorial of " &lt;&lt; num &lt;&lt; " is " &lt;&lt; factorial(num) &lt;&lt; endl;
+    return 0;
+}</code></pre>
+    <p><strong>Output:</strong></p>
+    <pre><code>Factorial of 5 is 120</code></pre>
+    <p><strong>Explanation:</strong></p>
+    <ul class="list-disc list-inside ml-4">
+        <li><code>factorial(5)</code> calls <code>factorial(4)</code> → <code>factorial(3)</code> → … → <code>factorial(1)</code></li>
+        <li>Base case returns 1, then calls <strong>unwind</strong>, multiplying along the way.</li>
+    </ul>
+
+    <hr class="border-gray-600">
+
+    <h2 class="text-2xl font-semibold mt-4">🔄 Example 2 – Fibonacci Numbers</h2>
+    <p>Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8 …</p>
+    <pre><code class="lang-c++">#include &lt;iostream&gt;
+using namespace std;
+
+int fibonacci(int n) {
+    if (n == 0) return 0;   // Base case
+    if (n == 1) return 1;   // Base case
+    return fibonacci(n - 1) + fibonacci(n - 2);  // Recursive case
+}
+
+int main() {
+    int n = 10;
+    cout &lt;&lt; "Fibonacci series up to " &lt;&lt; n &lt;&lt; ": ";
+    for (int i = 0; i &lt; n; i++)
+        cout &lt;&lt; fibonacci(i) &lt;&lt; " ";
+    cout &lt;&lt; endl;
+    return 0;
+}</code></pre>
+    <p><strong>Explanation:</strong></p>
+    <ul class="list-disc list-inside ml-4">
+        <li>Each Fibonacci number is the sum of the previous two.</li>
+        <li>Recursive calls branch into <strong>two subproblems</strong> at each step.</li>
+        <li>Note: This naive approach has <strong>exponential complexity</strong>, often improved with <strong>memoization</strong>.</li>
+    </ul>
+
+    <hr class="border-gray-600">
+
+    <h2 class="text-2xl font-semibold mt-4">🧩 Example 3 – Recursive Tree Traversal</h2>
+    <p>Recursion is especially useful for <strong>trees</strong>:</p>
+    <pre><code class="lang-c++">#include &lt;iostream&gt;
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+Node* createNode(int val) {
+    Node* node = new Node{val, nullptr, nullptr};
+    return node;
+}
+
+void inOrder(Node* root) {
+    if (root) {
+        inOrder(root-&gt;left);       // Recursive call
+        cout &lt;&lt; root-&gt;data &lt;&lt; " "; // Process node
+        inOrder(root-&gt;right);      // Recursive call
+    }
+}
+
+int main() {
+    Node* root = createNode(10);
+    root-&gt;left = createNode(5);
+    root-&gt;right = createNode(15);
+    root-&gt;left-&gt;left = createNode(2);
+    root-&gt;left-&gt;right = createNode(7);
+
+    cout &lt;&lt; "In-order traversal: ";
+    inOrder(root);  // Output: 2 5 7 10 15
+    cout &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+    <p><strong>Explanation:</strong></p>
+    <ul class="list-disc list-inside ml-4">
+        <li>The function <strong>visits the left subtree</strong>, then the root, then the right subtree.</li>
+        <li>Recursion naturally handles <strong>nested structure traversal</strong>.</li>
+    </ul>
+
+    <hr class="border-gray-600">
+
+    <h2 class="text-2xl font-semibold mt-4">⚠️ Important Rules and Tips</h2>
+    <ol class="list-decimal list-inside ml-4 space-y-2">
+        <li><strong>Always define a base case</strong> → prevents infinite recursion.</li>
+        <li><strong>Ensure progress</strong> → each recursive call should approach the base case.</li>
+        <li><strong>Stack usage</strong> → recursion uses <strong>call stack</strong>, deep recursion may cause stack overflow.</li>
+        <li><strong>Recursive vs Iterative</strong> → sometimes recursion can be rewritten iteratively for efficiency.</li>
+        <li><strong>Divide-and-conquer</strong> → recursion shines in problems like quicksort, mergesort, and binary search.</li>
+        <li><strong>Tail recursion</strong> → if the recursive call is the last operation, compiler can optimize and reduce stack usage.</li>
+    </ol>
+
+    <hr class="border-gray-600">
+
+    <h2 class="text-2xl font-semibold mt-4">🔄 Advanced Example – Merge Sort</h2>
+    <p>Merge Sort uses <strong>divide-and-conquer recursion</strong>:</p>
+    <pre><code class="lang-c++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;</code></pre>
+
+    <pre><code class="lang-c++">void merge(vector&lt;int&gt;&amp; arr, int left, int mid, int right) {
+    vector&lt;int&gt; temp(right - left + 1);
+    int i = left, j = mid + 1, k = 0;
+
+    while (i &lt;= mid &amp;&amp; j &lt;= right) {
+        if (arr[i] &lt;= arr[j])
+            temp[k++] = arr[i++];
+        else
+            temp[k++] = arr[j++];
+    }
+    while (i &lt;= mid) temp[k++] = arr[i++];
+    while (j &lt;= right) temp[k++] = arr[j++];
+    for (int i = 0; i &lt; temp.size(); i++)
+        arr[left + i] = temp[i];
+}
+
+void mergeSort(vector&lt;int&gt;&amp; arr, int left, int right) {
+    if (left &gt;= right) return;  // Base case
+
+    int mid = left + (right - left) / 2;
+    mergeSort(arr, left, mid);       // Recursive call
+    mergeSort(arr, mid + 1, right);  // Recursive call
+    merge(arr, left, mid, right);    // Merge step
+}
+
+int main() {
+    vector&lt;int&gt; arr = {38, 27, 43, 3, 9, 82, 10};
+
+    mergeSort(arr, 0, arr.size() - 1);
+
+    cout &lt;&lt; "Sorted array: ";
+    for (int x : arr) cout &lt;&lt; x &lt;&lt; " ";
+    cout &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+
+<p><strong>Explanation:</strong></p>
+<ul class="list-disc list-inside ml-4">
+    <li>Recursively splits the array into halves until size = 1 (base case).</li>
+    <li>Merges sorted halves back together.</li>
+    <li>Complexity: <strong>O(n log n)</strong>.</li>
+</ul>
+
+<hr class="border-gray-600">
+
+<h2 class="text-2xl font-semibold mt-4">✅ Summary Table</h2>
+<table class="table-auto border-collapse border border-gray-600 w-full text-left">
+<thead>
+<tr class="bg-gray-200">
+<th class="border border-gray-600 px-4 py-2">Concept</th>
+<th class="border border-gray-600 px-4 py-2">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="border border-gray-600 px-4 py-2">Base case</td>
+<td class="border border-gray-600 px-4 py-2"><code>if (n == 0) return 1;</code></td>
+</tr>
+<tr>
+<td class="border border-gray-600 px-4 py-2">Recursive case</td>
+<td class="border border-gray-600 px-4 py-2"><code>return n * factorial(n-1);</code></td>
+</tr>
+<tr>
+<td class="border border-gray-600 px-4 py-2">Tree traversal</td>
+<td class="border border-gray-600 px-4 py-2"><code>inOrder(root);</code></td>
+</tr>
+<tr>
+<td class="border border-gray-600 px-4 py-2">Divide-and-conquer</td>
+<td class="border border-gray-600 px-4 py-2"><code>mergeSort(arr, left, mid); mergeSort(arr, mid+1, right);</code></td>
+</tr>
+<tr>
+<td class="border border-gray-600 px-4 py-2">Recursive vs Iterative</td>
+<td class="border border-gray-600 px-4 py-2">Factorial can also be done with a loop</td>
+</tr>
+<tr>
+<td class="border border-gray-600 px-4 py-2">Tail recursion</td>
+<td class="border border-gray-600 px-4 py-2">Last operation is the recursive call, e.g., <code>return helper(n-1, acc*n);</code></td>
+</tr>
+</tbody>
+</table>
+
+<hr class="border-gray-600">
+
+<h1 class="text-3xl font-bold mt-4">🔄 Understanding Recursion with Stack Diagrams</h1>
+<p>Recursion works by <strong>pushing each function call onto the call stack</strong> until the base case is reached, then <strong>unwinding the stack</strong> as calls return.</p>
+
+<hr class="border-gray-600">
+
+<h2 class="text-2xl font-semibold mt-4">1️⃣ Factorial Example: <code>factorial(5)</code></h2>
+<pre><code>Call Stack (growing downward):
+
+factorial(5)
+  -> needs factorial(4)
+factorial(4)
+  -> needs factorial(3)
+factorial(3)
+  -> needs factorial(2)
+factorial(2)
+  -> needs factorial(1)
+factorial(1)  <- base case returns 1
+
+Stack unwinding:
+
+factorial(2) returns 2*1 = 2
+factorial(3) returns 3*2 = 6
+factorial(4) returns 4*6 = 24
+factorial(5) returns 5*24 = 120</code></pre>
+
+<p><strong>Key Idea:</strong></p>
+<ul class="list-disc list-inside ml-4">
+    <li>Each call waits for the <strong>result of the next call</strong>.</li>
+    <li>The stack keeps track of <strong>where to resume</strong> after each call returns.</li>
+</ul>
+
+<hr class="border-gray-600">
+
+    <h2 class="text-2xl font-semibold mt-4">2️⃣ Fibonacci Example: <code>fibonacci(4)</code> (Stack)</h2>
+    <pre><code>fibonacci(4)
+  -> fibonacci(3)
+       -> fibonacci(2)
+            -> fibonacci(1) returns 1
+            -> fibonacci(0) returns 0
+       -> fibonacci(1) returns 1
+  -> fibonacci(2)
+       -> fibonacci(1) returns 1
+       -> fibonacci(0) returns 0
+
+Stack unwinding sums results:
+
+fibonacci(2) = 1
+fibonacci(3) = 2
+fibonacci(4) = 3</code></pre>
+
+    <p><strong>Key Idea:</strong></p>
+    <ul class="list-disc list-inside ml-4">
+        <li>Recursive calls <strong>branch</strong> when multiple subproblems exist.</li>
+        <li>Naive recursion can lead to <strong>repeated work</strong>, so <strong>memoization</strong> is recommended for Fibonacci.</li>
+    </ul>
+
+    <hr class="border-gray-600">
+
+    <h2 class="text-2xl font-semibold mt-4">3️⃣ Tree Traversal Example: In-Order Traversal</h2>
+    <pre><code>Tree:
+        10
+       /  \
+      5    15
+     / \
+    2   7
+
+Call Stack (in-order):
+
+inOrder(10)
+  -> inOrder(5)
+       -> inOrder(2)
+            -> inOrder(nullptr) returns
+            process 2
+            -> inOrder(nullptr) returns
+       process 5
+       -> inOrder(7)
+            -> inOrder(nullptr) returns
+            process 7
+            -> inOrder(nullptr) returns
+  process 10
+  -> inOrder(15)
+       -> inOrder(nullptr) returns
+       process 15
+       -> inOrder(nullptr) returns</code></pre>
+
+    <p><strong>Key Idea:</strong></p>
+    <ul class="list-disc list-inside ml-4">
+        <li>Recursion <strong>naturally handles hierarchical traversal</strong>.</li>
+        <li>The call stack ensures <strong>left subtree → node → right subtree</strong> order.</li>
+    </ul>
+
+    <hr class="border-gray-600">
+
+    <h2 class="text-2xl font-semibold mt-4">4️⃣ Merge Sort Example</h2>
+    <pre><code>Array: [38, 27, 43, 3]
+
+Recursive splitting (call stack grows):
+
+mergeSort([38,27,43,3])
+  -> mergeSort([38,27])
+       -> mergeSort([38])  <- base case
+       -> mergeSort([27])  <- base case
+       merge([38],[27]) = [27,38]
+  -> mergeSort([43,3])
+       -> mergeSort([43])  <- base case
+       -> mergeSort([3])   <- base case
+       merge([43],[3]) = [3,43]
+  merge([27,38],[3,43]) = [3,27,38,43]</code></pre>
+
+    <p><strong>Key Idea:</strong></p>
+    <ul class="list-disc list-inside ml-4">
+        <li>Stack grows as the array is <strong>split recursively</strong>.</li>
+        <li>Stack unwinds as <strong>merge operations</strong> combine results.</li>
+        <li>Efficient <strong>divide-and-conquer</strong> pattern.</li>
+    </ul>
+
+    <hr class="border-gray-600">
+
+    <h2 class="text-2xl font-semibold mt-4">⚠️ Summary of Recursion Stack Behavior</h2>
+    <table class="table-auto border-collapse border border-gray-600 w-full text-left">
+        <thead>
+            <tr class="bg-gray-200">
+                <th class="border border-gray-600 px-4 py-2">Concept</th>
+                <th class="border border-gray-600 px-4 py-2">Key Point</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="border border-gray-600 px-4 py-2">Call stack</td>
+                <td class="border border-gray-600 px-4 py-2">Each recursive call is pushed onto the stack</td>
+            </tr>
+            <tr>
+                <td class="border border-gray-600 px-4 py-2">Base case</td>
+                <td class="border border-gray-600 px-4 py-2">Stops further recursion</td>
+            </tr>
+            <tr>
+                <td class="border border-gray-600 px-4 py-2">Stack unwinding</td>
+                <td class="border border-gray-600 px-4 py-2">Resumes computation in <strong>reverse order</strong> of calls</td>
+            </tr>
+            <tr>
+                <td class="border border-gray-600 px-4 py-2">Multiple recursive calls</td>
+                <td class="border border-gray-600 px-4 py-2">Stack forms a <strong>tree</strong> (e.g., Fibonacci, mergesort)</td>
+            </tr>
+            <tr>
+                <td class="border border-gray-600 px-4 py-2">Stack overflow</td>
+                <td class="border border-gray-600 px-4 py-2">Occurs if recursion depth is too large or no base case</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+        </section>
+
+        <!-- Bottom Back Button -->
+        <div class="w-full max-w-3xl mb-4 flex">
+            <button
+                onclick="window.location.href='../index.html'"
+                class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group"
+            >
+                <!-- Arrow SVG -->
+                <svg
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                        clip-rule="evenodd"
+                    />
+                </svg>
+
+                <!-- C++ Logo SVG -->
+                <img
+                    class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                    alt="C++ Logo"
+                />
+
+                <span class="pl-8">Back to Main</span>
+            </button>
+        </div>
+    </body>
+</html>

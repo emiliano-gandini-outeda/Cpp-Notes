@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Notes - BST</title>
+    <link rel="icon" type="image/png"
+        href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/250px-ISO_C%2B%2B_Logo.svg.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        :root {
+            --color-dark-grey: #2D2D2D;
+            --color-background: #111217;
+            --color-surface: #3A3A3A;
+            --color-dark-red: #B71C1C;
+            --color-dark-red-light: #D32F2F;
+            --color-text-primary: #E0E0E0;
+            --color-text-secondary: #B0B0B0;
+            --color-borders: #4A4A4A;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        pre {
+            background-color: var(--color-dark-grey);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--color-borders);
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--color-surface);
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center py-8 px-4">
+
+    <!-- Top Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+    <!-- Blog Section -->
+    <section class="max-w-3xl w-full bg-surface p-6 rounded shadow-md space-y-6">
+        <h1 class="text-3xl font-bold mb-4">🌲 Binary Search Tree (BST)</h1>
+
+        <h2 class="text-2xl font-semibold mt-4">✅ What is a BST?</h2>
+        <p>A <strong>Binary Search Tree (BST)</strong> is a special type of binary tree with an <strong>ordering property</strong>:</p>
+        <ul class="list-disc list-inside ml-4">
+            <li>Values in the <strong>left subtree</strong> are <strong>smaller</strong> than the node.</li>
+            <li>Values in the <strong>right subtree</strong> are <strong>greater</strong> than the node.</li>
+        </ul>
+        <p>This property allows <strong>efficient searching, insertion, and deletion</strong>.</p>
+        <ul class="list-disc list-inside ml-4">
+            <li>Average complexity: <strong>O(log n)</strong> (balanced tree).</li>
+            <li>Worst case: <strong>O(n)</strong> (degenerate/unbalanced tree).</li>
+        </ul>
+
+        <hr class="border-gray-600">
+
+        <h2 class="text-2xl font-semibold mt-4">🧠 Syntax (Node Definition)</h2>
+        <pre><code class="lang-c++">struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};</code></pre>
+
+        <hr class="border-gray-600">
+
+        <h2 class="text-2xl font-semibold mt-4">🧾 Example Program – Insert &amp; Search in BST</h2>
+        <pre><code class="lang-c++">#include &lt;iostream&gt;
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+Node* createNode(int value) {
+    return new Node{value, nullptr, nullptr};
+}
+
+Node* insert(Node* root, int value) {
+    if (!root) return createNode(value);
+    if (value &lt; root-&gt;data)
+        root-&gt;left = insert(root-&gt;left, value);
+    else
+        root-&gt;right = insert(root-&gt;right, value);
+    return root;
+}
+
+bool search(Node* root, int value) {
+    if (!root) return false;
+    if (root-&gt;data == value) return true;
+    if (value &lt; root-&gt;data) return search(root-&gt;left, value);
+    return search(root-&gt;right, value);
+}
+
+int main() {
+    Node* root = nullptr;
+    root = insert(root, 10);
+    root = insert(root, 5);
+    root = insert(root, 15);
+    root = insert(root, 7);
+
+    cout &lt;&lt; "Search 7: " &lt;&lt; (search(root, 7) ? "Found" : "Not Found") &lt;&lt; endl;
+    cout &lt;&lt; "Search 12: " &lt;&lt; (search(root, 12) ? "Found" : "Not Found") &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+
+        <hr class="border-gray-600">
+
+        <h2 class="text-2xl font-semibold mt-4">⚠️ Important Notes</h2>
+        <ol class="list-decimal list-inside ml-4">
+            <li>BST property ensures <strong>fast search</strong> compared to unsorted arrays/lists.</li>
+            <li>Operations: <strong>search, insert, delete</strong> all rely on ordering.</li>
+            <li>Works best when <strong>balanced</strong> (height ≈ log n).</li>
+            <li>Can degrade to a linked list if values are inserted in sorted order.</li>
+        </ol>
+
+        <hr class="border-gray-600">
+
+        <h2 class="text-2xl font-semibold mt-4">✅ Summary Table</h2>
+        <table class="mt-2">
+            <thead>
+                <tr>
+                    <th>Concept</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Insert</td>
+                    <td><code>root = insert(root, value);</code></td>
+                </tr>
+                <tr>
+                    <td>Search</td>
+                    <td><code>search(root, 7);</code></td>
+                </tr>
+                <tr>
+                    <td>Left child rule</td>
+                    <td>Smaller than parent</td>
+                </tr>
+                <tr>
+                    <td>Right child rule</td>
+                    <td>Greater than parent</td>
+                </tr>
+                <tr>
+                    <td>Average complexity</td>
+                    <td>O(log n)</td>
+                </tr>
+                <tr>
+                    <td>Worst case</td>
+                    <td>O(n)</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Bottom Back Button -->
+    <div class="w-full max-w-3xl mb-4 flex mt-6">
+        <button onclick="window.location.href='../index.html'"
+            class="text-red-600 hover:text-white text-lg flex items-center gap-2 relative group">
+            <svg class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                    d="M10 18a1 1 0 01-.707-1.707L14.586 10 9.293 4.707A1 1 0 1110.707 3.293l6 6a1 1 0 010 1.414l-6 6A1 1 0 0110 18z"
+                    clip-rule="evenodd" />
+            </svg>
+            <img class="w-6 h-6 absolute left-0 top-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png"
+                alt="C++ Logo">
+            <span class="pl-8">Back to Main</span>
+        </button>
+    </div>
+
+</body>
+
+</html>
